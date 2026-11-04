@@ -146,14 +146,6 @@
   "news_warned": [],
   "news": [
     {
-      "time": "2026-11-04T15:00:00Z",
-      "currency": "USD",
-      "impact": "Medium",
-      "title": "ISM Services PMI",
-      "forecast": "54.8",
-      "previous": "54.9"
-    },
-    {
       "time": "2026-11-05T12:00:00Z",
       "currency": "GBP",
       "impact": "High",
@@ -314,7 +306,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-04T16:10:18Z",
+  "updated": "2026-11-04T17:00:35Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
