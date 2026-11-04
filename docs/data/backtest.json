@@ -1,25 +1,29 @@
 {
-  "generated": "2026-11-04T05:54:32Z",
+  "generated": "2026-11-04T06:10:22Z",
   "risk_usd_example": 3.0,
   "ranges": {
     "EUR/USD": {
-      "from": "2026-04-23T06:00:00Z",
-      "to": "2026-11-04T04:00:00Z",
+      "from": "2026-04-23T07:00:00Z",
+      "to": "2026-11-04T05:00:00Z",
+      "split": "2026-08-22T03:00:00Z",
       "candles": 4679
     },
     "GBP/USD": {
-      "from": "2026-04-23T06:00:00Z",
-      "to": "2026-11-04T04:00:00Z",
+      "from": "2026-04-23T07:00:00Z",
+      "to": "2026-11-04T05:00:00Z",
+      "split": "2026-08-22T03:00:00Z",
       "candles": 4679
     },
     "USD/JPY": {
-      "from": "2026-04-23T06:00:00Z",
-      "to": "2026-11-04T04:00:00Z",
+      "from": "2026-04-23T07:00:00Z",
+      "to": "2026-11-04T05:00:00Z",
+      "split": "2026-08-22T03:00:00Z",
       "candles": 4679
     },
     "XAU/USD": {
-      "from": "2026-04-23T06:00:00Z",
-      "to": "2026-11-04T04:00:00Z",
+      "from": "2026-04-23T07:00:00Z",
+      "to": "2026-11-04T05:00:00Z",
+      "split": "2026-08-22T03:00:00Z",
       "candles": 4679
     }
   },
@@ -31,17 +35,17 @@
   "profiles": {
     "low": {
       "filtered": {
-        "trades": 103,
+        "trades": 104,
         "wins": 50,
-        "losses": 53,
+        "losses": 54,
         "expired": 0,
-        "win_rate": 48.5,
-        "net_r": -3.0,
-        "avg_r": -0.029,
-        "profit_factor": 0.94,
+        "win_rate": 48.1,
+        "net_r": -4.0,
+        "avg_r": -0.038,
+        "profit_factor": 0.93,
         "worst_losing_streak": 6,
         "max_drawdown_r": 15.0,
-        "net_usd": -9.0,
+        "net_usd": -12.0,
         "max_drawdown_usd": 45.0,
         "by_pair": {
           "EUR/USD": {
@@ -87,17 +91,17 @@
             "max_drawdown_usd": 18.0
           },
           "XAU/USD": {
-            "trades": 31,
+            "trades": 32,
             "wins": 16,
-            "losses": 15,
+            "losses": 16,
             "expired": 0,
-            "win_rate": 51.6,
-            "net_r": 1.0,
-            "avg_r": 0.032,
-            "profit_factor": 1.07,
+            "win_rate": 50.0,
+            "net_r": 0.0,
+            "avg_r": 0.0,
+            "profit_factor": 1.0,
             "worst_losing_streak": 4,
             "max_drawdown_r": 5.0,
-            "net_usd": 3.0,
+            "net_usd": 0.0,
             "max_drawdown_usd": 15.0
           }
         },
@@ -204,21 +208,22 @@
           -2.0,
           -3.0,
           -4.0,
-          -3.0
+          -3.0,
+          -4.0
         ]
       },
       "basic": {
-        "trades": 154,
+        "trades": 155,
         "wins": 78,
-        "losses": 76,
+        "losses": 77,
         "expired": 0,
-        "win_rate": 50.6,
-        "net_r": 2.0,
-        "avg_r": 0.013,
-        "profit_factor": 1.03,
+        "win_rate": 50.3,
+        "net_r": 1.0,
+        "avg_r": 0.006,
+        "profit_factor": 1.01,
         "worst_losing_streak": 5,
         "max_drawdown_r": 13.0,
-        "net_usd": 6.0,
+        "net_usd": 3.0,
         "max_drawdown_usd": 39.0,
         "by_pair": {
           "EUR/USD": {
@@ -264,17 +269,17 @@
             "max_drawdown_usd": 27.0
           },
           "XAU/USD": {
-            "trades": 45,
+            "trades": 46,
             "wins": 26,
-            "losses": 19,
+            "losses": 20,
             "expired": 0,
-            "win_rate": 57.8,
-            "net_r": 7.0,
-            "avg_r": 0.156,
-            "profit_factor": 1.37,
+            "win_rate": 56.5,
+            "net_r": 6.0,
+            "avg_r": 0.13,
+            "profit_factor": 1.3,
             "worst_losing_streak": 4,
             "max_drawdown_r": 5.0,
-            "net_usd": 21.0,
+            "net_usd": 18.0,
             "max_drawdown_usd": 15.0
           }
         },
@@ -286,49 +291,44 @@
           2.0,
           1.0,
           2.0,
-          1.0,
+          0.0,
           1.0,
           2.0,
           1.0,
           -1.0,
           -2.0,
           -3.0,
-          -2.0,
+          -1.0,
           -2.0,
           -3.0,
           -4.0,
           -4.0,
           -5.0,
           -4.0,
-          -3.0,
+          -2.0,
           -3.0,
           -2.0,
-          -1.0,
+          -2.0,
           -1.0,
           0.0,
           1.0,
-          0.0,
+          -1.0,
           -2.0,
           -3.0,
-          -2.0,
+          -3.0,
           -4.0,
           -5.0,
           -4.0,
-          -3.0,
-          -3.0,
           -4.0,
           -3.0,
+          -4.0,
+          -4.0,
           -5.0,
           -6.0,
           -7.0,
-          -8.0,
+          -7.0,
           -6.0,
           -7.0,
-          -8.0,
-          -10.0,
-          -11.0,
-          -10.0,
-          -9.0,
           -9.0,
           -10.0,
           -11.0,
@@ -339,66 +339,71 @@
           -10.0,
           -9.0,
           -8.0,
-          -6.0,
+          -10.0,
+          -11.0,
+          -10.0,
+          -9.0,
           -7.0,
           -6.0,
+          -7.0,
           -5.0,
+          -4.0,
           -3.0,
           -2.0,
-          -1.0,
           0.0,
+          1.0,
           2.0,
-          3.0,
           2.0,
+          1.0,
           2.0,
-          3.0,
           4.0,
-          3.0,
-          5.0,
-          4.0,
-          5.0,
-          3.0,
-          2.0,
-          3.0,
-          4.0,
-          4.0,
-          3.0,
-          4.0,
-          2.0,
           3.0,
           4.0,
           5.0,
-          7.0,
-          8.0,
+          5.0,
+          4.0,
+          3.0,
+          3.0,
+          4.0,
+          5.0,
+          4.0,
+          4.0,
+          3.0,
+          2.0,
+          4.0,
+          5.0,
+          6.0,
           7.0,
           7.0,
           6.0,
+          7.0,
           5.0,
           6.0,
-          6.0,
+          7.0,
           5.0,
-          4.0,
           4.0,
           3.0,
           4.0,
+          4.0,
           5.0,
-          7.0,
+          6.0,
           8.0,
           9.0,
-          7.0,
           8.0,
           7.0,
+          7.0,
           6.0,
+          5.0,
+          7.0,
           6.0,
           7.0,
           6.0,
           6.0,
           5.0,
-          6.0,
-          5.0,
-          3.0,
+          4.0,
           2.0,
-          2.0
+          1.0,
+          1.0
         ]
       },
       "score_buckets": [
@@ -416,25 +421,298 @@
         },
         {
           "band": "70 and above",
-          "trades": 120,
-          "win_rate": 50.0,
-          "avg_r": 0.0
+          "trades": 121,
+          "win_rate": 49.6,
+          "avg_r": -0.008
         }
-      ]
+      ],
+      "time_analysis": {
+        "split": "2026-08-22T03:00:00Z",
+        "practice": {
+          "trades": 58,
+          "win_rate": 48.3,
+          "net_r": -2.0,
+          "avg_r": -0.034
+        },
+        "exam": {
+          "trades": 46,
+          "win_rate": 47.8,
+          "net_r": -2.0,
+          "avg_r": -0.043
+        },
+        "by_session": [
+          {
+            "name": "Asian",
+            "practice": {
+              "trades": 12,
+              "win_rate": 50.0,
+              "net_r": 0.0,
+              "avg_r": 0.0
+            },
+            "exam": {
+              "trades": 9,
+              "win_rate": 44.4,
+              "net_r": -1.0,
+              "avg_r": -0.111
+            }
+          },
+          {
+            "name": "London",
+            "practice": {
+              "trades": 10,
+              "win_rate": 30.0,
+              "net_r": -4.0,
+              "avg_r": -0.4
+            },
+            "exam": {
+              "trades": 12,
+              "win_rate": 33.3,
+              "net_r": -4.0,
+              "avg_r": -0.333
+            }
+          },
+          {
+            "name": "London + New York",
+            "practice": {
+              "trades": 19,
+              "win_rate": 47.4,
+              "net_r": -1.0,
+              "avg_r": -0.053
+            },
+            "exam": {
+              "trades": 14,
+              "win_rate": 35.7,
+              "net_r": -4.0,
+              "avg_r": -0.286
+            }
+          },
+          {
+            "name": "New York",
+            "practice": {
+              "trades": 12,
+              "win_rate": 58.3,
+              "net_r": 2.0,
+              "avg_r": 0.167
+            },
+            "exam": {
+              "trades": 8,
+              "win_rate": 87.5,
+              "net_r": 6.0,
+              "avg_r": 0.75
+            }
+          },
+          {
+            "name": "Late / rollover",
+            "practice": {
+              "trades": 5,
+              "win_rate": 60.0,
+              "net_r": 1.0,
+              "avg_r": 0.2
+            },
+            "exam": {
+              "trades": 3,
+              "win_rate": 66.7,
+              "net_r": 1.0,
+              "avg_r": 0.333
+            }
+          }
+        ],
+        "by_weekday": [
+          {
+            "name": "Mon",
+            "practice": {
+              "trades": 24,
+              "win_rate": 41.7,
+              "net_r": -4.0,
+              "avg_r": -0.167
+            },
+            "exam": {
+              "trades": 18,
+              "win_rate": 38.9,
+              "net_r": -4.0,
+              "avg_r": -0.222
+            }
+          },
+          {
+            "name": "Tue",
+            "practice": {
+              "trades": 3,
+              "win_rate": 66.7,
+              "net_r": 1.0,
+              "avg_r": 0.333
+            },
+            "exam": {
+              "trades": 5,
+              "win_rate": 60.0,
+              "net_r": 1.0,
+              "avg_r": 0.2
+            }
+          },
+          {
+            "name": "Wed",
+            "practice": {
+              "trades": 6,
+              "win_rate": 66.7,
+              "net_r": 2.0,
+              "avg_r": 0.333
+            },
+            "exam": {
+              "trades": 5,
+              "win_rate": 80.0,
+              "net_r": 3.0,
+              "avg_r": 0.6
+            }
+          },
+          {
+            "name": "Thu",
+            "practice": {
+              "trades": 5,
+              "win_rate": 60.0,
+              "net_r": 1.0,
+              "avg_r": 0.2
+            },
+            "exam": {
+              "trades": 5,
+              "win_rate": 60.0,
+              "net_r": 1.0,
+              "avg_r": 0.2
+            }
+          },
+          {
+            "name": "Fri",
+            "practice": {
+              "trades": 10,
+              "win_rate": 60.0,
+              "net_r": 2.0,
+              "avg_r": 0.2
+            },
+            "exam": {
+              "trades": 6,
+              "win_rate": 33.3,
+              "net_r": -2.0,
+              "avg_r": -0.333
+            }
+          },
+          {
+            "name": "Sun",
+            "practice": {
+              "trades": 10,
+              "win_rate": 30.0,
+              "net_r": -4.0,
+              "avg_r": -0.4
+            },
+            "exam": {
+              "trades": 7,
+              "win_rate": 42.9,
+              "net_r": -1.0,
+              "avg_r": -0.143
+            }
+          }
+        ],
+        "by_pair": [
+          {
+            "name": "EUR/USD",
+            "practice": {
+              "trades": 14,
+              "win_rate": 35.7,
+              "net_r": -4.0,
+              "avg_r": -0.286
+            },
+            "exam": {
+              "trades": 8,
+              "win_rate": 87.5,
+              "net_r": 6.0,
+              "avg_r": 0.75
+            }
+          },
+          {
+            "name": "GBP/USD",
+            "practice": {
+              "trades": 16,
+              "win_rate": 50.0,
+              "net_r": 0.0,
+              "avg_r": 0.0
+            },
+            "exam": {
+              "trades": 14,
+              "win_rate": 42.9,
+              "net_r": -2.0,
+              "avg_r": -0.143
+            }
+          },
+          {
+            "name": "USD/JPY",
+            "practice": {
+              "trades": 11,
+              "win_rate": 54.5,
+              "net_r": 1.0,
+              "avg_r": 0.091
+            },
+            "exam": {
+              "trades": 9,
+              "win_rate": 22.2,
+              "net_r": -5.0,
+              "avg_r": -0.556
+            }
+          },
+          {
+            "name": "XAU/USD",
+            "practice": {
+              "trades": 17,
+              "win_rate": 52.9,
+              "net_r": 1.0,
+              "avg_r": 0.059
+            },
+            "exam": {
+              "trades": 15,
+              "win_rate": 46.7,
+              "net_r": -1.0,
+              "avg_r": -0.067
+            }
+          }
+        ],
+        "filter": {
+          "sessions": [],
+          "pairs": [
+            "XAU/USD"
+          ],
+          "practice_kept": {
+            "trades": 0,
+            "win_rate": null,
+            "net_r": 0,
+            "avg_r": null
+          },
+          "exam_all": {
+            "trades": 46,
+            "win_rate": 47.8,
+            "net_r": -2.0,
+            "avg_r": -0.043
+          },
+          "exam_kept": {
+            "trades": 0,
+            "win_rate": null,
+            "net_r": 0,
+            "avg_r": null
+          },
+          "helps": false,
+          "profitable": false,
+          "verdict": "Nothing to keep: no session or pair had at least 15 practice trades AND made money. There is no clear time/pair edge here."
+        }
+      }
     },
     "moderate": {
       "filtered": {
-        "trades": 279,
+        "trades": 280,
         "wins": 109,
-        "losses": 170,
+        "losses": 171,
         "expired": 0,
-        "win_rate": 39.1,
-        "net_r": -6.5,
-        "avg_r": -0.023,
+        "win_rate": 38.9,
+        "net_r": -7.5,
+        "avg_r": -0.027,
         "profit_factor": 0.96,
         "worst_losing_streak": 11,
         "max_drawdown_r": 20.5,
-        "net_usd": -19.5,
+        "net_usd": -22.5,
         "max_drawdown_usd": 61.5,
         "by_pair": {
           "EUR/USD": {
@@ -480,17 +758,17 @@
             "max_drawdown_usd": 31.5
           },
           "XAU/USD": {
-            "trades": 69,
+            "trades": 70,
             "wins": 27,
-            "losses": 42,
+            "losses": 43,
             "expired": 0,
-            "win_rate": 39.1,
-            "net_r": -1.5,
-            "avg_r": -0.022,
-            "profit_factor": 0.96,
+            "win_rate": 38.6,
+            "net_r": -2.5,
+            "avg_r": -0.036,
+            "profit_factor": 0.94,
             "worst_losing_streak": 7,
             "max_drawdown_r": 12.5,
-            "net_usd": -4.5,
+            "net_usd": -7.5,
             "max_drawdown_usd": 37.5
           }
         },
@@ -498,137 +776,137 @@
           -1.0,
           -3.0,
           -5.0,
+          -5.5,
+          -5.0,
           -4.5,
           -5.0,
           -4.5,
           -4.0,
           -4.5,
-          -4.0,
-          -6.0,
           -6.5,
           -6.0,
-          -8.0,
+          -9.0,
           -6.0,
           -5.5,
-          -2.5,
+          -3.5,
           -5.5,
           -5.0,
-          -7.0,
+          -5.5,
           -7.5,
           -4.5,
-          -1.5,
+          0.0,
           3.0,
           3.5,
-          6.5,
+          5.5,
           6.0,
           4.0,
-          7.0,
+          6.0,
           6.5,
+          4.5,
+          4.0,
           4.5,
           5.0,
           4.5,
           5.0,
-          3.0,
-          5.0,
           5.5,
-          8.5,
+          7.5,
           5.5,
           6.0,
-          6.5,
+          8.0,
           6.0,
           4.0,
-          2.0,
-          0.0,
+          1.0,
+          -1.0,
+          -3.0,
+          -1.0,
           -3.0,
           -2.5,
+          -5.5,
+          -5.0,
           -2.0,
+          -5.0,
+          -7.0,
+          -6.5,
+          -7.0,
+          -6.5,
+          -3.5,
+          -6.5,
+          -6.0,
+          -5.5,
+          -6.0,
+          -5.5,
+          -5.0,
+          -3.0,
+          0.0,
+          -2.0,
+          -5.0,
+          -4.5,
+          -4.0,
+          -4.5,
+          -4.0,
+          -1.0,
+          -1.5,
+          -1.0,
+          -0.5,
+          -3.5,
+          -5.5,
+          -7.5,
+          -8.0,
+          -5.0,
+          -7.0,
+          -10.0,
+          -12.0,
+          -9.0,
+          -9.5,
+          -9.0,
+          -11.0,
+          -11.5,
+          -8.5,
+          -10.5,
+          -8.5,
+          -5.5,
+          -2.5,
+          -3.0,
           -2.5,
           -4.5,
-          -6.5,
+          -2.5,
+          0.5,
+          1.0,
           -2.0,
+          1.0,
+          1.5,
+          1.0,
+          1.5,
+          4.5,
+          4.0,
+          4.5,
+          2.5,
+          2.0,
+          0.0,
+          0.5,
+          0.0,
+          0.5,
+          -1.5,
+          -4.5,
           -4.0,
           -6.0,
           -6.5,
           -8.5,
-          -8.0,
-          -3.5,
-          -5.5,
-          -7.5,
-          -5.5,
-          -7.5,
-          -4.5,
-          -5.0,
-          -2.0,
-          -1.5,
-          -2.0,
-          -4.0,
-          -6.0,
-          -4.0,
-          -6.0,
-          -5.5,
-          -1.0,
-          -3.0,
-          0.0,
-          -0.5,
-          -2.5,
-          -4.5,
-          -7.5,
-          -9.5,
-          -6.5,
-          -7.0,
-          -9.0,
-          -11.0,
-          -10.5,
-          -11.0,
-          -8.0,
-          -10.0,
-          -10.5,
-          -10.0,
-          -9.5,
-          -7.5,
-          -7.0,
-          -4.0,
-          -2.0,
-          -4.0,
-          -3.5,
-          -4.0,
-          -1.0,
-          -0.5,
-          -1.0,
-          -0.5,
-          0.0,
-          2.0,
-          0.0,
-          3.0,
-          2.5,
-          5.5,
-          3.5,
-          3.0,
-          1.0,
-          -1.0,
-          1.0,
-          -1.0,
-          -0.5,
-          -3.5,
-          -5.5,
-          -5.0,
-          -5.5,
-          -7.5,
-          -6.5
+          -7.5
         ]
       },
       "basic": {
-        "trades": 304,
+        "trades": 305,
         "wins": 117,
-        "losses": 187,
+        "losses": 188,
         "expired": 0,
-        "win_rate": 38.5,
-        "net_r": -11.5,
-        "avg_r": -0.038,
-        "profit_factor": 0.94,
+        "win_rate": 38.4,
+        "net_r": -12.5,
+        "avg_r": -0.041,
+        "profit_factor": 0.93,
         "worst_losing_streak": 12,
         "max_drawdown_r": 20.0,
-        "net_usd": -34.5,
+        "net_usd": -37.5,
         "max_drawdown_usd": 60.0,
         "by_pair": {
           "EUR/USD": {
@@ -674,17 +952,17 @@
             "max_drawdown_usd": 33.0
           },
           "XAU/USD": {
-            "trades": 77,
+            "trades": 78,
             "wins": 29,
-            "losses": 48,
+            "losses": 49,
             "expired": 0,
-            "win_rate": 37.7,
-            "net_r": -4.5,
-            "avg_r": -0.058,
-            "profit_factor": 0.91,
+            "win_rate": 37.2,
+            "net_r": -5.5,
+            "avg_r": -0.071,
+            "profit_factor": 0.89,
             "worst_losing_streak": 6,
             "max_drawdown_r": 15.0,
-            "net_usd": -13.5,
+            "net_usd": -16.5,
             "max_drawdown_usd": 45.0
           }
         },
@@ -702,7 +980,7 @@
           -8.5,
           -5.5,
           -8.5,
-          -8.0,
+          -6.5,
           -6.0,
           -4.0,
           -6.0,
@@ -713,11 +991,11 @@
           -4.0,
           -1.0,
           1.0,
-          4.0,
+          5.5,
           6.0,
-          4.0,
+          3.0,
           6.0,
-          6.5,
+          5.5,
           3.5,
           3.0,
           1.0,
@@ -726,89 +1004,89 @@
           3.0,
           3.5,
           5.5,
-          3.5,
+          5.0,
           3.0,
-          3.5,
+          5.0,
           3.0,
-          1.0,
+          0.0,
           -2.0,
-          -4.0,
+          -5.0,
           -7.0,
           -5.0,
           -7.0,
           -7.5,
-          -9.5,
-          -7.5,
-          -7.0,
-          -10.0,
-          -9.5,
-          -12.5,
-          -12.0,
-          -10.0,
-          -9.5,
-          -12.5,
-          -9.5,
-          -12.5,
-          -10.5,
-          -10.0,
-          -8.0,
-          -5.0,
-          -8.0,
-          -10.0,
           -10.5,
           -7.5,
           -8.0,
-          -7.5,
+          -10.0,
+          -10.5,
+          -12.5,
+          -13.0,
+          -10.0,
+          -10.5,
+          -12.5,
+          -10.5,
+          -12.5,
+          -10.5,
+          -8.5,
+          -8.0,
+          -6.0,
+          -8.0,
+          -11.0,
+          -10.5,
+          -8.5,
+          -8.0,
+          -6.0,
           -3.0,
-          0.0,
-          -0.5,
-          0.0,
-          -0.5,
-          -3.5,
-          -5.5,
-          -8.5,
-          -5.5,
-          -6.0,
-          -8.0,
-          -11.0,
-          -8.0,
-          -8.5,
-          -8.0,
-          -11.0,
-          -10.5,
-          -8.5,
-          -10.5,
-          -8.5,
-          -6.5,
-          -6.0,
-          -4.0,
-          -3.5,
-          -4.0,
-          -6.0,
-          -4.0,
-          -1.0,
-          -1.5,
-          -3.5,
-          -1.5,
           -1.0,
           1.0,
           -1.0,
-          3.5,
-          3.0,
-          3.5,
-          3.0,
-          1.0,
-          -2.0,
           -1.5,
-          -2.0,
-          -1.5,
-          -4.5,
+          -3.5,
           -6.5,
+          -8.5,
+          -4.0,
+          -6.0,
+          -9.0,
+          -11.0,
+          -9.0,
+          -8.5,
+          -9.0,
           -9.5,
           -9.0,
           -9.5,
-          -11.5,
-          -11.5
+          -9.0,
+          -9.5,
+          -6.5,
+          -4.5,
+          -4.0,
+          -4.5,
+          -4.0,
+          -7.0,
+          -2.5,
+          -2.0,
+          -2.5,
+          -4.5,
+          0.0,
+          0.5,
+          0.0,
+          0.5,
+          2.5,
+          3.0,
+          2.5,
+          3.0,
+          0.0,
+          -0.5,
+          -2.5,
+          -3.0,
+          -2.5,
+          -5.5,
+          -7.5,
+          -8.0,
+          -10.0,
+          -10.5,
+          -12.5,
+          -12.5
         ]
       },
       "score_buckets": [
@@ -826,11 +1104,288 @@
         },
         {
           "band": "70 and above",
-          "trades": 233,
-          "win_rate": 38.2,
-          "avg_r": -0.045
+          "trades": 234,
+          "win_rate": 38.0,
+          "avg_r": -0.049
         }
-      ]
+      ],
+      "time_analysis": {
+        "split": "2026-08-22T03:00:00Z",
+        "practice": {
+          "trades": 166,
+          "win_rate": 39.8,
+          "net_r": -1.0,
+          "avg_r": -0.006
+        },
+        "exam": {
+          "trades": 114,
+          "win_rate": 37.7,
+          "net_r": -6.5,
+          "avg_r": -0.057
+        },
+        "by_session": [
+          {
+            "name": "Asian",
+            "practice": {
+              "trades": 36,
+              "win_rate": 50.0,
+              "net_r": 9.0,
+              "avg_r": 0.25
+            },
+            "exam": {
+              "trades": 22,
+              "win_rate": 50.0,
+              "net_r": 5.5,
+              "avg_r": 0.25
+            }
+          },
+          {
+            "name": "London",
+            "practice": {
+              "trades": 33,
+              "win_rate": 51.5,
+              "net_r": 9.5,
+              "avg_r": 0.288
+            },
+            "exam": {
+              "trades": 20,
+              "win_rate": 40.0,
+              "net_r": 0.0,
+              "avg_r": 0.0
+            }
+          },
+          {
+            "name": "London + New York",
+            "practice": {
+              "trades": 45,
+              "win_rate": 40.0,
+              "net_r": 0.0,
+              "avg_r": 0.0
+            },
+            "exam": {
+              "trades": 31,
+              "win_rate": 35.5,
+              "net_r": -3.5,
+              "avg_r": -0.113
+            }
+          },
+          {
+            "name": "New York",
+            "practice": {
+              "trades": 47,
+              "win_rate": 25.5,
+              "net_r": -17.0,
+              "avg_r": -0.362
+            },
+            "exam": {
+              "trades": 30,
+              "win_rate": 36.7,
+              "net_r": -2.5,
+              "avg_r": -0.083
+            }
+          },
+          {
+            "name": "Late / rollover",
+            "practice": {
+              "trades": 5,
+              "win_rate": 20.0,
+              "net_r": -2.5,
+              "avg_r": -0.5
+            },
+            "exam": {
+              "trades": 11,
+              "win_rate": 18.2,
+              "net_r": -6.0,
+              "avg_r": -0.545
+            }
+          }
+        ],
+        "by_weekday": [
+          {
+            "name": "Mon",
+            "practice": {
+              "trades": 47,
+              "win_rate": 42.6,
+              "net_r": 3.0,
+              "avg_r": 0.064
+            },
+            "exam": {
+              "trades": 27,
+              "win_rate": 48.1,
+              "net_r": 5.5,
+              "avg_r": 0.204
+            }
+          },
+          {
+            "name": "Tue",
+            "practice": {
+              "trades": 26,
+              "win_rate": 53.8,
+              "net_r": 9.0,
+              "avg_r": 0.346
+            },
+            "exam": {
+              "trades": 18,
+              "win_rate": 38.9,
+              "net_r": -0.5,
+              "avg_r": -0.028
+            }
+          },
+          {
+            "name": "Wed",
+            "practice": {
+              "trades": 23,
+              "win_rate": 21.7,
+              "net_r": -10.5,
+              "avg_r": -0.457
+            },
+            "exam": {
+              "trades": 21,
+              "win_rate": 33.3,
+              "net_r": -3.5,
+              "avg_r": -0.167
+            }
+          },
+          {
+            "name": "Thu",
+            "practice": {
+              "trades": 25,
+              "win_rate": 36.0,
+              "net_r": -2.5,
+              "avg_r": -0.1
+            },
+            "exam": {
+              "trades": 13,
+              "win_rate": 7.7,
+              "net_r": -10.5,
+              "avg_r": -0.808
+            }
+          },
+          {
+            "name": "Fri",
+            "practice": {
+              "trades": 23,
+              "win_rate": 56.5,
+              "net_r": 9.5,
+              "avg_r": 0.413
+            },
+            "exam": {
+              "trades": 15,
+              "win_rate": 53.3,
+              "net_r": 5.0,
+              "avg_r": 0.333
+            }
+          },
+          {
+            "name": "Sun",
+            "practice": {
+              "trades": 21,
+              "win_rate": 19.0,
+              "net_r": -11.0,
+              "avg_r": -0.524
+            },
+            "exam": {
+              "trades": 19,
+              "win_rate": 31.6,
+              "net_r": -4.0,
+              "avg_r": -0.211
+            }
+          }
+        ],
+        "by_pair": [
+          {
+            "name": "EUR/USD",
+            "practice": {
+              "trades": 43,
+              "win_rate": 37.2,
+              "net_r": -3.0,
+              "avg_r": -0.07
+            },
+            "exam": {
+              "trades": 27,
+              "win_rate": 51.9,
+              "net_r": 8.0,
+              "avg_r": 0.296
+            }
+          },
+          {
+            "name": "GBP/USD",
+            "practice": {
+              "trades": 49,
+              "win_rate": 40.8,
+              "net_r": 1.0,
+              "avg_r": 0.02
+            },
+            "exam": {
+              "trades": 28,
+              "win_rate": 35.7,
+              "net_r": -3.0,
+              "avg_r": -0.107
+            }
+          },
+          {
+            "name": "USD/JPY",
+            "practice": {
+              "trades": 35,
+              "win_rate": 37.1,
+              "net_r": -2.5,
+              "avg_r": -0.071
+            },
+            "exam": {
+              "trades": 28,
+              "win_rate": 32.1,
+              "net_r": -5.5,
+              "avg_r": -0.196
+            }
+          },
+          {
+            "name": "XAU/USD",
+            "practice": {
+              "trades": 39,
+              "win_rate": 43.6,
+              "net_r": 3.5,
+              "avg_r": 0.09
+            },
+            "exam": {
+              "trades": 31,
+              "win_rate": 32.3,
+              "net_r": -6.0,
+              "avg_r": -0.194
+            }
+          }
+        ],
+        "filter": {
+          "sessions": [
+            "Asian",
+            "London"
+          ],
+          "pairs": [
+            "GBP/USD",
+            "XAU/USD"
+          ],
+          "practice_kept": {
+            "trades": 40,
+            "win_rate": 45.0,
+            "net_r": 5.0,
+            "avg_r": 0.125
+          },
+          "exam_all": {
+            "trades": 114,
+            "win_rate": 37.7,
+            "net_r": -6.5,
+            "avg_r": -0.057
+          },
+          "exam_kept": {
+            "trades": 21,
+            "win_rate": 47.6,
+            "net_r": 4.0,
+            "avg_r": 0.19
+          },
+          "helps": true,
+          "profitable": true,
+          "verdict": "Passed the final exam: on months it had never seen, the time/pair filter did better AND made money (before spreads). Worth trying on a demo account. Caution: only 21 exam trades, so this could still be luck."
+        }
+      }
     },
     "high": {
       "filtered": {
@@ -1240,7 +1795,283 @@
           "win_rate": 29.5,
           "avg_r": -0.115
         }
-      ]
+      ],
+      "time_analysis": {
+        "split": "2026-08-22T03:00:00Z",
+        "practice": {
+          "trades": 355,
+          "win_rate": 30.7,
+          "net_r": -28.0,
+          "avg_r": -0.079
+        },
+        "exam": {
+          "trades": 233,
+          "win_rate": 25.8,
+          "net_r": -53.0,
+          "avg_r": -0.227
+        },
+        "by_session": [
+          {
+            "name": "Asian",
+            "practice": {
+              "trades": 81,
+              "win_rate": 37.0,
+              "net_r": 9.0,
+              "avg_r": 0.111
+            },
+            "exam": {
+              "trades": 57,
+              "win_rate": 35.1,
+              "net_r": 3.0,
+              "avg_r": 0.053
+            }
+          },
+          {
+            "name": "London",
+            "practice": {
+              "trades": 75,
+              "win_rate": 40.0,
+              "net_r": 15.0,
+              "avg_r": 0.2
+            },
+            "exam": {
+              "trades": 39,
+              "win_rate": 20.5,
+              "net_r": -15.0,
+              "avg_r": -0.385
+            }
+          },
+          {
+            "name": "London + New York",
+            "practice": {
+              "trades": 82,
+              "win_rate": 26.8,
+              "net_r": -16.0,
+              "avg_r": -0.195
+            },
+            "exam": {
+              "trades": 50,
+              "win_rate": 18.0,
+              "net_r": -23.0,
+              "avg_r": -0.46
+            }
+          },
+          {
+            "name": "New York",
+            "practice": {
+              "trades": 94,
+              "win_rate": 21.3,
+              "net_r": -34.0,
+              "avg_r": -0.362
+            },
+            "exam": {
+              "trades": 57,
+              "win_rate": 22.8,
+              "net_r": -18.0,
+              "avg_r": -0.316
+            }
+          },
+          {
+            "name": "Late / rollover",
+            "practice": {
+              "trades": 23,
+              "win_rate": 30.4,
+              "net_r": -2.0,
+              "avg_r": -0.087
+            },
+            "exam": {
+              "trades": 30,
+              "win_rate": 33.3,
+              "net_r": 0.0,
+              "avg_r": 0.0
+            }
+          }
+        ],
+        "by_weekday": [
+          {
+            "name": "Mon",
+            "practice": {
+              "trades": 72,
+              "win_rate": 38.9,
+              "net_r": 12.0,
+              "avg_r": 0.167
+            },
+            "exam": {
+              "trades": 43,
+              "win_rate": 30.2,
+              "net_r": -4.0,
+              "avg_r": -0.093
+            }
+          },
+          {
+            "name": "Tue",
+            "practice": {
+              "trades": 67,
+              "win_rate": 32.8,
+              "net_r": -1.0,
+              "avg_r": -0.015
+            },
+            "exam": {
+              "trades": 29,
+              "win_rate": 44.8,
+              "net_r": 10.0,
+              "avg_r": 0.345
+            }
+          },
+          {
+            "name": "Wed",
+            "practice": {
+              "trades": 48,
+              "win_rate": 29.2,
+              "net_r": -6.0,
+              "avg_r": -0.125
+            },
+            "exam": {
+              "trades": 39,
+              "win_rate": 28.2,
+              "net_r": -6.0,
+              "avg_r": -0.154
+            }
+          },
+          {
+            "name": "Thu",
+            "practice": {
+              "trades": 58,
+              "win_rate": 25.9,
+              "net_r": -13.0,
+              "avg_r": -0.224
+            },
+            "exam": {
+              "trades": 33,
+              "win_rate": 15.2,
+              "net_r": -18.0,
+              "avg_r": -0.545
+            }
+          },
+          {
+            "name": "Fri",
+            "practice": {
+              "trades": 59,
+              "win_rate": 33.9,
+              "net_r": 1.0,
+              "avg_r": 0.017
+            },
+            "exam": {
+              "trades": 41,
+              "win_rate": 22.0,
+              "net_r": -14.0,
+              "avg_r": -0.341
+            }
+          },
+          {
+            "name": "Sun",
+            "practice": {
+              "trades": 46,
+              "win_rate": 19.6,
+              "net_r": -19.0,
+              "avg_r": -0.413
+            },
+            "exam": {
+              "trades": 38,
+              "win_rate": 21.1,
+              "net_r": -14.0,
+              "avg_r": -0.368
+            }
+          }
+        ],
+        "by_pair": [
+          {
+            "name": "EUR/USD",
+            "practice": {
+              "trades": 99,
+              "win_rate": 29.3,
+              "net_r": -12.0,
+              "avg_r": -0.121
+            },
+            "exam": {
+              "trades": 56,
+              "win_rate": 30.4,
+              "net_r": -5.0,
+              "avg_r": -0.089
+            }
+          },
+          {
+            "name": "GBP/USD",
+            "practice": {
+              "trades": 93,
+              "win_rate": 31.2,
+              "net_r": -6.0,
+              "avg_r": -0.065
+            },
+            "exam": {
+              "trades": 57,
+              "win_rate": 24.6,
+              "net_r": -15.0,
+              "avg_r": -0.263
+            }
+          },
+          {
+            "name": "USD/JPY",
+            "practice": {
+              "trades": 91,
+              "win_rate": 27.5,
+              "net_r": -16.0,
+              "avg_r": -0.176
+            },
+            "exam": {
+              "trades": 54,
+              "win_rate": 22.2,
+              "net_r": -18.0,
+              "avg_r": -0.333
+            }
+          },
+          {
+            "name": "XAU/USD",
+            "practice": {
+              "trades": 72,
+              "win_rate": 36.1,
+              "net_r": 6.0,
+              "avg_r": 0.083
+            },
+            "exam": {
+              "trades": 66,
+              "win_rate": 25.8,
+              "net_r": -15.0,
+              "avg_r": -0.227
+            }
+          }
+        ],
+        "filter": {
+          "sessions": [
+            "Asian",
+            "London"
+          ],
+          "pairs": [
+            "XAU/USD"
+          ],
+          "practice_kept": {
+            "trades": 36,
+            "win_rate": 41.7,
+            "net_r": 9.0,
+            "avg_r": 0.25
+          },
+          "exam_all": {
+            "trades": 233,
+            "win_rate": 25.8,
+            "net_r": -53.0,
+            "avg_r": -0.227
+          },
+          "exam_kept": {
+            "trades": 31,
+            "win_rate": 25.8,
+            "net_r": -7.0,
+            "avg_r": -0.226
+          },
+          "helps": true,
+          "profitable": false,
+          "verdict": "Partly helped: on unseen months it lost less than trading every session/pair, but it still did not make money."
+        }
+      }
     }
   },
   "score_buckets_all": [
@@ -1258,9 +2089,9 @@
     },
     {
       "band": "70 and above",
-      "trades": 780,
-      "win_rate": 35.3,
-      "avg_r": -0.076
+      "trades": 782,
+      "win_rate": 35.2,
+      "avg_r": -0.079
     }
   ]
 }
