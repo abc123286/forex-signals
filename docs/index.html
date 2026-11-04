@@ -78,7 +78,7 @@
     <h1>📈 Forex Signal Dashboard</h1>
     <div class="mute" id="strategy">Loading…</div>
   </div>
-  <div class="mute" id="updated"></div>
+  <div class="mute" style="text-align:right"><div id="botrun"></div><div id="updated"></div></div>
 </header>
 
 <div class="layout">
@@ -292,7 +292,7 @@ function render(){
   const st = DATA.strategy || {};
   if (st.pairs) pairs = st.pairs;
   document.getElementById("strategy").textContent = st.name ? `${st.name} · ${st.timeframe} candles · 3 risk levels` : "Waiting for first run";
-  document.getElementById("updated").textContent = DATA.updated ? "Last change: " + fmt(DATA.updated) : "";
+  document.getElementById("updated").textContent = DATA.updated ? "Data last changed: " + fmt(DATA.updated) : "";
   renderNav();
 
   document.getElementById("pIcon").textContent = p.icon;
@@ -369,11 +369,35 @@ document.getElementById("pairTabs").onclick = e => { if (e.target.dataset.p) cha
 document.getElementById("fPair").onchange = render;
 document.getElementById("fStatus").onchange = render;
 
+// Read data straight from the GitHub project (always the latest save), so the page doesn't
+// depend on GitHub rebuilding the website. Falls back to the website's own copy.
+const OWNER = location.hostname.endsWith(".github.io") ? location.hostname.split(".")[0] : "abc123286";
+const REPO = location.pathname.split("/").filter(Boolean)[0] || "forex-signals";
+const RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/docs/data/`;
+async function getJson(name){
+  for (const url of [RAW + name, "data/" + name]) {
+    try { const r = await fetch(url + "?t=" + Date.now(), {cache: "no-store"}); if (r.ok) return await r.json(); }
+    catch(e){ console.log("Could not load", url, e); }
+  }
+  return null;
+}
+async function botStatus(){
+  const el = document.getElementById("botrun");
+  try {
+    const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/signals.yml/runs?per_page=1`, {cache: "no-store"});
+    if (!r.ok) throw new Error(r.status);
+    const run = (await r.json()).workflow_runs[0];
+    if (!run) { el.textContent = ""; return; }
+    const mins = Math.round((Date.now() - new Date(run.created_at)) / 60000);
+    const ok = run.conclusion === "success" || run.status !== "completed";
+    const late = mins > 30;
+    el.innerHTML = `Bot last ran: ${mins <= 1 ? "just now" : mins + " min ago"} ${late ? "⚠️ (expected every 10 min)" : ok ? "✅" : "❌ last run failed"}`;
+  } catch(e) { el.textContent = ""; }
+}
 async function load(){
-  try { DATA = await (await fetch("data/signals.json?t=" + Date.now())).json(); }
-  catch(e){ console.log("No data yet", e); }
-  try { const r = await fetch("data/backtest.json?t=" + Date.now()); if (r.ok) BT = await r.json(); }
-  catch(e){ console.log("No backtest yet", e); }
+  const d = await getJson("signals.json"); if (d) DATA = d;
+  const b = await getJson("backtest.json"); if (b) BT = b;
+  botStatus();
   render();
 }
 render();
