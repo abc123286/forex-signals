@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forex Signal Dashboard</title>
+<style>
+  :root{--bg:#0f1420;--card:#171e2e;--line:#263049;--text:#e6eaf2;--mute:#8d98b0;--green:#22c55e;--red:#ef4444;--amber:#f59e0b;--blue:#3b82f6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  header{padding:18px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+  h1{font-size:20px;margin:0}
+  h2{font-size:15px;margin:0 0 12px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  .mute{color:var(--mute)}
+  main{max-width:1200px;margin:0 auto;padding:20px 24px 40px;display:grid;gap:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .tabs button{background:transparent;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit}
+  .tabs button.on{background:var(--blue);border-color:var(--blue)}
+  #chart{height:480px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}
+  .stat .v{font-size:26px;font-weight:700}
+  .stat .l{color:var(--mute);font-size:12px}
+  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{color:var(--mute);font-weight:600;font-size:12px}
+  .wrap{overflow-x:auto}
+  .pill{padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600}
+  .win{background:rgba(34,197,94,.15);color:var(--green)}
+  .loss{background:rgba(239,68,68,.15);color:var(--red)}
+  .open{background:rgba(59,130,246,.15);color:var(--blue)}
+  .expired{background:rgba(245,158,11,.15);color:var(--amber)}
+  .buy{color:var(--green);font-weight:700}.sell{color:var(--red);font-weight:700}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  select{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:inherit}
+  .note{font-size:12px;color:var(--mute)}
+  .open-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+  .sig{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}
+  .sig b{font-size:16px}
+  .row{display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>📈 Forex Signal Dashboard</h1>
+    <div class="mute" id="strategy">Loading…</div>
+  </div>
+  <div class="mute" id="updated"></div>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Live chart</h2>
+    <div class="tabs" id="pairTabs"></div>
+    <div id="chart"></div>
+    <p class="note">Live chart by TradingView. Its prices can differ slightly from the bot's price feed (Twelve Data).</p>
+  </section>
+
+  <section class="card">
+    <h2>Accuracy</h2>
+    <div class="stats" id="stats"></div>
+    <div class="wrap" style="margin-top:14px"><table id="pairStats"></table></div>
+    <p class="note">Accuracy = wins ÷ (wins + losses). Open and expired suggestions are not counted.
+      If TP and SL are both touched in the same candle, it is counted as a loss.</p>
+  </section>
+
+  <section class="card">
+    <h2>Open suggestions</h2>
+    <div class="open-list" id="openList"></div>
+  </section>
+
+  <section class="card">
+    <h2>History</h2>
+    <div class="filters">
+      <select id="fPair"><option value="">All pairs</option></select>
+      <select id="fStatus">
+        <option value="">All results</option><option value="win">Win (TP hit)</option>
+        <option value="loss">Loss (SL hit)</option><option value="open">Open</option><option value="expired">Expired</option>
+      </select>
+    </div>
+    <div class="wrap"><table id="history"></table></div>
+  </section>
+
+  <p class="note">Educational, rule-based tool. Not financial advice. Past results do not guarantee future results. Forex trading carries a high risk of loss.</p>
+</main>
+
+<script src="https://s3.tradingview.com/tv.js"></script>
+<script>
+const TV = {"EUR/USD":"FX:EURUSD","GBP/USD":"FX:GBPUSD","USD/JPY":"FX:USDJPY","XAU/USD":"OANDA:XAUUSD"};
+const MYT = {timeZone:"Asia/Kuala_Lumpur",day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"};
+const fmt = s => s ? new Date(s).toLocaleString("en-MY", MYT) : "–";
+let DATA = {signals:[]}, pairs = Object.keys(TV);
+
+function chart(pair){
+  document.querySelectorAll("#pairTabs button").forEach(b=>b.classList.toggle("on", b.dataset.p===pair));
+  if (!window.TradingView){ document.getElementById("chart").innerHTML='<p class="mute">Chart could not load.</p>'; return; }
+  new TradingView.widget({container_id:"chart",symbol:TV[pair]||pair.replace("/",""),interval:"60",
+    timezone:"Asia/Kuala_Lumpur",theme:"dark",style:"1",locale:"en",autosize:true,
+    hide_side_toolbar:false,allow_symbol_change:true,studies:["RSI@tv-basicstudies"]});
+}
+
+function counts(list){
+  const w=list.filter(s=>s.status==="win").length, l=list.filter(s=>s.status==="loss").length;
+  return {w,l,o:list.filter(s=>s.status==="open").length,e:list.filter(s=>s.status==="expired").length,
+          t:list.length, acc: w+l ? (100*w/(w+l)).toFixed(1)+"%" : "–"};
+}
+
+function render(){
+  const S = DATA.signals || [];
+  const st = DATA.strategy || {};
+  document.getElementById("strategy").textContent = st.name
+    ? `${st.name} · ${st.timeframe} · reward:risk ${st.reward_risk}:1` : "Waiting for first run";
+  document.getElementById("strategy").title = st.rules || "";
+  document.getElementById("updated").textContent = DATA.updated ? "Last change: " + fmt(DATA.updated) : "";
+  if (st.pairs) pairs = st.pairs;
+
+  const c = counts(S);
+  document.getElementById("stats").innerHTML = [
+    ["Accuracy", c.acc], ["Wins (TP hit)", c.w], ["Losses (SL hit)", c.l],
+    ["Open", c.o], ["Expired", c.e], ["Total suggestions", c.t]
+  ].map(([l,v])=>`<div class="stat"><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
+
+  document.getElementById("pairStats").innerHTML =
+    "<tr><th>Pair</th><th>Accuracy</th><th>Wins</th><th>Losses</th><th>Open</th><th>Expired</th><th>Total</th></tr>" +
+    pairs.map(p=>{const k=counts(S.filter(s=>s.pair===p));
+      return `<tr><td>${p}</td><td>${k.acc}</td><td>${k.w}</td><td>${k.l}</td><td>${k.o}</td><td>${k.e}</td><td>${k.t}</td></tr>`}).join("");
+
+  const open = S.filter(s=>s.status==="open");
+  document.getElementById("openList").innerHTML = open.length ? open.map(s=>`
+    <div class="sig">
+      <div class="row"><b class="${s.direction.toLowerCase()}">${s.direction} ${s.pair}</b><span class="mute">${fmt(s.created)}</span></div>
+      <div class="row"><span>Entry</span><span>${s.entry}</span></div>
+      <div class="row"><span>Take Profit</span><span class="buy">${s.tp} (+${s.tp_pips} pips)</span></div>
+      <div class="row"><span>Stop Loss</span><span class="sell">${s.sl} (−${s.sl_pips} pips)</span></div>
+      <div class="note" style="margin-top:6px">${s.reason}</div>
+    </div>`).join("") : '<p class="mute">No open suggestions right now.</p>';
+
+  const fp=document.getElementById("fPair");
+  if (fp.options.length===1) pairs.forEach(p=>fp.add(new Option(p,p)));
+  const vp=fp.value, vs=document.getElementById("fStatus").value;
+  const rows = S.filter(s=>(!vp||s.pair===vp)&&(!vs||s.status===vs)).slice().reverse();
+  const label={win:"Win",loss:"Loss",open:"Open",expired:"Expired"};
+  document.getElementById("history").innerHTML =
+    "<tr><th>Time (MYT)</th><th>Pair</th><th>Side</th><th>Entry</th><th>TP</th><th>SL</th><th>Result</th><th>Exit</th><th>Closed</th></tr>" +
+    (rows.length ? rows.map(s=>`<tr><td>${fmt(s.created)}</td><td>${s.pair}</td>
+      <td class="${s.direction.toLowerCase()}">${s.direction}</td><td>${s.entry}</td><td>${s.tp}</td><td>${s.sl}</td>
+      <td><span class="pill ${s.status}">${label[s.status]}</span></td><td>${s.exit_price ?? "–"}</td><td>${fmt(s.closed_at)}</td></tr>`).join("")
+      : '<tr><td colspan="9" class="mute">No suggestions yet. The bot checks every 15 minutes.</td></tr>');
+}
+
+document.getElementById("pairTabs").innerHTML = pairs.map(p=>`<button data-p="${p}">${p}</button>`).join("");
+document.getElementById("pairTabs").onclick = e => { if (e.target.dataset.p) chart(e.target.dataset.p); };
+document.getElementById("fPair").onchange = render;
+document.getElementById("fStatus").onchange = render;
+
+async function load(){
+  try { DATA = await (await fetch("data/signals.json?t=" + Date.now())).json(); }
+  catch(e){ console.log("No data yet", e); }
+  render();
+}
+chart(pairs[0]);
+load();
+setInterval(load, 5 * 60 * 1000);   // refresh history every 5 minutes
+</script>
+</body>
+</html>
