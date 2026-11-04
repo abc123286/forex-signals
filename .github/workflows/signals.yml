@@ -53,5 +53,9 @@ jobs:
           git add docs/data/signals.json
           if ! git diff --cached --quiet; then
             git commit -m "Update signal history"
-            git push
+            for attempt in 1 2 3 4; do
+              git pull --rebase -X theirs && git push && break
+              echo "Save clashed with another update, retrying ($attempt)..."
+              sleep $((attempt * 5))
+            done
           fi
