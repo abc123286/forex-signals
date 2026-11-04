@@ -1,0 +1,42 @@
+name: Backtest
+
+on:
+  schedule:
+    - cron: "17 2 * * 6"        # every Saturday 02:17 UTC (10:17am Malaysia), market closed
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: forex-signals          # never runs at the same time as the signal bot
+  cancel-in-progress: false
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install requests
+
+      - name: Run backtest
+        env:
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+        run: python backtest.py
+
+      - name: Save results
+        run: |
+          git config user.name "forex-bot"
+          git config user.email "forex-bot@users.noreply.github.com"
+          git add docs/data/backtest.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update backtest results"
+            git pull --rebase
+            git push
+          fi
