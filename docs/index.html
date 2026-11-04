@@ -111,6 +111,11 @@
     </section>
 
     <section class="card">
+      <h2>Best time periods: practice vs final exam</h2>
+      <div id="ta"><p class="mute">Run the "Backtest" workflow on GitHub to see this.</p></div>
+    </section>
+
+    <section class="card">
       <h2>Open suggestions</h2>
       <div class="open-list" id="openList"></div>
     </section>
@@ -211,6 +216,35 @@ function renderBacktest(){
     </table></div>
     <p class="note">If higher confidence rows show a better average per trade, the score is helping. ${(BT.notes||[]).join(" ")}</p>`;
 }
+function renderTime(){
+  const el = document.getElementById("ta");
+  const a = BT && BT.profiles && BT.profiles[current] && BT.profiles[current].time_analysis;
+  if (!a) return;
+  const f = a.filter, cls = f.profitable ? "win" : f.helps ? "expired" : "loss";
+  const label = f.profitable ? "PASSED" : f.helps ? "PARTLY HELPED" : "DID NOT PASS";
+  const day = s => fmt(s).split(",")[0];
+  const tbl = (title, rows) => `<div class="wrap"><table>
+      <tr><th>${title}</th><th>Practice trades</th><th>Practice win %</th><th>Practice net R</th><th>Exam trades</th><th>Exam win %</th><th>Exam net R</th></tr>
+      ${rows.map(r=>`<tr><td>${r.name}${(f.sessions.includes(r.name)||f.pairs.includes(r.name))?" ✅":""}</td>
+        <td>${r.practice.trades}</td><td>${pct(r.practice.win_rate)}</td><td>${sign(r.practice.net_r)}</td>
+        <td>${r.exam.trades}</td><td>${pct(r.exam.win_rate)}</td><td>${sign(r.exam.net_r)}</td></tr>`).join("")}
+    </table></div>`;
+  el.innerHTML = `
+    <p class="mute" style="margin-top:0">Practice = first ~5 months (used to pick the good sessions/pairs).
+      Final exam = last ~3 months from ${day(a.split)}, which the strategy never saw. Only the exam shows if it really works.</p>
+    <div class="sig" style="margin-bottom:14px">
+      <div class="row"><b>Time & pair filter</b><span class="pill ${cls}">${label}</span></div>
+      <div class="note" style="margin:6px 0">Keep sessions: <b>${f.sessions.join(", ")||"none"}</b> · Keep pairs: <b>${f.pairs.join(", ")||"none"}</b></div>
+      <div class="row"><span>Final exam, all trades</span><span>${f.exam_all.trades} trades · ${pct(f.exam_all.win_rate)} · ${sign(f.exam_all.net_r)} R</span></div>
+      <div class="row"><span>Final exam, only kept sessions/pairs</span><span>${f.exam_kept.trades} trades · ${pct(f.exam_kept.win_rate)} · ${sign(f.exam_kept.net_r)} R</span></div>
+      <div class="note" style="margin-top:6px">${f.verdict}</div>
+    </div>
+    ${tbl("Session (UTC hours)", a.by_session)}
+    <p class="note">Asian 00–07 UTC (8am–3pm MYT) · London 07–12 (3–8pm) · London + New York 12–16 (8pm–12am) · New York 16–21 (12–5am) · Late 21–24 (5–8am).</p>
+    ${tbl("Pair", a.by_pair)}
+    <div style="margin-top:12px">${tbl("Day (UTC)", a.by_weekday)}</div>
+    <p class="note">✅ = kept by the filter. Small groups (under ~30 trades) can look good or bad just by luck.</p>`;
+}
 function renderSnap(){
   const sn = DATA.snapshot || [];
   const t = v => v==="up" ? '<span class="buy">▲ Up</span>' : v==="down" ? '<span class="sell">▼ Down</span>' : '<span class="mute">– Flat</span>';
@@ -305,6 +339,7 @@ function render(){
       : '<tr><td colspan="6" class="mute">No upcoming high/medium-impact news loaded yet.</td></tr>');
 
   renderBacktest();
+  renderTime();
   renderSnap();
 
   const fp=document.getElementById("fPair");
