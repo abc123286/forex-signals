@@ -13,19 +13,28 @@ What it does:
 
 Think of it like **surfing**: first find which way the wave is going (trend), then wait for a small dip so you can get on at a better price (pullback).
 
-| Step | BUY | SELL |
-|---|---|---|
-| 1. Trend | 50-candle average is **above** the 200-candle average | 50 is **below** 200 |
-| 2. Pullback ends | RSI dipped under 40 and climbs back above 40 | RSI rose over 60 and drops back below 60 |
-| Stop Loss | 1.5 × ATR below entry | 1.5 × ATR above entry |
-| Take Profit | 2.25 × ATR above entry | 2.25 × ATR below entry |
+- **Trend:** 50-candle average above the 200-candle average = uptrend (look for BUY); below = downtrend (look for SELL).
+- **Pullback ends:** RSI dips and then climbs back (BUY), or rises and then drops back (SELL).
+- **SL / TP** are set from **ATR** (how much price normally moves in one hour), so they adjust to calm or wild markets.
 
-- **ATR** = how much the price normally moves in one hour, so SL/TP adjust automatically to calm or wild markets.
-- Reward : risk = **1.5 : 1**. That means you only need a win rate above **40%** to break even (before spreads and fees).
-- Only **one open suggestion per pair** at a time.
+### Three risk levels (each has its own tab, history and accuracy)
+
+| | 🛡️ Low risk | ⚖️ Moderate | 🔥 High risk |
+|---|---|---|---|
+| Pullback needed | Deep (RSI 35 / 65) + trend must be rising/falling | Normal (RSI 40 / 60) | Small (RSI 45 / 55), no extra filters |
+| Stop Loss | 2 × ATR (wide) | 1.5 × ATR | 1 × ATR (tight) |
+| Take Profit | 2 × ATR (1 : 1) | 2.25 × ATR (1.5 : 1) | 2 × ATR (2 : 1) |
+| Break-even win rate | ~50% | ~40% | ~33% |
+| News pause (Forex Factory) | 2h before → 1h after **high & medium** news | 1h before → 30 min after high news | 15 min before → 15 min after high news |
+| Expect | Fewest trades, higher win %, smaller wins | Balanced | Most trades, lower win %, bigger wins |
+
+- Only **one open suggestion per pair per risk level** at a time.
 - A suggestion with no TP/SL after **5 days** is marked "expired" (not counted in accuracy).
+- Every new alert lists the **high-impact news in the next 24 hours**, and you get a ⚠️ warning when high-impact news is less than 60 minutes away and you have an open trade.
+- If the Forex Factory feed can't be read, the bot still works and says so in the alert.
+- To stop Telegram alerts for a level, edit `ALERT_PROFILES` at the top of `signals.py` (the website still records all levels).
 
-You can change these numbers at the top of `signals.py`.
+"Low risk" means lower risk **compared with the other levels**, not risk-free.
 
 ---
 

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Forex signal bot.
+Forex signal bot with three risk levels (Low / Moderate / High).
 
 Runs on GitHub Actions every 15 minutes:
   1. Downloads recent 1-hour candles for each pair (Twelve Data, free plan).
-  2. Checks open suggestions: did price hit Take Profit (win) or Stop Loss (loss)?
-  3. Looks for a new setup using the "Trend + RSI pullback" strategy.
-  4. Sends alerts (Telegram and/or Gmail) for new suggestions and results.
+  2. Reads the Forex Factory economic calendar (high/medium impact news).
+  3. For each risk level: checks open suggestions (TP hit = win, SL hit = loss),
+     warns about big news for open trades, and looks for new setups.
+  4. Sends alerts (Telegram and/or Gmail).
   5. Saves everything to docs/data/signals.json (shown on the website).
 
 This is a rule-based educational tool, not financial advice.
@@ -25,22 +26,58 @@ import requests
 # Settings (safe to change)
 # ----------------------------------------------------------------------------
 PAIRS = ["EUR/USD", "GBP/USD", "USD/JPY", "XAU/USD"]
-INTERVAL_HOURS = 1          # 1-hour candles
+INTERVAL_HOURS = 1          # 1-hour candles (shared by all risk levels)
 CANDLES = 300               # how many candles to download
-EMA_FAST = 50               # trend filter: fast moving average
-EMA_SLOW = 200              # trend filter: slow moving average
+EMA_FAST = 50
+EMA_SLOW = 200
 RSI_LEN = 14
 ATR_LEN = 14
-RSI_BUY_LEVEL = 40          # uptrend: RSI dips under 40, then climbs back above -> BUY
-RSI_SELL_LEVEL = 60         # downtrend: RSI rises over 60, then drops back below -> SELL
-SL_ATR = 1.5                # Stop Loss  = 1.5 x ATR away from entry
-TP_ATR = 2.25               # Take Profit = 2.25 x ATR away (reward:risk = 1.5 : 1)
 EXPIRE_HOURS = 120          # close a suggestion as "expired" after 5 days with no TP/SL
+NEWS_WARN_MIN = 60          # warn about open trades when high-impact news is within 60 min
+NEWS_ALERT_HOURS = 24       # list high-impact news for the next 24h inside each new alert
 MY_TIMEZONE = timezone(timedelta(hours=8))   # Malaysia time for alert messages
+
+# Which risk levels send Telegram/Gmail alerts. All levels are always recorded on the website.
+ALERT_PROFILES = ["low", "moderate", "high"]
+
+PROFILES = {
+    "low": {
+        "label": "Low risk", "icon": "🛡️",
+        "rsi_buy": 35, "rsi_sell": 65,      # needs a deeper pullback
+        "sl_atr": 2.0, "tp_atr": 2.0,       # wide SL, TP same size as SL (1 : 1)
+        "trend_slope": True,                # long-term trend must also be rising/falling
+        "price_filter": True,               # price must be on the right side of EMA200
+        "news_before": 120, "news_after": 60, "news_medium": True,
+        "desc": "Very picky: only strong, clear trends after a deep pullback. Wide stop loss and "
+                "TP equal to SL, so wins should be more frequent but smaller. Pauses 2h before to "
+                "1h after high AND medium impact news.",
+    },
+    "moderate": {
+        "label": "Moderate", "icon": "⚖️",
+        "rsi_buy": 40, "rsi_sell": 60,
+        "sl_atr": 1.5, "tp_atr": 2.25,      # reward : risk = 1.5 : 1
+        "trend_slope": False,
+        "price_filter": True,
+        "news_before": 60, "news_after": 30, "news_medium": False,
+        "desc": "Balanced: trend + normal pullback. TP is 1.5x the SL. Pauses 1h before to 30 min "
+                "after high impact news.",
+    },
+    "high": {
+        "label": "High risk", "icon": "🔥",
+        "rsi_buy": 45, "rsi_sell": 55,      # small pullbacks count -> more trades
+        "sl_atr": 1.0, "tp_atr": 2.0,       # tight SL, TP = 2x SL (2 : 1)
+        "trend_slope": False,
+        "price_filter": False,
+        "news_before": 15, "news_after": 15, "news_medium": False,
+        "desc": "Least picky: more trades, tight stop loss, TP is 2x the SL. Expect more losing "
+                "trades but bigger wins. Only pauses 15 min around high impact news.",
+    },
+}
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(ROOT, "docs", "data", "signals.json")
 API_URL = "https://api.twelvedata.com/time_series"
+NEWS_URL = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"   # Forex Factory calendar feed
 
 
 # ----------------------------------------------------------------------------
@@ -127,20 +164,25 @@ def from_iso(s):
 
 
 def my_time(dt):
-    return dt.astimezone(MY_TIMEZONE).strftime("%d %b %Y, %I:%M %p (MYT)")
+    return dt.astimezone(MY_TIMEZONE).strftime("%a %d %b, %I:%M %p (MYT)")
 
 
 def load_data():
     if os.path.exists(DATA_FILE):
         with open(DATA_FILE, encoding="utf-8") as f:
-            return json.load(f)
-    return {"strategy": {}, "signals": []}
+            data = json.load(f)
+    else:
+        data = {"signals": []}
+    for s in data.get("signals", []):
+        s.setdefault("profile", "moderate")      # older suggestions = moderate
+    data.setdefault("signals", [])
+    return data
 
 
 def save_data(data):
     os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
     with open(DATA_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
+        json.dump(data, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
 
@@ -148,11 +190,14 @@ def strategy_info():
     return {
         "name": "Trend + RSI pullback",
         "timeframe": f"{INTERVAL_HOURS}H",
-        "rules": (f"BUY when EMA{EMA_FAST} > EMA{EMA_SLOW} (uptrend) and RSI{RSI_LEN} crosses back above "
-                  f"{RSI_BUY_LEVEL}. SELL when EMA{EMA_FAST} < EMA{EMA_SLOW} (downtrend) and RSI{RSI_LEN} "
-                  f"crosses back below {RSI_SELL_LEVEL}. SL = {SL_ATR} x ATR{ATR_LEN}, TP = {TP_ATR} x ATR{ATR_LEN}."),
-        "reward_risk": round(TP_ATR / SL_ATR, 2),
         "pairs": PAIRS,
+        "profiles": {
+            k: {"label": p["label"], "icon": p["icon"], "desc": p["desc"],
+                "reward_risk": round(p["tp_atr"] / p["sl_atr"], 2),
+                "sl_atr": p["sl_atr"], "tp_atr": p["tp_atr"],
+                "rsi_buy": p["rsi_buy"], "rsi_sell": p["rsi_sell"]}
+            for k, p in PROFILES.items()
+        },
     }
 
 
@@ -160,68 +205,115 @@ def strategy_info():
 # Price data
 # ----------------------------------------------------------------------------
 def fetch_candles(pair, api_key):
-    params = {
-        "symbol": pair,
-        "interval": f"{INTERVAL_HOURS}h",
-        "outputsize": CANDLES,
-        "timezone": "UTC",
-        "apikey": api_key,
-    }
+    params = {"symbol": pair, "interval": f"{INTERVAL_HOURS}h", "outputsize": CANDLES,
+              "timezone": "UTC", "apikey": api_key}
     r = requests.get(API_URL, params=params, timeout=30)
     r.raise_for_status()
     js = r.json()
     if js.get("status") != "ok" or "values" not in js:
         raise RuntimeError(js.get("message", "unknown error from Twelve Data"))
-    candles = []
-    for v in js["values"]:
-        candles.append({
-            "time": parse_time(v["datetime"]),
-            "open": float(v["open"]),
-            "high": float(v["high"]),
-            "low": float(v["low"]),
-            "close": float(v["close"]),
-        })
+    candles = [{"time": parse_time(v["datetime"]), "open": float(v["open"]),
+                "high": float(v["high"]), "low": float(v["low"]), "close": float(v["close"])}
+               for v in js["values"]]
     candles.sort(key=lambda c: c["time"])
     return candles
 
 
 # ----------------------------------------------------------------------------
+# News (Forex Factory calendar feed)
+# ----------------------------------------------------------------------------
+def fetch_news():
+    r = requests.get(NEWS_URL, timeout=20, headers={"User-Agent": "forex-signals-bot"})
+    r.raise_for_status()
+    events = []
+    for e in r.json():
+        try:
+            t = datetime.fromisoformat(e["date"]).astimezone(timezone.utc)
+        except Exception:
+            continue
+        events.append({"time": iso(t), "currency": e.get("country", ""),
+                       "impact": e.get("impact", ""), "title": e.get("title", ""),
+                       "forecast": e.get("forecast", ""), "previous": e.get("previous", "")})
+    events.sort(key=lambda x: x["time"])
+    return events
+
+
+def pair_currencies(pair):
+    base, quote = pair.split("/")
+    if base == "XAU":            # gold mostly reacts to US news
+        return {"USD"}
+    return {base, quote}
+
+
+def news_for(pair, events, now, start_min, end_min, impacts=("High",)):
+    """Events for this pair's currencies between now+start_min and now+end_min."""
+    cur = pair_currencies(pair)
+    out = []
+    for e in events or []:
+        if e["impact"] not in impacts or e["currency"] not in cur:
+            continue
+        mins = (from_iso(e["time"]) - now).total_seconds() / 60
+        if start_min <= mins <= end_min:
+            out.append(e)
+    return out
+
+
+def news_line(e):
+    return f"• {my_time(from_iso(e['time']))} {e['currency']} {e['title']}"
+
+
+# ----------------------------------------------------------------------------
 # Strategy
 # ----------------------------------------------------------------------------
-def find_setup(pair, closed):
-    """Look at the latest *closed* candle. Return a new signal dict or None."""
-    if len(closed) < EMA_SLOW + 5:
-        return None
+def indicators(closed):
     closes = [c["close"] for c in closed]
-    highs = [c["high"] for c in closed]
-    lows = [c["low"] for c in closed]
-    ef, es = ema(closes, EMA_FAST), ema(closes, EMA_SLOW)
-    r, a = rsi(closes, RSI_LEN), atr(highs, lows, closes, ATR_LEN)
+    return {
+        "close": closes,
+        "ef": ema(closes, EMA_FAST),
+        "es": ema(closes, EMA_SLOW),
+        "rsi": rsi(closes, RSI_LEN),
+        "atr": atr([c["high"] for c in closed], [c["low"] for c in closed], closes, ATR_LEN),
+    }
+
+
+def find_setup(pair, closed, profile="moderate", ind=None):
+    """Look at the latest *closed* candle. Return a new signal dict or None."""
+    p = PROFILES[profile]
+    if len(closed) < EMA_SLOW + 15:
+        return None
+    ind = ind or indicators(closed)
+    ef, es, r, a, closes = ind["ef"], ind["es"], ind["rsi"], ind["atr"], ind["close"]
     i = len(closed) - 1
-    if None in (ef[i], es[i], r[i], r[i - 1], a[i]):
+    if None in (ef[i], es[i], es[i - 10], r[i], r[i - 1], a[i]):
         return None
 
     price = closes[i]
+    up = ef[i] > es[i]
+    down = ef[i] < es[i]
+    if p["price_filter"]:
+        up = up and price > es[i]
+        down = down and price < es[i]
+    if p["trend_slope"]:
+        up = up and es[i] > es[i - 10]
+        down = down and es[i] < es[i - 10]
+
     direction = None
-    if ef[i] > es[i] and price > es[i] and r[i - 1] < RSI_BUY_LEVEL <= r[i]:
+    if up and r[i - 1] < p["rsi_buy"] <= r[i]:
         direction = "BUY"
-        reason = f"Uptrend (EMA{EMA_FAST} above EMA{EMA_SLOW}); RSI bounced back above {RSI_BUY_LEVEL}"
-    elif ef[i] < es[i] and price < es[i] and r[i - 1] > RSI_SELL_LEVEL >= r[i]:
+        reason = f"Uptrend (EMA{EMA_FAST} above EMA{EMA_SLOW}); RSI bounced back above {p['rsi_buy']}"
+    elif down and r[i - 1] > p["rsi_sell"] >= r[i]:
         direction = "SELL"
-        reason = f"Downtrend (EMA{EMA_FAST} below EMA{EMA_SLOW}); RSI dropped back below {RSI_SELL_LEVEL}"
+        reason = f"Downtrend (EMA{EMA_FAST} below EMA{EMA_SLOW}); RSI dropped back below {p['rsi_sell']}"
     if not direction:
         return None
 
     d = decimals(pair)
-    risk = SL_ATR * a[i]
-    reward = TP_ATR * a[i]
-    if direction == "BUY":
-        sl, tp = price - risk, price + reward
-    else:
-        sl, tp = price + risk, price - reward
+    risk, reward = p["sl_atr"] * a[i], p["tp_atr"] * a[i]
+    sl, tp = (price - risk, price + reward) if direction == "BUY" else (price + risk, price - reward)
     signal_time = closed[i]["time"] + timedelta(hours=INTERVAL_HOURS)   # candle close time
     return {
-        "id": f"{pair.replace('/', '')}-{signal_time.strftime('%Y%m%d%H%M')}",
+        "id": f"{profile}-{pair.replace('/', '')}-{signal_time.strftime('%Y%m%d%H%M')}",
+        "profile": profile,
         "pair": pair,
         "direction": direction,
         "entry": round(price, d),
@@ -304,21 +396,45 @@ def notify(subject, text):
     send_email(subject, text)
 
 
-def new_signal_message(s):
+def tag(profile):
+    p = PROFILES.get(profile, PROFILES["moderate"])
+    return f"{p['icon']} {p['label'].upper()}"
+
+
+def new_signal_message(s, upcoming=None):
     arrow = "🟢 BUY" if s["direction"] == "BUY" else "🔴 SELL"
-    return (f"<b>{arrow} {s['pair']}</b>\n"
-            f"Entry: {s['entry']}\n"
-            f"Take Profit: {s['tp']}  (+{s['tp_pips']} pips)\n"
-            f"Stop Loss: {s['sl']}  (-{s['sl_pips']} pips)\n"
-            f"Why: {s['reason']}\n"
-            f"Time: {my_time(from_iso(s['created']))}")
+    msg = (f"[{tag(s['profile'])}]\n"
+           f"<b>{arrow} {s['pair']}</b>\n"
+           f"Entry: {s['entry']}\n"
+           f"Take Profit: {s['tp']}  (+{s['tp_pips']} pips)\n"
+           f"Stop Loss: {s['sl']}  (-{s['sl_pips']} pips)\n"
+           f"Why: {s['reason']}\n"
+           f"Time: {my_time(from_iso(s['created']))}")
+    if upcoming is None:
+        msg += "\n\n📰 News check unavailable (Forex Factory feed could not be read)."
+    elif upcoming:
+        msg += f"\n\n📰 High-impact news in next {NEWS_ALERT_HOURS}h (Forex Factory):\n"
+        msg += "\n".join(news_line(e) for e in upcoming[:5])
+    else:
+        msg += f"\n\n📰 No high-impact news for this pair in the next {NEWS_ALERT_HOURS}h."
+    return msg
+
+
+def news_warning_message(sigs, e):
+    lines = "\n".join(f"• [{tag(s['profile'])}] {s['direction']} {s['pair']} (entry {s['entry']})" for s in sigs)
+    return (f"<b>⚠️ High-impact news soon</b>\n"
+            f"{news_line(e)}\n"
+            f"Forecast: {e['forecast'] or '-'} | Previous: {e['previous'] or '-'}\n\n"
+            f"Open trades affected:\n{lines}\n\n"
+            f"High-impact news can make price jump fast, past your SL or TP.")
 
 
 def result_message(s, stats):
     icon = {"win": "✅ TP HIT", "loss": "❌ SL HIT", "expired": "⏱ EXPIRED"}[s["status"]]
-    return (f"<b>{icon}: {s['direction']} {s['pair']}</b>\n"
+    return (f"[{tag(s['profile'])}]\n"
+            f"<b>{icon}: {s['direction']} {s['pair']}</b>\n"
             f"Entry {s['entry']} → Exit {s['exit_price']}\n"
-            f"Overall accuracy: {stats}")
+            f"{PROFILES[s['profile']]['label']} accuracy: {stats}")
 
 
 def accuracy_text(signals):
@@ -332,14 +448,29 @@ def accuracy_text(signals):
 # ----------------------------------------------------------------------------
 # Main
 # ----------------------------------------------------------------------------
-def run(fetch=fetch_candles, now=None):
+def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
     now = now or datetime.now(timezone.utc)
     api_key = os.getenv("TWELVEDATA_API_KEY", "")
     data = load_data()
-    data["strategy"] = strategy_info()
+    info = strategy_info()
+    changed = data.get("strategy") != info
+    data["strategy"] = info
     signals = data["signals"]
-    changed = False
-    messages = []
+    warned = data.setdefault("news_warned", [])
+    outbox = []          # (subject, text, profile or None)
+
+    # Economic calendar (Forex Factory). If it fails, the bot still runs.
+    try:
+        events = news_fetch()
+    except Exception as e:
+        print("News feed error:", e)
+        events = None
+    if events is not None:
+        upcoming = [e for e in events if e["impact"] in ("High", "Medium")
+                    and from_iso(e["time"]) >= now - timedelta(hours=2)]
+        if upcoming != data.get("news"):
+            data["news"] = upcoming
+            changed = True
 
     for n, pair in enumerate(PAIRS):
         if n:
@@ -349,34 +480,56 @@ def run(fetch=fetch_candles, now=None):
         except Exception as e:
             print(f"[{pair}] could not get prices: {e}")
             continue
-        # Only candles that have fully closed are used for new signals.
         closed = [c for c in candles if c["time"] + timedelta(hours=INTERVAL_HOURS) <= now]
+        ind = indicators(closed) if len(closed) >= EMA_SLOW + 15 else None
 
-        # 1) Update open suggestions
+        # 1) Update open suggestions (all risk levels)
         for s in signals:
-            if s["pair"] == pair and s["status"] == "open":
-                if update_open_signal(s, candles, now):
-                    changed = True
-                    messages.append((f"{s['pair']} {s['status'].upper()}", s))
+            if s["pair"] == pair and s["status"] == "open" and update_open_signal(s, candles, now):
+                changed = True
+                same = [x for x in signals if x["profile"] == s["profile"]]
+                outbox.append((f"{s['pair']} {s['status'].upper()}",
+                               result_message(s, accuracy_text(same)), s["profile"]))
 
-        # 2) Look for a new one (max one open suggestion per pair)
-        if any(s["pair"] == pair and s["status"] == "open" for s in signals):
-            print(f"[{pair}] has an open suggestion, waiting for TP/SL")
-            continue
-        sig = find_setup(pair, closed)
-        if sig and not any(s["id"] == sig["id"] for s in signals):
+        # 2) One warning per news event, listing every open trade it affects
+        open_here = [s for s in signals if s["pair"] == pair and s["status"] == "open"]
+        if open_here:
+            for e in news_for(pair, events, now, 0, NEWS_WARN_MIN):
+                key = f"{pair}|{e['time']}|{e['title']}"
+                if key not in warned:
+                    warned.append(key)
+                    changed = True
+                    outbox.append((f"News warning: {pair}", news_warning_message(open_here, e), None))
+
+        # 3) New setups, separately for each risk level (max one open per pair per level)
+        for prof, p in PROFILES.items():
+            label = f"[{pair}][{p['label']}]"
+            if any(s["pair"] == pair and s["profile"] == prof and s["status"] == "open" for s in signals):
+                print(f"{label} open suggestion, waiting for TP/SL")
+                continue
+            sig = find_setup(pair, closed, prof, ind) if ind else None
+            if not sig or any(s["id"] == sig["id"] for s in signals):
+                print(f"{label} no setup")
+                continue
+            impacts = ("High", "Medium") if p["news_medium"] else ("High",)
+            block = news_for(pair, events, now, -p["news_after"], p["news_before"], impacts)
+            if block:
+                print(f"{label} setup SKIPPED because of news: {block[0]['currency']} {block[0]['title']}")
+                continue
+            upcoming = None if events is None else news_for(pair, events, now, 0, NEWS_ALERT_HOURS * 60)
+            sig["news_note"] = ("feed unavailable" if upcoming is None else
+                                "; ".join(f"{e['currency']} {e['title']}" for e in upcoming[:5]) or "none in next 24h")
             signals.append(sig)
             changed = True
-            messages.append(("NEW", sig))
-            print(f"[{pair}] NEW {sig['direction']} at {sig['entry']}")
-        else:
-            print(f"[{pair}] no setup")
+            outbox.append((f"Forex signal [{p['label']}]: {sig['direction']} {pair}",
+                           new_signal_message(sig, upcoming), prof))
+            print(f"{label} NEW {sig['direction']} at {sig['entry']}")
 
-    for kind, s in messages:
-        if kind == "NEW":
-            notify(f"Forex signal: {s['direction']} {s['pair']}", new_signal_message(s))
-        else:
-            notify(f"Forex result: {kind}", result_message(s, accuracy_text(signals)))
+    del warned[:-200]   # keep the list short
+
+    for subject, text, prof in outbox:
+        if prof is None or prof in ALERT_PROFILES:
+            notify(subject, text)
 
     if changed or not os.path.exists(DATA_FILE):
         data["updated"] = iso(now)
