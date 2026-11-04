@@ -1,4 +1,233 @@
 {
-  "strategy": {},
-  "signals": []
+  "strategy": {
+    "name": "Trend + RSI pullback",
+    "timeframe": "1H",
+    "pairs": [
+      "EUR/USD",
+      "GBP/USD",
+      "USD/JPY",
+      "XAU/USD"
+    ],
+    "profiles": {
+      "low": {
+        "label": "Low risk",
+        "icon": "🛡️",
+        "desc": "Very picky: only strong, clear trends after a deep pullback. Wide stop loss and TP equal to SL, so wins should be more frequent but smaller. Pauses 2h before to 1h after high AND medium impact news.",
+        "reward_risk": 1.0,
+        "sl_atr": 2.0,
+        "tp_atr": 2.0,
+        "rsi_buy": 35,
+        "rsi_sell": 65
+      },
+      "moderate": {
+        "label": "Moderate",
+        "icon": "⚖️",
+        "desc": "Balanced: trend + normal pullback. TP is 1.5x the SL. Pauses 1h before to 30 min after high impact news.",
+        "reward_risk": 1.5,
+        "sl_atr": 1.5,
+        "tp_atr": 2.25,
+        "rsi_buy": 40,
+        "rsi_sell": 60
+      },
+      "high": {
+        "label": "High risk",
+        "icon": "🔥",
+        "desc": "Least picky: more trades, tight stop loss, TP is 2x the SL. Expect more losing trades but bigger wins. Only pauses 15 min around high impact news.",
+        "reward_risk": 2.0,
+        "sl_atr": 1.0,
+        "tp_atr": 2.0,
+        "rsi_buy": 45,
+        "rsi_sell": 55
+      }
+    }
+  },
+  "signals": [],
+  "news_warned": [],
+  "news": [
+    {
+      "time": "2026-11-04T10:00:00Z",
+      "currency": "EUR",
+      "impact": "Medium",
+      "title": "Core CPI Flash Estimate y/y",
+      "forecast": "2.5%",
+      "previous": "2.5%"
+    },
+    {
+      "time": "2026-11-04T10:00:00Z",
+      "currency": "EUR",
+      "impact": "Medium",
+      "title": "CPI Flash Estimate y/y",
+      "forecast": "4.0%",
+      "previous": "3.8%"
+    },
+    {
+      "time": "2026-11-04T15:00:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "ISM Services PMI",
+      "forecast": "54.8",
+      "previous": "54.9"
+    },
+    {
+      "time": "2026-11-05T12:00:00Z",
+      "currency": "GBP",
+      "impact": "High",
+      "title": "BOE Monetary Policy Report",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-05T12:00:00Z",
+      "currency": "GBP",
+      "impact": "High",
+      "title": "Monetary Policy Summary",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-05T12:00:00Z",
+      "currency": "GBP",
+      "impact": "High",
+      "title": "MPC Official Bank Rate Votes",
+      "forecast": "7-0-2",
+      "previous": "3-0-6"
+    },
+    {
+      "time": "2026-11-05T12:00:00Z",
+      "currency": "GBP",
+      "impact": "High",
+      "title": "Official Bank Rate",
+      "forecast": "4.00%",
+      "previous": "3.75%"
+    },
+    {
+      "time": "2026-11-05T12:30:00Z",
+      "currency": "GBP",
+      "impact": "High",
+      "title": "BOE Gov Bailey Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-05T12:40:00Z",
+      "currency": "CHF",
+      "impact": "Medium",
+      "title": "SNB Chairman Schlegel Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-05T13:30:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "Unemployment Claims",
+      "forecast": "197K",
+      "previous": "194K"
+    },
+    {
+      "time": "2026-11-05T15:30:00Z",
+      "currency": "CAD",
+      "impact": "Medium",
+      "title": "BOC Gov Macklem Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-05T18:00:00Z",
+      "currency": "EUR",
+      "impact": "Medium",
+      "title": "ECB President Lagarde Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-05T21:00:00Z",
+      "currency": "CAD",
+      "impact": "Medium",
+      "title": "Annual Budget Release",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-06T13:30:00Z",
+      "currency": "CAD",
+      "impact": "High",
+      "title": "Employment Change",
+      "forecast": "14.6K",
+      "previous": "-68.3K"
+    },
+    {
+      "time": "2026-11-06T13:30:00Z",
+      "currency": "CAD",
+      "impact": "High",
+      "title": "Unemployment Rate",
+      "forecast": "6.5%",
+      "previous": "6.5%"
+    },
+    {
+      "time": "2026-11-06T13:30:00Z",
+      "currency": "USD",
+      "impact": "High",
+      "title": "Average Hourly Earnings m/m",
+      "forecast": "0.3%",
+      "previous": "0.1%"
+    },
+    {
+      "time": "2026-11-06T13:30:00Z",
+      "currency": "USD",
+      "impact": "High",
+      "title": "Non-Farm Employment Change",
+      "forecast": "65K",
+      "previous": "29K"
+    },
+    {
+      "time": "2026-11-06T13:30:00Z",
+      "currency": "USD",
+      "impact": "High",
+      "title": "Unemployment Rate",
+      "forecast": "4.2%",
+      "previous": "4.2%"
+    },
+    {
+      "time": "2026-11-06T15:00:00Z",
+      "currency": "CAD",
+      "impact": "Medium",
+      "title": "Ivey PMI",
+      "forecast": "57.7",
+      "previous": "58.2"
+    },
+    {
+      "time": "2026-11-06T15:00:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "Prelim UoM Consumer Sentiment",
+      "forecast": "48.1",
+      "previous": "46.3"
+    },
+    {
+      "time": "2026-11-06T15:00:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "Prelim UoM Inflation Expectations",
+      "forecast": "",
+      "previous": "4.7%"
+    },
+    {
+      "time": "2026-11-06T16:00:00Z",
+      "currency": "JPY",
+      "impact": "High",
+      "title": "BOJ Gov Ueda Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-06T21:45:00Z",
+      "currency": "NZD",
+      "impact": "High",
+      "title": "Parliamentary Elections",
+      "forecast": "",
+      "previous": ""
+    }
+  ],
+  "updated": "2026-11-04T02:18:21Z"
 }
