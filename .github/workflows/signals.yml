@@ -1,0 +1,57 @@
+name: Forex signals
+
+on:
+  schedule:
+    - cron: "*/15 * * * 0-5"     # every 15 minutes, Sunday to Friday (UTC)
+  workflow_dispatch:
+    inputs:
+      test_alert:
+        description: "Only send a test alert (to check Telegram / Gmail)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: forex-signals
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install requests
+
+      - name: Check the market
+        env:
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: |
+          export SITE_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/"
+          if [ "${{ inputs.test_alert }}" = "true" ]; then
+            python signals.py --test-alert
+          else
+            python signals.py
+          fi
+
+      - name: Save history
+        run: |
+          git config user.name "forex-bot"
+          git config user.email "forex-bot@users.noreply.github.com"
+          git add docs/data/signals.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update signal history"
+            git push
+          fi
