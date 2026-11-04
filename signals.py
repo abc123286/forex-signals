@@ -45,7 +45,8 @@ SNAPSHOT_EVERY_MIN = 55     # save a market snapshot about once an hour
 MY_TIMEZONE = timezone(timedelta(hours=8))   # Malaysia time for alert messages
 
 # Which risk levels send Telegram/Gmail alerts. All levels are always recorded on the website.
-ALERT_PROFILES = ["low", "moderate", "high"]
+# High risk is OFF because the backtest showed it losing clearly (about -81R over ~8 months).
+ALERT_PROFILES = ["low", "moderate", "focused"]
 
 PROFILES = {
     "low": {
@@ -86,7 +87,24 @@ PROFILES = {
         "min_score": 40,
         "news_before": 15, "news_after": 15, "news_medium": False,
         "desc": "Least picky: more trades, tight stop loss, TP is 2x the SL, confidence 40+. "
-                "Expect more losing trades but bigger wins. Only pauses 15 min around high impact news.",
+                "Expect more losing trades but bigger wins. Only pauses 15 min around high impact news. "
+                "Telegram alerts are OFF: the backtest showed this level losing clearly.",
+    },
+    "focused": {
+        "label": "Focused", "icon": "🎯",
+        "rsi_buy": 40, "rsi_sell": 60,      # same rules as Moderate...
+        "sl_atr": 1.5, "tp_atr": 2.25,
+        "trend_slope": False,
+        "price_filter": True,
+        "h4_rule": "not_against",
+        "min_adx": 0,
+        "min_score": 55,
+        "news_before": 60, "news_after": 30, "news_medium": False,
+        "only_pairs": ["GBP/USD", "XAU/USD"],   # ...but only these pairs
+        "hours_utc": [0, 12],                    # ...and only Asian + London sessions (8am-8pm Malaysia time)
+        "desc": "Moderate rules, but only GBP/USD and gold, and only during the Asian + London sessions "
+                "(8am-8pm Malaysia time). Picked from the backtest's practice months; it then made +4R on "
+                "unseen months, but from only 21 trades, so it could still be luck. Demo-test it first.",
     },
 }
 
@@ -297,7 +315,9 @@ def strategy_info():
                 "reward_risk": round(p["tp_atr"] / p["sl_atr"], 2),
                 "sl_atr": p["sl_atr"], "tp_atr": p["tp_atr"],
                 "rsi_buy": p["rsi_buy"], "rsi_sell": p["rsi_sell"],
-                "min_score": p["min_score"], "h4_rule": p["h4_rule"], "min_adx": p["min_adx"]}
+                "min_score": p["min_score"], "h4_rule": p["h4_rule"], "min_adx": p["min_adx"],
+                "only_pairs": p.get("only_pairs"), "hours_utc": p.get("hours_utc"),
+                "alerts": k in ALERT_PROFILES}
             for k, p in PROFILES.items()
         },
     }
@@ -470,6 +490,12 @@ def score_setup(pair, ind, i, direction, sl_dist, tp_dist, news_6h=None):
 def evaluate(pair, ind, i, profile, use_filters=True, news_6h=None):
     """Return (signal or None, note). The signal is entered at the close of candle i."""
     p = PROFILES[profile]
+    if p.get("only_pairs") and pair not in p["only_pairs"]:
+        return None, "pair not traded at this level"
+    if p.get("hours_utc"):
+        h = (ind["candles"][i]["time"] + timedelta(hours=INTERVAL_HOURS)).hour
+        if not (p["hours_utc"][0] <= h < p["hours_utc"][1]):
+            return None, "outside this level's trading hours"
     direction, reason = raw_setup(ind, i, p)
     if not direction:
         return None, "no setup"

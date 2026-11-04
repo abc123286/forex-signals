@@ -167,7 +167,7 @@ const DEFAULT_PROFILES = {
   low:{label:"Low risk",icon:"🛡️",desc:"",reward_risk:1,sl_atr:2,tp_atr:2},
   moderate:{label:"Moderate",icon:"⚖️",desc:"",reward_risk:1.5,sl_atr:1.5,tp_atr:2.25},
   high:{label:"High risk",icon:"🔥",desc:"",reward_risk:2,sl_atr:1,tp_atr:2}};
-const NEWS_RULE = {low:"Pauses 2h before → 1h after high & medium news", moderate:"Pauses 1h before → 30 min after high news", high:"Pauses 15 min before → 15 min after high news"};
+const NEWS_RULE = {low:"Pauses 2h before → 1h after high & medium news", moderate:"Pauses 1h before → 30 min after high news", high:"Pauses 15 min before → 15 min after high news", focused:"Pauses 1h before → 30 min after high news"};
 let DATA = {signals:[]}, pairs = Object.keys(TV), current = "moderate";
 try { current = localStorage.getItem("riskTab") || "moderate"; } catch(e) {}
 
@@ -280,7 +280,7 @@ function renderNav(){
     const c = counts(S.filter(s=>s.profile===k));
     return `<button data-k="${k}" class="${k===current?"on":""}">
       <span class="nm">${p.icon} ${p.label}</span>
-      <span class="sub">Accuracy ${c.acc} · ${c.o} open</span></button>`;
+      <span class="sub">Accuracy ${c.acc} · ${c.o} open${p.alerts===false?" · 🔕":""}</span></button>`;
   }).join("");
 }
 
@@ -303,7 +303,10 @@ function render(){
     `Break-even win rate ≈ ${(100/(1+p.reward_risk)).toFixed(0)}%`,
     p.min_score!=null ? `Min confidence: ${p.min_score}/100` : "",
     p.h4_rule==="agree" ? "4H trend must agree" : p.h4_rule==="not_against" ? "4H trend must not be against" : "",
-    p.min_adx ? `ADX ≥ ${p.min_adx}` : "", NEWS_RULE[current] || ""
+    p.min_adx ? `ADX ≥ ${p.min_adx}` : "",
+    p.only_pairs ? `Pairs: ${p.only_pairs.join(", ")}` : "",
+    p.hours_utc ? `Hours: ${String((p.hours_utc[0]+8)%24).padStart(2,"0")}:00–${String((p.hours_utc[1]+8)%24).padStart(2,"0")}:00 MYT` : "",
+    p.alerts === false ? "🔕 Telegram alerts OFF" : "", NEWS_RULE[current] || ""
   ].filter(Boolean).map(t=>`<span class="chip">${t}</span>`).join("");
 
   const c = counts(S);
