@@ -1,8 +1,9 @@
 name: Forex signals
 
 on:
-  schedule:
-    - cron: "7,22,37,52 * * * 0-5"     # every 15 minutes (at :07 :22 :37 :52), Sunday to Friday (UTC)
+  # Started every 10 minutes by an outside timer (cron-job.org), because GitHub's own
+  # schedule never started for this project. Don't add a schedule here as well:
+  # two timers together would go over the free price-data limit (800 credits/day).
   workflow_dispatch:
     inputs:
       test_alert:
