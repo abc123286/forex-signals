@@ -2,7 +2,7 @@ name: Forex signals
 
 on:
   schedule:
-    - cron: "*/15 * * * 0-5"     # every 15 minutes, Sunday to Friday (UTC)
+    - cron: "7,22,37,52 * * * 0-5"     # every 15 minutes (at :07 :22 :37 :52), Sunday to Friday (UTC)
   workflow_dispatch:
     inputs:
       test_alert:
