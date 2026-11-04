@@ -8,19 +8,27 @@
   :root{--bg:#0f1420;--card:#171e2e;--line:#263049;--text:#e6eaf2;--mute:#8d98b0;--green:#22c55e;--red:#ef4444;--amber:#f59e0b;--blue:#3b82f6}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-  header{padding:18px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+  header{padding:16px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
   h1{font-size:20px;margin:0}
-  h2{font-size:15px;margin:0 0 12px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  h2{font-size:14px;margin:0 0 12px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
   .mute{color:var(--mute)}
-  main{max-width:1200px;margin:0 auto;padding:20px 24px 40px;display:grid;gap:20px}
+  .layout{display:grid;grid-template-columns:230px 1fr;max-width:1400px;margin:0 auto}
+  nav{border-right:1px solid var(--line);padding:20px 12px;position:sticky;top:0;align-self:start;height:100vh}
+  nav .navtitle{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em;margin:0 10px 8px}
+  nav button{display:block;width:100%;text-align:left;background:transparent;color:var(--text);border:1px solid transparent;border-radius:10px;padding:10px 12px;margin-bottom:6px;cursor:pointer;font:inherit}
+  nav button:hover{background:var(--card)}
+  nav button.on{background:var(--card);border-color:var(--blue)}
+  nav button .nm{font-weight:600;display:block}
+  nav button .sub{font-size:12px;color:var(--mute)}
+  main{padding:20px 24px 40px;display:grid;gap:20px;min-width:0}
   .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
   .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
   .tabs button{background:transparent;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit}
   .tabs button.on{background:var(--blue);border-color:var(--blue)}
-  #chart{height:480px}
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  #chart{height:460px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
   .stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}
-  .stat .v{font-size:26px;font-weight:700}
+  .stat .v{font-size:24px;font-weight:700}
   .stat .l{color:var(--mute);font-size:12px}
   table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
   th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -38,7 +46,20 @@
   .open-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
   .sig{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}
   .sig b{font-size:16px}
-  .row{display:flex;justify-content:space-between}
+  .row{display:flex;justify-content:space-between;gap:10px}
+  .profile-head{display:flex;gap:14px;align-items:flex-start}
+  .profile-head .ic{font-size:34px;line-height:1}
+  .profile-head h3{margin:0 0 4px;font-size:20px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .chip{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12px;color:var(--mute)}
+  a{color:var(--blue)}
+  @media (max-width:800px){
+    .layout{grid-template-columns:1fr}
+    nav{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;padding:10px}
+    nav .navtitle{display:none}
+    nav button{margin:0;min-width:150px}
+    main{padding:16px}
+  }
 </style>
 </head>
 <body>
@@ -50,55 +71,89 @@
   <div class="mute" id="updated"></div>
 </header>
 
-<main>
-  <section class="card">
-    <h2>Live chart</h2>
-    <div class="tabs" id="pairTabs"></div>
-    <div id="chart"></div>
-    <p class="note">Live chart by TradingView. Its prices can differ slightly from the bot's price feed (Twelve Data).</p>
-  </section>
+<div class="layout">
+  <nav id="nav"><div class="navtitle">Risk level</div></nav>
 
-  <section class="card">
-    <h2>Accuracy</h2>
-    <div class="stats" id="stats"></div>
-    <div class="wrap" style="margin-top:14px"><table id="pairStats"></table></div>
-    <p class="note">Accuracy = wins ÷ (wins + losses). Open and expired suggestions are not counted.
-      If TP and SL are both touched in the same candle, it is counted as a loss.</p>
-  </section>
+  <main>
+    <section class="card">
+      <div class="profile-head">
+        <div class="ic" id="pIcon"></div>
+        <div>
+          <h3 id="pName"></h3>
+          <div class="mute" id="pDesc"></div>
+          <div class="chips" id="pChips"></div>
+        </div>
+      </div>
+    </section>
 
-  <section class="card">
-    <h2>Open suggestions</h2>
-    <div class="open-list" id="openList"></div>
-  </section>
+    <section class="card">
+      <h2>Accuracy</h2>
+      <div class="stats" id="stats"></div>
+      <div class="wrap" style="margin-top:14px"><table id="pairStats"></table></div>
+      <p class="note">Accuracy = wins ÷ (wins + losses). Open and expired suggestions are not counted.
+        If TP and SL are both touched in the same candle, it is counted as a loss.
+        Compare accuracy together with reward:risk: a lower win % can still be fine when wins are bigger than losses.</p>
+    </section>
 
-  <section class="card">
-    <h2>History</h2>
-    <div class="filters">
-      <select id="fPair"><option value="">All pairs</option></select>
-      <select id="fStatus">
-        <option value="">All results</option><option value="win">Win (TP hit)</option>
-        <option value="loss">Loss (SL hit)</option><option value="open">Open</option><option value="expired">Expired</option>
-      </select>
-    </div>
-    <div class="wrap"><table id="history"></table></div>
-  </section>
+    <section class="card">
+      <h2>Open suggestions</h2>
+      <div class="open-list" id="openList"></div>
+    </section>
 
-  <p class="note">Educational, rule-based tool. Not financial advice. Past results do not guarantee future results. Forex trading carries a high risk of loss.</p>
-</main>
+    <section class="card">
+      <h2>Live chart</h2>
+      <div class="tabs" id="pairTabs"></div>
+      <div id="chart"></div>
+      <p class="note">Live chart by TradingView. Its prices can differ slightly from the bot's price feed (Twelve Data).</p>
+    </section>
+
+    <section class="card">
+      <h2>Upcoming news (Forex Factory)</h2>
+      <div class="wrap"><table id="news"></table></div>
+      <p class="note">High (red) and medium (orange) impact events from the
+        <a href="https://www.forexfactory.com/calendar" target="_blank" rel="noopener">Forex Factory calendar</a>.
+        Each risk level pauses new suggestions around big news (see its news rule above). Gold follows USD news.</p>
+    </section>
+
+    <section class="card">
+      <h2>History</h2>
+      <div class="filters">
+        <select id="fPair"><option value="">All pairs</option></select>
+        <select id="fStatus">
+          <option value="">All results</option><option value="win">Win (TP hit)</option>
+          <option value="loss">Loss (SL hit)</option><option value="open">Open</option><option value="expired">Expired</option>
+        </select>
+      </div>
+      <div class="wrap"><table id="history"></table></div>
+    </section>
+
+    <p class="note">Educational, rule-based tool. Not financial advice. "Low risk" is lower risk compared with the other levels, not risk-free.
+      Past results do not guarantee future results. Forex trading carries a high risk of loss.</p>
+  </main>
+</div>
 
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script>
 const TV = {"EUR/USD":"FX:EURUSD","GBP/USD":"FX:GBPUSD","USD/JPY":"FX:USDJPY","XAU/USD":"OANDA:XAUUSD"};
 const MYT = {timeZone:"Asia/Kuala_Lumpur",day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"};
 const fmt = s => s ? new Date(s).toLocaleString("en-MY", MYT) : "–";
-let DATA = {signals:[]}, pairs = Object.keys(TV);
+const DEFAULT_PROFILES = {
+  low:{label:"Low risk",icon:"🛡️",desc:"",reward_risk:1,sl_atr:2,tp_atr:2},
+  moderate:{label:"Moderate",icon:"⚖️",desc:"",reward_risk:1.5,sl_atr:1.5,tp_atr:2.25},
+  high:{label:"High risk",icon:"🔥",desc:"",reward_risk:2,sl_atr:1,tp_atr:2}};
+const NEWS_RULE = {low:"Pauses 2h before → 1h after high & medium news", moderate:"Pauses 1h before → 30 min after high news", high:"Pauses 15 min before → 15 min after high news"};
+let DATA = {signals:[]}, pairs = Object.keys(TV), current = "moderate";
+try { current = localStorage.getItem("riskTab") || "moderate"; } catch(e) {}
+
+function profiles(){ return (DATA.strategy && DATA.strategy.profiles) || DEFAULT_PROFILES; }
+function sigs(){ return (DATA.signals||[]).map(s=>({...s, profile: s.profile || "moderate"})); }
 
 function chart(pair){
   document.querySelectorAll("#pairTabs button").forEach(b=>b.classList.toggle("on", b.dataset.p===pair));
   if (!window.TradingView){ document.getElementById("chart").innerHTML='<p class="mute">Chart could not load.</p>'; return; }
   new TradingView.widget({container_id:"chart",symbol:TV[pair]||pair.replace("/",""),interval:"60",
     timezone:"Asia/Kuala_Lumpur",theme:"dark",style:"1",locale:"en",autosize:true,
-    hide_side_toolbar:false,allow_symbol_change:true,studies:["RSI@tv-basicstudies"]});
+    allow_symbol_change:true,studies:["RSI@tv-basicstudies"]});
 }
 
 function counts(list){
@@ -107,14 +162,35 @@ function counts(list){
           t:list.length, acc: w+l ? (100*w/(w+l)).toFixed(1)+"%" : "–"};
 }
 
+function renderNav(){
+  const P = profiles(), S = sigs();
+  const nav = document.getElementById("nav");
+  nav.innerHTML = '<div class="navtitle">Risk level</div>' + Object.entries(P).map(([k,p])=>{
+    const c = counts(S.filter(s=>s.profile===k));
+    return `<button data-k="${k}" class="${k===current?"on":""}">
+      <span class="nm">${p.icon} ${p.label}</span>
+      <span class="sub">Accuracy ${c.acc} · ${c.o} open</span></button>`;
+  }).join("");
+}
+
 function render(){
-  const S = DATA.signals || [];
+  const P = profiles();
+  if (!P[current]) current = "moderate";
+  const p = P[current];
+  const all = sigs(), S = all.filter(s=>s.profile===current);
   const st = DATA.strategy || {};
-  document.getElementById("strategy").textContent = st.name
-    ? `${st.name} · ${st.timeframe} · reward:risk ${st.reward_risk}:1` : "Waiting for first run";
-  document.getElementById("strategy").title = st.rules || "";
-  document.getElementById("updated").textContent = DATA.updated ? "Last change: " + fmt(DATA.updated) : "";
   if (st.pairs) pairs = st.pairs;
+  document.getElementById("strategy").textContent = st.name ? `${st.name} · ${st.timeframe} candles · 3 risk levels` : "Waiting for first run";
+  document.getElementById("updated").textContent = DATA.updated ? "Last change: " + fmt(DATA.updated) : "";
+  renderNav();
+
+  document.getElementById("pIcon").textContent = p.icon;
+  document.getElementById("pName").textContent = p.label;
+  document.getElementById("pDesc").textContent = p.desc || "";
+  document.getElementById("pChips").innerHTML = [
+    `Stop Loss: ${p.sl_atr} × ATR`, `Take Profit: ${p.tp_atr} × ATR`, `Reward : risk = ${p.reward_risk} : 1`,
+    `Break-even win rate ≈ ${(100/(1+p.reward_risk)).toFixed(0)}%`, NEWS_RULE[current] || ""
+  ].filter(Boolean).map(t=>`<span class="chip">${t}</span>`).join("");
 
   const c = counts(S);
   document.getElementById("stats").innerHTML = [
@@ -124,8 +200,8 @@ function render(){
 
   document.getElementById("pairStats").innerHTML =
     "<tr><th>Pair</th><th>Accuracy</th><th>Wins</th><th>Losses</th><th>Open</th><th>Expired</th><th>Total</th></tr>" +
-    pairs.map(p=>{const k=counts(S.filter(s=>s.pair===p));
-      return `<tr><td>${p}</td><td>${k.acc}</td><td>${k.w}</td><td>${k.l}</td><td>${k.o}</td><td>${k.e}</td><td>${k.t}</td></tr>`}).join("");
+    pairs.map(pr=>{const k=counts(S.filter(s=>s.pair===pr));
+      return `<tr><td>${pr}</td><td>${k.acc}</td><td>${k.w}</td><td>${k.l}</td><td>${k.o}</td><td>${k.e}</td><td>${k.t}</td></tr>`}).join("");
 
   const open = S.filter(s=>s.status==="open");
   document.getElementById("openList").innerHTML = open.length ? open.map(s=>`
@@ -135,10 +211,19 @@ function render(){
       <div class="row"><span>Take Profit</span><span class="buy">${s.tp} (+${s.tp_pips} pips)</span></div>
       <div class="row"><span>Stop Loss</span><span class="sell">${s.sl} (−${s.sl_pips} pips)</span></div>
       <div class="note" style="margin-top:6px">${s.reason}</div>
-    </div>`).join("") : '<p class="mute">No open suggestions right now.</p>';
+      ${s.news_note ? `<div class="note">📰 ${s.news_note}</div>` : ""}
+    </div>`).join("") : `<p class="mute">No open ${p.label.toLowerCase()} suggestions right now.</p>`;
+
+  const news = (DATA.news || []).filter(e => new Date(e.time) >= Date.now() - 60*60*1000).slice(0, 25);
+  document.getElementById("news").innerHTML =
+    "<tr><th>Time (MYT)</th><th>Currency</th><th>Impact</th><th>Event</th><th>Forecast</th><th>Previous</th></tr>" +
+    (news.length ? news.map(e=>`<tr><td>${fmt(e.time)}</td><td>${e.currency}</td>
+      <td><span class="pill ${e.impact==="High"?"loss":"expired"}">${e.impact}</span></td>
+      <td>${e.title}</td><td>${e.forecast||"–"}</td><td>${e.previous||"–"}</td></tr>`).join("")
+      : '<tr><td colspan="6" class="mute">No upcoming high/medium-impact news loaded yet.</td></tr>');
 
   const fp=document.getElementById("fPair");
-  if (fp.options.length===1) pairs.forEach(p=>fp.add(new Option(p,p)));
+  if (fp.options.length===1) pairs.forEach(pr=>fp.add(new Option(pr,pr)));
   const vp=fp.value, vs=document.getElementById("fStatus").value;
   const rows = S.filter(s=>(!vp||s.pair===vp)&&(!vs||s.status===vs)).slice().reverse();
   const label={win:"Win",loss:"Loss",open:"Open",expired:"Expired"};
@@ -147,10 +232,16 @@ function render(){
     (rows.length ? rows.map(s=>`<tr><td>${fmt(s.created)}</td><td>${s.pair}</td>
       <td class="${s.direction.toLowerCase()}">${s.direction}</td><td>${s.entry}</td><td>${s.tp}</td><td>${s.sl}</td>
       <td><span class="pill ${s.status}">${label[s.status]}</span></td><td>${s.exit_price ?? "–"}</td><td>${fmt(s.closed_at)}</td></tr>`).join("")
-      : '<tr><td colspan="9" class="mute">No suggestions yet. The bot checks every 15 minutes.</td></tr>');
+      : '<tr><td colspan="9" class="mute">No suggestions yet for this risk level. The bot checks every 15 minutes.</td></tr>');
 }
 
-document.getElementById("pairTabs").innerHTML = pairs.map(p=>`<button data-p="${p}">${p}</button>`).join("");
+document.getElementById("nav").onclick = e => {
+  const b = e.target.closest("button[data-k]"); if (!b) return;
+  current = b.dataset.k;
+  try { localStorage.setItem("riskTab", current); } catch(err) {}
+  render();
+};
+document.getElementById("pairTabs").innerHTML = pairs.map(pr=>`<button data-p="${pr}">${pr}</button>`).join("");
 document.getElementById("pairTabs").onclick = e => { if (e.target.dataset.p) chart(e.target.dataset.p); };
 document.getElementById("fPair").onchange = render;
 document.getElementById("fStatus").onchange = render;
@@ -160,9 +251,10 @@ async function load(){
   catch(e){ console.log("No data yet", e); }
   render();
 }
+render();
 chart(pairs[0]);
 load();
-setInterval(load, 5 * 60 * 1000);   // refresh history every 5 minutes
+setInterval(load, 5 * 60 * 1000);
 </script>
 </body>
 </html>
