@@ -146,22 +146,6 @@
   "news_warned": [],
   "news": [
     {
-      "time": "2026-11-04T10:00:00Z",
-      "currency": "EUR",
-      "impact": "Medium",
-      "title": "Core CPI Flash Estimate y/y",
-      "forecast": "2.5%",
-      "previous": "2.5%"
-    },
-    {
-      "time": "2026-11-04T10:00:00Z",
-      "currency": "EUR",
-      "impact": "Medium",
-      "title": "CPI Flash Estimate y/y",
-      "forecast": "4.0%",
-      "previous": "3.8%"
-    },
-    {
       "time": "2026-11-04T15:00:00Z",
       "currency": "USD",
       "impact": "Medium",
@@ -330,7 +314,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-04T11:10:20Z",
+  "updated": "2026-11-04T12:00:33Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
