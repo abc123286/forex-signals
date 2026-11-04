@@ -53,6 +53,16 @@
   .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
   .chip{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12px;color:var(--mute)}
   a{color:var(--blue)}
+  .score{display:inline-block;padding:2px 8px;border-radius:999px;font-weight:700;font-size:12px}
+  .s-hi{background:rgba(34,197,94,.15);color:var(--green)}
+  .s-mid{background:rgba(245,158,11,.15);color:var(--amber)}
+  .s-lo{background:rgba(239,68,68,.15);color:var(--red)}
+  .pc{font-size:12px;margin-top:6px}
+  .pc div{margin:2px 0}
+  .bt-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:900px){.bt-grid{grid-template-columns:1fr}}
+  .pos{color:var(--green);font-weight:600}.neg{color:var(--red);font-weight:600}
+  svg.eq{width:100%;height:140px;background:var(--bg);border:1px solid var(--line);border-radius:10px}
   @media (max-width:800px){
     .layout{grid-template-columns:1fr}
     nav{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;padding:10px}
@@ -96,6 +106,11 @@
     </section>
 
     <section class="card">
+      <h2>Backtest: how this risk level did in the past</h2>
+      <div id="bt"><p class="mute">No backtest yet. Run the "Backtest" workflow on GitHub (Actions tab).</p></div>
+    </section>
+
+    <section class="card">
       <h2>Open suggestions</h2>
       <div class="open-list" id="openList"></div>
     </section>
@@ -105,6 +120,12 @@
       <div class="tabs" id="pairTabs"></div>
       <div id="chart"></div>
       <p class="note">Live chart by TradingView. Its prices can differ slightly from the bot's price feed (Twelve Data).</p>
+    </section>
+
+    <section class="card">
+      <h2>Market snapshot</h2>
+      <div class="wrap"><table id="snap"></table></div>
+      <p class="note" id="snapNote">Updated about once an hour by the bot. ADX: under 20 = weak/choppy, over 25 = strong trend.</p>
     </section>
 
     <section class="card">
@@ -145,6 +166,62 @@ const NEWS_RULE = {low:"Pauses 2h before → 1h after high & medium news", moder
 let DATA = {signals:[]}, pairs = Object.keys(TV), current = "moderate";
 try { current = localStorage.getItem("riskTab") || "moderate"; } catch(e) {}
 
+let BT = null;
+function scoreBadge(v){ if (v==null) return ""; const c = v>=70?"s-hi":v>=50?"s-mid":"s-lo"; return `<span class="score ${c}">${v}/100</span>`; }
+const sign = v => v==null ? "–" : `<span class="${v>0?"pos":v<0?"neg":""}">${v>0?"+":""}${v}</span>`;
+const pct = v => v==null ? "–" : v + "%";
+function eqSvg(pts){
+  if (!pts || pts.length < 2) return '<p class="mute">Not enough trades for a chart.</p>';
+  const w=600,h=140,pad=10, all=[0,...pts], mn=Math.min(...all), mx=Math.max(...all), rg=(mx-mn)||1;
+  const X=i=>pad+(w-2*pad)*i/(pts.length), Y=v=>h-pad-(h-2*pad)*(v-mn)/rg;
+  const d=["M",X(0),Y(0),...pts.flatMap((v,i)=>["L",X(i+1),Y(v)])].join(" ");
+  const col = pts[pts.length-1] >= 0 ? "#22c55e" : "#ef4444";
+  return `<svg class="eq" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <line x1="${pad}" x2="${w-pad}" y1="${Y(0)}" y2="${Y(0)}" stroke="#263049" stroke-dasharray="4 4"/>
+    <path d="${d}" fill="none" stroke="${col}" stroke-width="2"/></svg>`;
+}
+function renderBacktest(){
+  const el = document.getElementById("bt");
+  if (!BT || !BT.profiles || !BT.profiles[current]) return;
+  const e = BT.profiles[current], f = e.filtered, b = e.basic, risk = BT.risk_usd_example || 3;
+  const r0 = Object.values(BT.ranges||{})[0];
+  const rows = [
+    ["Trades", f.trades, b.trades], ["Win rate", pct(f.win_rate), pct(b.win_rate)],
+    ["Net result (R)", sign(f.net_r), sign(b.net_r)], [`Net result if risking $${risk}/trade`, sign(f.net_usd!=null?Math.round(f.net_usd):null), sign(b.net_usd!=null?Math.round(b.net_usd):null)],
+    ["Average per trade (R)", sign(f.avg_r), sign(b.avg_r)], ["Profit factor", f.profit_factor ?? "–", b.profit_factor ?? "–"],
+    ["Worst losing streak", f.worst_losing_streak, b.worst_losing_streak], ["Biggest drop (R)", f.max_drawdown_r, b.max_drawdown_r]];
+  el.innerHTML = `
+    <p class="mute" style="margin-top:0">Replayed on past 1-hour prices${r0?` from ${fmt(r0.from).split(",")[0]} to ${fmt(r0.to).split(",")[0]}`:""} · last run ${fmt(BT.generated)}.
+      <b>R</b> = how many times the risk you won or lost (a loss = −1R).</p>
+    <div class="bt-grid">
+      <div class="wrap"><table>
+        <tr><th></th><th>With smart filters (live)</th><th>Basic rules only</th></tr>
+        ${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}
+      </table></div>
+      <div><div class="note" style="margin-bottom:6px">Running total (R), with smart filters</div>${eqSvg(f.equity)}
+        <div class="wrap" style="margin-top:10px"><table>
+          <tr><th>Pair</th><th>Trades</th><th>Win rate</th><th>Net R</th></tr>
+          ${Object.entries(f.by_pair||{}).map(([k,v])=>`<tr><td>${k}</td><td>${v.trades}</td><td>${pct(v.win_rate)}</td><td>${sign(v.net_r)}</td></tr>`).join("")}
+        </table></div></div>
+    </div>
+    <h2 style="margin-top:16px">Does the confidence score work?</h2>
+    <div class="wrap"><table>
+      <tr><th>Confidence</th><th>Trades</th><th>Win rate</th><th>Average per trade (R)</th></tr>
+      ${(e.score_buckets||[]).map(x=>`<tr><td>${x.band}</td><td>${x.trades}</td><td>${pct(x.win_rate)}</td><td>${sign(x.avg_r)}</td></tr>`).join("")}
+    </table></div>
+    <p class="note">If higher confidence rows show a better average per trade, the score is helping. ${(BT.notes||[]).join(" ")}</p>`;
+}
+function renderSnap(){
+  const sn = DATA.snapshot || [];
+  const t = v => v==="up" ? '<span class="buy">▲ Up</span>' : v==="down" ? '<span class="sell">▼ Down</span>' : '<span class="mute">– Flat</span>';
+  document.getElementById("snap").innerHTML =
+    "<tr><th>Pair</th><th>Price</th><th>1H trend</th><th>4H trend</th><th>RSI</th><th>ADX</th><th>Normal move (1H)</th><th>48h high</th><th>48h low</th></tr>" +
+    (sn.length ? sn.map(x=>`<tr><td>${x.pair}</td><td>${x.price}</td><td>${t(x.trend_1h)}</td><td>${t(x.trend_4h)}</td>
+      <td>${x.rsi}</td><td>${x.adx??"–"}</td><td>${x.atr_pips} pips</td><td>${x.high_48h}</td><td>${x.low_48h}</td></tr>`).join("")
+      : '<tr><td colspan="9" class="mute">No snapshot yet.</td></tr>');
+  document.getElementById("snapNote").textContent = (DATA.snapshot_time ? "Snapshot from " + fmt(DATA.snapshot_time) + ". " : "") +
+    "Updated about once an hour by the bot. ADX: under 20 = weak/choppy, over 25 = strong trend.";
+}
 function profiles(){ return (DATA.strategy && DATA.strategy.profiles) || DEFAULT_PROFILES; }
 function sigs(){ return (DATA.signals||[]).map(s=>({...s, profile: s.profile || "moderate"})); }
 
@@ -189,7 +266,10 @@ function render(){
   document.getElementById("pDesc").textContent = p.desc || "";
   document.getElementById("pChips").innerHTML = [
     `Stop Loss: ${p.sl_atr} × ATR`, `Take Profit: ${p.tp_atr} × ATR`, `Reward : risk = ${p.reward_risk} : 1`,
-    `Break-even win rate ≈ ${(100/(1+p.reward_risk)).toFixed(0)}%`, NEWS_RULE[current] || ""
+    `Break-even win rate ≈ ${(100/(1+p.reward_risk)).toFixed(0)}%`,
+    p.min_score!=null ? `Min confidence: ${p.min_score}/100` : "",
+    p.h4_rule==="agree" ? "4H trend must agree" : p.h4_rule==="not_against" ? "4H trend must not be against" : "",
+    p.min_adx ? `ADX ≥ ${p.min_adx}` : "", NEWS_RULE[current] || ""
   ].filter(Boolean).map(t=>`<span class="chip">${t}</span>`).join("");
 
   const c = counts(S);
@@ -206,11 +286,13 @@ function render(){
   const open = S.filter(s=>s.status==="open");
   document.getElementById("openList").innerHTML = open.length ? open.map(s=>`
     <div class="sig">
-      <div class="row"><b class="${s.direction.toLowerCase()}">${s.direction} ${s.pair}</b><span class="mute">${fmt(s.created)}</span></div>
+      <div class="row"><b class="${s.direction.toLowerCase()}">${s.direction} ${s.pair}</b>${scoreBadge(s.score)}</div>
+      <div class="row"><span class="mute">Opened</span><span class="mute">${fmt(s.created)}</span></div>
       <div class="row"><span>Entry</span><span>${s.entry}</span></div>
       <div class="row"><span>Take Profit</span><span class="buy">${s.tp} (+${s.tp_pips} pips)</span></div>
       <div class="row"><span>Stop Loss</span><span class="sell">${s.sl} (−${s.sl_pips} pips)</span></div>
       <div class="note" style="margin-top:6px">${s.reason}</div>
+      <div class="pc">${(s.pros||[]).map(x=>`<div>✅ ${x}</div>`).join("")}${(s.cons||[]).map(x=>`<div>⚠️ ${x}</div>`).join("")}</div>
       ${s.news_note ? `<div class="note">📰 ${s.news_note}</div>` : ""}
     </div>`).join("") : `<p class="mute">No open ${p.label.toLowerCase()} suggestions right now.</p>`;
 
@@ -222,17 +304,20 @@ function render(){
       <td>${e.title}</td><td>${e.forecast||"–"}</td><td>${e.previous||"–"}</td></tr>`).join("")
       : '<tr><td colspan="6" class="mute">No upcoming high/medium-impact news loaded yet.</td></tr>');
 
+  renderBacktest();
+  renderSnap();
+
   const fp=document.getElementById("fPair");
   if (fp.options.length===1) pairs.forEach(pr=>fp.add(new Option(pr,pr)));
   const vp=fp.value, vs=document.getElementById("fStatus").value;
   const rows = S.filter(s=>(!vp||s.pair===vp)&&(!vs||s.status===vs)).slice().reverse();
   const label={win:"Win",loss:"Loss",open:"Open",expired:"Expired"};
   document.getElementById("history").innerHTML =
-    "<tr><th>Time (MYT)</th><th>Pair</th><th>Side</th><th>Entry</th><th>TP</th><th>SL</th><th>Result</th><th>Exit</th><th>Closed</th></tr>" +
+    "<tr><th>Time (MYT)</th><th>Pair</th><th>Side</th><th>Score</th><th>Entry</th><th>TP</th><th>SL</th><th>Result</th><th>Exit</th><th>Closed</th></tr>" +
     (rows.length ? rows.map(s=>`<tr><td>${fmt(s.created)}</td><td>${s.pair}</td>
-      <td class="${s.direction.toLowerCase()}">${s.direction}</td><td>${s.entry}</td><td>${s.tp}</td><td>${s.sl}</td>
+      <td class="${s.direction.toLowerCase()}">${s.direction}</td><td>${s.score!=null?scoreBadge(s.score):"–"}</td><td>${s.entry}</td><td>${s.tp}</td><td>${s.sl}</td>
       <td><span class="pill ${s.status}">${label[s.status]}</span></td><td>${s.exit_price ?? "–"}</td><td>${fmt(s.closed_at)}</td></tr>`).join("")
-      : '<tr><td colspan="9" class="mute">No suggestions yet for this risk level. The bot checks every 15 minutes.</td></tr>');
+      : '<tr><td colspan="10" class="mute">No suggestions yet for this risk level. The bot checks every 15 minutes.</td></tr>');
 }
 
 document.getElementById("nav").onclick = e => {
@@ -249,6 +334,8 @@ document.getElementById("fStatus").onchange = render;
 async function load(){
   try { DATA = await (await fetch("data/signals.json?t=" + Date.now())).json(); }
   catch(e){ console.log("No data yet", e); }
+  try { const r = await fetch("data/backtest.json?t=" + Date.now()); if (r.ok) BT = await r.json(); }
+  catch(e){ console.log("No backtest yet", e); }
   render();
 }
 render();
