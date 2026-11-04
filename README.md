@@ -36,6 +36,27 @@ Think of it like **surfing**: first find which way the wave is going (trend), th
 
 "Low risk" means lower risk **compared with the other levels**, not risk-free.
 
+### Smart filters & confidence score
+Every setup gets a **confidence score (0–100)** with ✅ reasons for and ⚠️ reasons against:
+- **4-hour trend** agrees (+15) / points the other way (−20)
+- **Trend strength (ADX)**: strong ≥25 (+10), moderate 20–25 (+5), weak <20 (−10)
+- **Room to TP** before the recent 48h high/low (+10), or a barrier very close (−15)
+- **Signal candle** closed in the trade's direction (+5 / −5)
+- **Busy market hours** London/New York (+5) vs quiet hours (−10)
+- **Unusual volatility** (too quiet or too wild) (−10)
+- **High-impact news within 6h** (−10)
+
+Minimum confidence: Low 70 (and 4H must agree, ADX ≥ 20) · Moderate 55 (4H not against) · High 40.
+
+### Backtest
+`backtest.py` replays every risk level on ~8 months of past 1-hour prices, **with** and **without** the smart filters,
+and checks whether higher confidence really did better. Results appear on each risk tab of the website.
+It runs by itself every Saturday, or anytime: **Actions → Backtest → Run workflow**.
+Spreads/fees and the news filter are not included, so real results will be a bit worse.
+
+### Market snapshot
+About once an hour the bot saves a snapshot (price, 1H/4H trend, RSI, ADX, normal move, 48h high/low) for the website and the Claude check-ins.
+
 ---
 
 ## Setup (about 30 minutes, no coding needed)
