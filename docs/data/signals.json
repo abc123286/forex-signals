@@ -44,7 +44,7 @@
       "high": {
         "label": "High risk",
         "icon": "🔥",
-        "desc": "Least picky: more trades, tight stop loss, TP is 2x the SL, confidence 40+. Expect more losing trades but bigger wins. Only pauses 15 min around high impact news. Telegram alerts are OFF: the backtest showed this level losing clearly.",
+        "desc": "Least picky: more trades, tight stop loss, TP is 2x the SL, confidence 40+. Expect more losing trades but bigger wins. Only pauses 15 min around high impact news. Alerts are ON for demo practice only: the backtest showed this level losing clearly.",
         "reward_risk": 2.0,
         "sl_atr": 1.0,
         "tp_atr": 2.0,
@@ -55,7 +55,7 @@
         "min_adx": 0,
         "only_pairs": null,
         "hours_utc": null,
-        "alerts": false
+        "alerts": true
       },
       "focused": {
         "label": "Focused",
@@ -345,7 +345,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-05T14:40:16Z",
+  "updated": "2026-11-05T15:00:35Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
