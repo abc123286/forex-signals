@@ -312,6 +312,36 @@
       "closed_at": null,
       "exit_price": null,
       "news_note": "none in next 24h"
+    },
+    {
+      "id": "high-EURUSD-202611051600",
+      "profile": "high",
+      "pair": "EUR/USD",
+      "direction": "BUY",
+      "entry": 1.12277,
+      "sl": 1.12129,
+      "tp": 1.12573,
+      "sl_pips": 14.8,
+      "tp_pips": 29.6,
+      "rsi": 46.3,
+      "adx": 22.0,
+      "h4_trend": "up",
+      "score": 90,
+      "pros": [
+        "4-hour trend agrees",
+        "Moderate trend strength (ADX 22)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [],
+      "session": "New York",
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
+      "created": "2026-11-05T16:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
     }
   ],
   "news_warned": [],
@@ -421,54 +451,54 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-05T15:36:03Z",
+  "updated": "2026-11-05T16:10:24Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.12132,
+      "price": 1.12183,
       "trend_1h": "up",
       "trend_4h": "up",
-      "rsi": 40.1,
-      "adx": 22.8,
-      "atr_pips": 14.1,
+      "rsi": 46.3,
+      "adx": 22.0,
+      "atr_pips": 14.8,
       "high_48h": 1.12734,
-      "low_48h": 1.11758
+      "low_48h": 1.11867
     },
     {
       "pair": "GBP/USD",
-      "price": 1.34628,
+      "price": 1.34662,
       "trend_1h": "up",
       "trend_4h": "up",
-      "rsi": 47.6,
-      "adx": 23.0,
-      "atr_pips": 15.4,
+      "rsi": 52.6,
+      "adx": 22.9,
+      "atr_pips": 16.3,
       "high_48h": 1.35023,
       "low_48h": 1.34084
     },
     {
       "pair": "USD/JPY",
-      "price": 158.127,
+      "price": 157.902,
       "trend_1h": "up",
-      "trend_4h": "up",
-      "rsi": 43.5,
-      "adx": 16.4,
-      "atr_pips": 19.6,
+      "trend_4h": "flat",
+      "rsi": 37.3,
+      "adx": 17.7,
+      "atr_pips": 21.5,
       "high_48h": 158.764,
       "low_48h": 157.421
     },
     {
       "pair": "XAU/USD",
-      "price": 4113.67,
+      "price": 4090.32,
       "trend_1h": "up",
       "trend_4h": "up",
-      "rsi": 58.2,
-      "adx": 50.1,
-      "atr_pips": 187.8,
+      "rsi": 47.1,
+      "adx": 46.8,
+      "atr_pips": 204.3,
       "high_48h": 4147.6,
       "low_48h": 3917.42
     }
   ],
-  "snapshot_time": "2026-11-05T15:10:18Z",
+  "snapshot_time": "2026-11-05T16:10:24Z",
   "news_log": [
     {
       "time": "2026-11-03T03:30:00Z",
