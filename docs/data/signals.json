@@ -308,10 +308,32 @@
       "cons": [],
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
       "created": "2026-11-05T13:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "none in next 24h"
+      "status": "loss",
+      "closed_at": "2026-11-05T19:00:00Z",
+      "exit_price": 1.34549,
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "High-impact news during the trade: GBP BOE Gov Bailey Speaks (Thu 05 Nov, 08:30 PM (MYT)). News often causes sudden moves that hit stops.",
+          "It was in profit first (+16.5 pips, 1.09R) before reversing. A 'move SL to break-even' or 'take partial profit' rule could have saved some of this.",
+          "Even with confidence 90/100 it lost: a score shows odds, not a guarantee."
+        ],
+        "hours": 7,
+        "mfe_r": 1.09,
+        "mae_r": 1.09,
+        "mfe_pips": 16.5,
+        "mae_pips": 16.5,
+        "spread_only": false,
+        "tags": {
+          "news_during": true,
+          "quick_stop": false,
+          "in_profit_first": true,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "London + New York",
+          "score_band": "70+"
+        }
+      }
     },
     {
       "id": "high-EURUSD-202611051600",
@@ -443,7 +465,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-05T19:10:16Z",
+  "updated": "2026-11-05T19:30:27Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
