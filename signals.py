@@ -44,6 +44,11 @@ NEWS_ALERT_HOURS = 24       # list high-impact news for the next 24h inside each
 SNAPSHOT_EVERY_MIN = 55     # save a market snapshot about once an hour
 MY_TIMEZONE = timezone(timedelta(hours=8))   # Malaysia time for alert messages
 
+# Typical broker spread (in pips). Prices from Twelve Data are MID prices, but a broker closes a
+# BUY at the lower "bid" price and a SELL at the higher "ask" price. Using half the spread when
+# checking TP/SL makes the bot (and the backtest) judge trades the way the broker does.
+SPREAD_PIPS = {"EUR/USD": 1.0, "GBP/USD": 1.5, "USD/JPY": 1.5, "XAU/USD": 3.0}
+
 # Which risk levels send Telegram/Gmail alerts. All levels are always recorded on the website.
 # High risk alerts are ON at the user's request (for demo practice), with a clear warning,
 # because the backtest showed it losing clearly (about -81R over ~8 months).
@@ -536,10 +541,11 @@ def update_open_signal(sig, candles, now):
     for c in candles:
         if c["time"] < created:
             continue
-        if sig["direction"] == "BUY":
-            hit_sl, hit_tp = c["low"] <= sig["sl"], c["high"] >= sig["tp"]
-        else:
-            hit_sl, hit_tp = c["high"] >= sig["sl"], c["low"] <= sig["tp"]
+        half = SPREAD_PIPS.get(sig["pair"], 0) * pip_size(sig["pair"]) / 2
+        if sig["direction"] == "BUY":      # a BUY is closed at the bid (mid - half spread)
+            hit_sl, hit_tp = c["low"] - half <= sig["sl"], c["high"] - half >= sig["tp"]
+        else:                              # a SELL is closed at the ask (mid + half spread)
+            hit_sl, hit_tp = c["high"] + half >= sig["sl"], c["low"] + half <= sig["tp"]
         # If both happen inside one candle we cannot know which came first,
         # so we count it as a loss (the honest, conservative choice).
         if hit_sl:

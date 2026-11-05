@@ -11,7 +11,7 @@ the strategy has never seen (final exam).
 Results are saved to docs/data/backtest.json and shown on the website.
 
 Limits (be aware):
-  * Spreads, commissions and slippage are NOT included -> real results will be a bit worse.
+  * Typical spreads ARE included (see SPREAD_PIPS in signals.py). Commissions and slippage are not.
   * The news filter is NOT included (no free history of past news).
   * Good past results do not guarantee future results.
 """
@@ -207,7 +207,7 @@ def run(fetch=None):
                 print(f"[{pair}][{prof}][{variant}] {len(t)} trades")
 
     result = {"generated": S.iso(now), "risk_usd_example": RISK_USD, "ranges": ranges,
-              "notes": ["Spreads, commissions and slippage are not included, so real results will be a bit worse.",
+              "notes": ["Typical broker spreads are included. Commissions and slippage are not, so real results may be slightly worse.",
                         "The Forex Factory news filter is not included (no free history of past news).",
                         "Past results do not guarantee future results."],
               "profiles": {}}
