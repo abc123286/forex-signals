@@ -589,14 +589,19 @@ def send_telegram(text):
     token, chat = os.getenv("TELEGRAM_BOT_TOKEN"), os.getenv("TELEGRAM_CHAT_ID")
     if not token or not chat:
         return
-    try:
-        r = requests.post(f"https://api.telegram.org/bot{token}/sendMessage",
-                          data={"chat_id": chat, "text": text, "parse_mode": "HTML",
-                                "disable_web_page_preview": "true"}, timeout=20)
-        if not r.ok:
-            print("Telegram error:", r.text)
-    except Exception as e:
-        print("Telegram error:", e)
+    for attempt in range(1, 4):          # retry: short network hiccups happen
+        try:
+            r = requests.post(f"https://api.telegram.org/bot{token}/sendMessage",
+                              data={"chat_id": chat, "text": text, "parse_mode": "HTML",
+                                    "disable_web_page_preview": "true"}, timeout=20)
+            if r.ok:
+                return
+            print(f"Telegram error (attempt {attempt}):", r.text)
+            if r.status_code < 500 and r.status_code != 429:
+                return                   # a real error (e.g. bad token) - retrying won't help
+        except Exception as e:
+            print(f"Telegram error (attempt {attempt}):", e)
+        time.sleep(5 * attempt)
 
 
 def send_email(subject, text):
@@ -606,12 +611,18 @@ def send_email(subject, text):
     to = os.getenv("EMAIL_TO") or user
     msg = MIMEText(text.replace("<b>", "").replace("</b>", ""), "plain", "utf-8")
     msg["Subject"], msg["From"], msg["To"] = subject, user, to
-    try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as s:
-            s.login(user, pw.replace(" ", ""))
-            s.sendmail(user, [x.strip() for x in to.split(",")], msg.as_string())
-    except Exception as e:
-        print("Email error:", e)
+    for attempt in range(1, 4):          # retry: short network hiccups happen
+        try:
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as s:
+                s.login(user, pw.replace(" ", ""))
+                s.sendmail(user, [x.strip() for x in to.split(",")], msg.as_string())
+            return
+        except smtplib.SMTPAuthenticationError as e:
+            print("Email error (login refused - check GMAIL_APP_PASSWORD):", e)
+            return
+        except Exception as e:
+            print(f"Email error (attempt {attempt}):", e)
+            time.sleep(5 * attempt)
 
 
 def notify(subject, text):
