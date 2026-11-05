@@ -32,7 +32,7 @@ OUT_FILE = os.path.join(S.ROOT, "docs", "data", "backtest.json")
 def simulate(pair, ind, profile, use_filters):
     """Walk through history candle by candle. One open trade at a time."""
     candles = ind["candles"]
-    trades, open_sig = [], None
+    trades, open_sig, open_i = [], None, 0
     p = S.PROFILES[profile]
     rr = p["tp_atr"] / p["sl_atr"]
     for i in range(WARMUP, len(candles)):
@@ -50,14 +50,17 @@ def simulate(pair, ind, profile, use_filters):
                     move = (s["exit_price"] - s["entry"]) if s["direction"] == "BUY" else (s["entry"] - s["exit_price"])
                     r = move / risk
                 entry = S.from_iso(s["created"])
+                ex = S.excursions(s, candles[open_i:i + 1], entry, S.from_iso(s["closed_at"])) or {}
                 trades.append({"pair": pair, "status": s["status"], "r": round(r, 3),
+                               "mfe_r": ex.get("mfe_r", 0), "mae_r": ex.get("mae_r", 0),
+                               "hours": len(candles[open_i:i + 1]),
                                "score": s["score"], "closed": s["closed_at"], "created": s["created"],
                                "session": session_name(entry.hour), "weekday": entry.strftime("%a")})
                 open_sig = None
             continue
         sig, _ = S.evaluate(pair, ind, i, profile, use_filters)
         if sig:
-            open_sig = sig
+            open_sig, open_i = sig, i + 1
     return trades
 
 
@@ -92,6 +95,23 @@ def learn_filter(train, key, names):
         if len(g) >= MIN_TRADES and sum(t["r"] for t in g) > 0:
             keep.append(n)
     return keep
+
+
+def review_stats(trades):
+    """What usually happens before a win or a loss (same ideas as the live trade reviews)."""
+    losses = [t for t in trades if t["status"] == "loss"]
+    wins = [t for t in trades if t["status"] == "win"]
+    pc = lambda part, whole: round(100 * len(part) / len(whole), 1) if whole else None
+    return {
+        "losses": len(losses), "wins": len(wins),
+        "loss_in_profit_half_r": pc([t for t in losses if t["mfe_r"] >= 0.5], losses),
+        "loss_in_profit_1r": pc([t for t in losses if t["mfe_r"] >= 1.0], losses),
+        "loss_never_in_profit": pc([t for t in losses if t["mfe_r"] < 0.25], losses),
+        "loss_quick_2h": pc([t for t in losses if t["hours"] <= 2], losses),
+        "win_near_sl_first": pc([t for t in wins if t["mae_r"] >= 0.5], wins),
+        "avg_hours_win": round(sum(t["hours"] for t in wins) / len(wins), 1) if wins else None,
+        "avg_hours_loss": round(sum(t["hours"] for t in losses) / len(losses), 1) if losses else None,
+    }
 
 
 def time_analysis(trades, split_time):
@@ -222,6 +242,7 @@ def run(fetch=None):
         entry["score_buckets"] = score_buckets(per[prof]["basic"])
         split = min((r["split"] for r in ranges.values()), default=S.iso(now))
         entry["time_analysis"] = time_analysis(per[prof]["filtered"], split)
+        entry["review_stats"] = review_stats(per[prof]["filtered"])
         result["profiles"][prof] = entry
         all_basic += per[prof]["basic"]
     result["score_buckets_all"] = score_buckets(all_basic)
@@ -234,6 +255,10 @@ def run(fetch=None):
         f_, b_ = e["filtered"], e["basic"]
         print(f"{prof:9s} FILTERED trades={f_['trades']} win%={f_['win_rate']} netR={f_['net_r']} | "
               f"BASIC trades={b_['trades']} win%={b_['win_rate']} netR={b_['net_r']}")
+        rv = e["review_stats"]
+        print(f"{'':9s} REVIEW losses in profit first (+0.5R)={rv['loss_in_profit_half_r']}% (+1R)={rv['loss_in_profit_1r']}% | "
+              f"never in profit={rv['loss_never_in_profit']}% | stopped within 2h={rv['loss_quick_2h']}% | "
+              f"wins that nearly hit SL first={rv['win_near_sl_first']}%")
         ta = e["time_analysis"]["filter"]
         print(f"{'':9s} TIME FILTER keep sessions={ta['sessions']} pairs={ta['pairs']} | final exam: "
               f"all={ta['exam_all']['net_r']}R ({ta['exam_all']['trades']} trades) -> kept={ta['exam_kept']['net_r']}R "

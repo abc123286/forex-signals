@@ -116,6 +116,16 @@
     </section>
 
     <section class="card">
+      <h2>Lessons from live trades</h2>
+      <div id="lessons"></div>
+    </section>
+
+    <section class="card">
+      <h2>Trade reviews: why each trade won or lost</h2>
+      <div id="reviews"></div>
+    </section>
+
+    <section class="card">
       <h2>Open suggestions</h2>
       <div class="open-list" id="openList"></div>
     </section>
@@ -209,6 +219,16 @@ function renderBacktest(){
           ${Object.entries(f.by_pair||{}).map(([k,v])=>`<tr><td>${k}</td><td>${v.trades}</td><td>${pct(v.win_rate)}</td><td>${sign(v.net_r)}</td></tr>`).join("")}
         </table></div></div>
     </div>
+    ${e.review_stats ? `<h2 style="margin-top:16px">What usually happens before a win or loss (past 8 months)</h2>
+    <div class="chips">
+      <span class="chip">Losses that were +0.5R in profit first: <b>${pct(e.review_stats.loss_in_profit_half_r)}</b></span>
+      <span class="chip">Losses that were +1R in profit first: <b>${pct(e.review_stats.loss_in_profit_1r)}</b></span>
+      <span class="chip">Losses never in profit: <b>${pct(e.review_stats.loss_never_in_profit)}</b></span>
+      <span class="chip">Losses stopped within 2h: <b>${pct(e.review_stats.loss_quick_2h)}</b></span>
+      <span class="chip">Wins that nearly hit SL first: <b>${pct(e.review_stats.win_near_sl_first)}</b></span>
+      <span class="chip">Avg time: win ${e.review_stats.avg_hours_win ?? "–"}h · loss ${e.review_stats.avg_hours_loss ?? "–"}h</span>
+    </div>
+    <p class="note">If many losses were in profit first, a "move SL to break-even" or "take partial profit" rule may help. That's the next thing to test.</p>` : ""}
     <h2 style="margin-top:16px">Does the confidence score work?</h2>
     <div class="wrap"><table>
       <tr><th>Confidence</th><th>Trades</th><th>Win rate</th><th>Average per trade (R)</th></tr>
@@ -244,6 +264,43 @@ function renderTime(){
     ${tbl("Pair", a.by_pair)}
     <div style="margin-top:12px">${tbl("Day (UTC)", a.by_weekday)}</div>
     <p class="note">✅ = kept by the filter. Small groups (under ~30 trades) can look good or bad just by luck.</p>`;
+}
+function renderLessons(S){
+  const closed = S.filter(s=>(s.status==="win"||s.status==="loss") && s.review && s.review.tags);
+  const el = document.getElementById("lessons");
+  if (!closed.length){ el.innerHTML = '<p class="mute">No closed trades with a review yet. Each TP/SL adds one.</p>'; }
+  else {
+    const grp = (label, fn) => {
+      const yes = closed.filter(fn), no = closed.filter(t=>!fn(t));
+      const wr = a => { const w=a.filter(t=>t.status==="win").length; return a.length ? `${Math.round(100*w/a.length)}% <span class="mute">(${w}/${a.length})</span>` : "–"; };
+      return `<tr><td>${label}</td><td>${wr(yes)}</td><td>${wr(no)}</td></tr>`;
+    };
+    const losses = closed.filter(t=>t.status==="loss");
+    const pf = losses.filter(t=>t.review.tags.in_profit_first).length;
+    const qs = losses.filter(t=>t.review.tags.quick_stop).length;
+    const sp = losses.filter(t=>t.review.spread_only).length;
+    el.innerHTML = `<div class="wrap"><table>
+      <tr><th>When…</th><th>Win rate if YES</th><th>Win rate if NO</th></tr>
+      ${grp("4-hour trend agreed at entry", t=>t.review.tags.h4_agreed)}
+      ${grp("Strong trend at entry (ADX 25+)", t=>t.review.tags.adx_strong)}
+      ${grp("Confidence 70+", t=>t.review.tags.score_band==="70+")}
+      ${grp("High-impact news during the trade", t=>t.review.tags.news_during)}
+      ${grp("Entered in London / New York hours", t=>["London","London + New York","New York"].includes(t.review.tags.session))}
+      </table></div>
+      <div class="chips" style="margin-top:10px">
+        <span class="chip">Losses that were in profit first: ${pf}/${losses.length}</span>
+        <span class="chip">Losses stopped within 2h: ${qs}/${losses.length}</span>
+        <span class="chip">Losses caused only by the spread: ${sp}/${losses.length}</span>
+      </div>
+      <p class="note">Only ${closed.length} closed trade${closed.length>1?"s":""} so far. Patterns need about 30+ trades before they mean much; the backtest section below has a much bigger sample.</p>`;
+  }
+  const rv = S.filter(s=>s.status!=="open" && s.review).slice().reverse().slice(0,10);
+  document.getElementById("reviews").innerHTML = rv.length ? rv.map(s=>`
+    <div class="sig" style="margin-bottom:10px">
+      <div class="row"><b class="${s.direction.toLowerCase()}">${s.direction} ${s.pair}</b><span class="pill ${s.status}">${{win:"✅ TP hit",loss:"❌ SL hit",expired:"⏱ Expired"}[s.status]}</span></div>
+      <div class="note">Opened ${fmt(s.created)} · closed ${fmt(s.closed_at)} · best +${s.review.mfe_pips} pips · worst −${s.review.mae_pips} pips</div>
+      <div class="pc">${s.review.reasons.map(r=>`<div>• ${r}</div>`).join("")}</div>
+    </div>`).join("") : '<p class="mute">No closed trades yet for this level.</p>';
 }
 function renderSnap(){
   const sn = DATA.snapshot || [];
@@ -343,6 +400,7 @@ function render(){
 
   renderBacktest();
   renderTime();
+  renderLessons(S);
   renderSnap();
 
   const fp=document.getElementById("fPair");

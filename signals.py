@@ -530,6 +530,7 @@ def evaluate(pair, ind, i, profile, use_filters=True, news_6h=None):
         "sl_pips": round(risk / pip_size(pair), 1), "tp_pips": round(reward / pip_size(pair), 1),
         "rsi": round(ind["rsi"][i], 1), "adx": None if adx_v is None else round(adx_v, 1),
         "h4_trend": h4, "score": score, "pros": pros, "cons": cons,
+        "session": session_label(t.hour),
         "reason": reason, "created": iso(t),
         "status": "open", "closed_at": None, "exit_price": None,
     }, "setup"
@@ -579,6 +580,110 @@ def snapshot(pair, ind, candles):
         "atr_pips": round(ind["atr"][i] / pip, 1),
         "high_48h": round(max(ind["high"][lo:]), d),
         "low_48h": round(min(ind["low"][lo:]), d),
+    }
+
+
+# ----------------------------------------------------------------------------
+# Trade review: why did a trade hit TP or SL?
+# ----------------------------------------------------------------------------
+def session_label(hour_utc):
+    if 0 <= hour_utc < 7:
+        return "Asian"
+    if 7 <= hour_utc < 12:
+        return "London"
+    if 12 <= hour_utc < 16:
+        return "London + New York"
+    if 16 <= hour_utc < 21:
+        return "New York"
+    return "Late / rollover"
+
+
+def excursions(sig, candles, start, end):
+    """Best (in favour) and worst (against) price move while the trade was open, in R and pips."""
+    span = [c for c in candles if start <= c["time"] <= end]
+    if not span:
+        return None
+    risk = abs(sig["entry"] - sig["sl"]) or 1e-9
+    pip = pip_size(sig["pair"])
+    if sig["direction"] == "BUY":
+        best, worst = max(c["high"] for c in span) - sig["entry"], sig["entry"] - min(c["low"] for c in span)
+        mid_reached_sl = min(c["low"] for c in span) <= sig["sl"]
+    else:
+        best, worst = sig["entry"] - min(c["low"] for c in span), max(c["high"] for c in span) - sig["entry"]
+        mid_reached_sl = max(c["high"] for c in span) >= sig["sl"]
+    return {"mfe_r": round(best / risk, 2), "mae_r": round(worst / risk, 2),
+            "mfe_pips": round(best / pip, 1), "mae_pips": round(worst / pip, 1),
+            "mid_reached_sl": mid_reached_sl}
+
+
+def review_trade(sig, candles, ind, news_log):
+    """Plain-English reasons why a closed trade won or lost, plus tags for the 'lessons' stats."""
+    created = from_iso(sig["created"])
+    closed = from_iso(sig["closed_at"]) if sig.get("closed_at") else created
+    ex = excursions(sig, candles, created, closed)
+    if ex is None:
+        return None
+    hours = max(1, round((closed - created).total_seconds() / 3600) + 1)
+    cur = pair_currencies(sig["pair"])
+    news = [e for e in (news_log or []) if e["currency"] in cur
+            and created - timedelta(minutes=30) <= from_iso(e["time"]) <= closed + timedelta(hours=1)]
+    want = "up" if sig["direction"] == "BUY" else "down"
+    h4_entry = sig.get("h4_trend")
+    h4_now = h4_trend(ind, len(ind["close"]) - 1) if ind else None
+    flipped = h4_now in ("up", "down") and h4_now != want
+    st, reasons = sig["status"], []
+
+    if st == "loss":
+        if news:
+            e = news[0]
+            reasons.append(f"High-impact news during the trade: {e['currency']} {e['title']} "
+                           f"({my_time(from_iso(e['time']))}). News often causes sudden moves that hit stops.")
+        if hours <= 2:
+            reasons.append(f"Stopped out quickly (within ~{hours}h): price turned against the trade almost right away.")
+        if ex["mfe_r"] >= 0.5:
+            reasons.append(f"It was in profit first (+{ex['mfe_pips']} pips, {ex['mfe_r']}R) before reversing. "
+                           "A 'move SL to break-even' or 'take partial profit' rule could have saved some of this.")
+        else:
+            reasons.append(f"It never really went into profit (best only +{ex['mfe_pips']} pips): "
+                           "the expected move in the trend direction did not happen.")
+        if flipped:
+            reasons.append(f"The 4-hour trend has now turned {h4_now}, against this {sig['direction']}.")
+        elif h4_entry not in (want,):
+            reasons.append("At entry the 4-hour trend did not clearly support the trade.")
+        if not ex["mid_reached_sl"]:
+            reasons.append("Only hit because of the spread: the market's middle price stayed just above/below the SL.")
+        if sig.get("cons"):
+            reasons.append("Warning signs at entry: " + "; ".join(sig["cons"]) + ".")
+        if (sig.get("score") or 0) >= 80:
+            reasons.append(f"Even with confidence {sig['score']}/100 it lost: a score shows odds, not a guarantee.")
+    elif st == "win":
+        reasons.append(f"Reached TP in about {hours}h.")
+        if ex["mae_r"] >= 0.5:
+            reasons.append(f"It went against you first (-{ex['mae_pips']} pips, {ex['mae_r']}R of the way to SL) "
+                           "before turning: a narrow escape.")
+        else:
+            reasons.append(f"It moved your way fairly smoothly (worst point only -{ex['mae_pips']} pips).")
+        if h4_entry == want:
+            reasons.append("The 4-hour trend supported it.")
+        if news:
+            reasons.append(f"High-impact news during the trade ({news[0]['currency']} {news[0]['title']}) did not stop it.")
+    else:
+        reasons.append(f"Neither TP nor SL was reached in {EXPIRE_HOURS // 24} days: the market went sideways.")
+
+    adx_v = sig.get("adx")
+    return {
+        "reasons": reasons[:5],
+        "hours": hours, **{k: ex[k] for k in ("mfe_r", "mae_r", "mfe_pips", "mae_pips")},
+        "spread_only": (st == "loss" and not ex["mid_reached_sl"]),
+        "tags": {
+            "news_during": bool(news),
+            "quick_stop": st == "loss" and hours <= 2,
+            "in_profit_first": st == "loss" and ex["mfe_r"] >= 0.5,
+            "h4_agreed": h4_entry == want,
+            "adx_strong": adx_v is not None and adx_v >= 25,
+            "session": sig.get("session") or session_label(created.hour),
+            "score_band": "70+" if (sig.get("score") or 0) >= 70 else "50-69" if (sig.get("score") or 0) >= 50 else "<50",
+        },
     }
 
 
@@ -675,10 +780,14 @@ def news_warning_message(sigs, e):
 
 def result_message(s, stats):
     icon = {"win": "✅ TP HIT", "loss": "❌ SL HIT", "expired": "⏱ EXPIRED"}[s["status"]]
-    return (f"[{tag(s['profile'])}]\n"
-            f"<b>{icon}: {s['direction']} {s['pair']}</b>\n"
-            f"Entry {s['entry']} → Exit {s['exit_price']}\n"
-            f"{PROFILES[s['profile']]['label']} accuracy: {stats}")
+    msg = (f"[{tag(s['profile'])}]\n"
+           f"<b>{icon}: {s['direction']} {s['pair']}</b>\n"
+           f"Entry {s['entry']} → Exit {s['exit_price']}\n"
+           f"{PROFILES[s['profile']]['label']} accuracy: {stats}")
+    rv = s.get("review")
+    if rv and rv.get("reasons"):
+        msg += "\n\n🔍 Why:\n" + "\n".join(f"• {r}" for r in rv["reasons"])
+    return msg
 
 
 def accuracy_text(signals):
@@ -714,7 +823,15 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
     except Exception as e:
         print("News feed error:", e)
         events = None
+    log = data.setdefault("news_log", [])
     if events is not None:
+        seen = {(e["time"], e["currency"], e["title"]) for e in log}
+        for e in events:
+            if e["impact"] == "High" and (e["time"], e["currency"], e["title"]) not in seen:
+                log.append({k: e[k] for k in ("time", "currency", "title")})
+                changed = True
+        cutoff = iso(now - timedelta(days=21))
+        log[:] = sorted([e for e in log if e["time"] >= cutoff], key=lambda e: e["time"])
         upcoming = [e for e in events if e["impact"] in ("High", "Medium")
                     and from_iso(e["time"]) >= now - timedelta(hours=2)]
         if upcoming != data.get("news"):
@@ -736,13 +853,21 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
             if snap:
                 snaps.append(snap)
 
-        # 1) Update open suggestions (all risk levels)
+        # 1) Update open suggestions (all risk levels), and review every trade that closes
         for s in signals:
             if s["pair"] == pair and s["status"] == "open" and update_open_signal(s, candles, now):
+                s["review"] = review_trade(s, candles, ind, log)
                 changed = True
                 same = [x for x in signals if x["profile"] == s["profile"]]
                 outbox.append((f"{s['pair']} {s['status'].upper()}",
                                result_message(s, accuracy_text(same)), s["profile"]))
+
+        # Backfill reviews for trades that closed before reviews existed
+        for s in signals:
+            if s["pair"] == pair and s["status"] != "open" and "review" not in s and candles \
+                    and candles[0]["time"] <= from_iso(s["created"]):
+                s["review"] = review_trade(s, candles, ind, log)
+                changed = True
 
         # 2) One warning per news event, listing every open trade it affects
         open_here = [s for s in signals if s["pair"] == pair and s["status"] == "open"]
