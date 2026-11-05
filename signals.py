@@ -784,9 +784,7 @@ def result_message(s, stats):
            f"<b>{icon}: {s['direction']} {s['pair']}</b>\n"
            f"Entry {s['entry']} → Exit {s['exit_price']}\n"
            f"{PROFILES[s['profile']]['label']} accuracy: {stats}")
-    rv = s.get("review")
-    if rv and rv.get("reasons"):
-        msg += "\n\n🔍 Why:\n" + "\n".join(f"• {r}" for r in rv["reasons"])
+    # The trade review is saved (website + Claude check-ins) but not sent in alerts (user's choice).
     return msg
 
 
