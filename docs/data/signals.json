@@ -141,6 +141,64 @@
       "closed_at": "2026-11-04T10:00:00Z",
       "exit_price": 158.508,
       "news_note": "none in next 24h"
+    },
+    {
+      "id": "moderate-USDJPY-202611050800",
+      "profile": "moderate",
+      "pair": "USD/JPY",
+      "direction": "BUY",
+      "entry": 158.197,
+      "sl": 157.899,
+      "tp": 158.643,
+      "sl_pips": 29.7,
+      "tp_pips": 44.6,
+      "rsi": 50.5,
+      "adx": 20.9,
+      "h4_trend": "up",
+      "score": 90,
+      "pros": [
+        "4-hour trend agrees",
+        "Moderate trend strength (ADX 21)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [],
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
+      "created": "2026-11-05T08:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "none in next 24h"
+    },
+    {
+      "id": "high-USDJPY-202611050800",
+      "profile": "high",
+      "pair": "USD/JPY",
+      "direction": "BUY",
+      "entry": 158.197,
+      "sl": 157.998,
+      "tp": 158.593,
+      "sl_pips": 19.8,
+      "tp_pips": 39.7,
+      "rsi": 50.5,
+      "adx": 20.9,
+      "h4_trend": "up",
+      "score": 90,
+      "pros": [
+        "4-hour trend agrees",
+        "Moderate trend strength (ADX 21)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [],
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
+      "created": "2026-11-05T08:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "none in next 24h"
     }
   ],
   "news_warned": [],
@@ -306,7 +364,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-05T07:10:16Z",
+  "updated": "2026-11-05T08:00:33Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
