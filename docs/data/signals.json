@@ -110,7 +110,28 @@
       "status": "win",
       "closed_at": "2026-11-04T11:00:00Z",
       "exit_price": 158.566,
-      "news_note": "none in next 24h"
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 6h.",
+          "It moved your way fairly smoothly (worst point only -5.3 pips)."
+        ],
+        "hours": 6,
+        "mfe_r": 1.58,
+        "mae_r": 0.15,
+        "mfe_pips": 55.6,
+        "mae_pips": 5.3,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": false,
+          "adx_strong": true,
+          "session": "Asian",
+          "score_band": "70+"
+        }
+      }
     },
     {
       "id": "high-USDJPY-202611040600",
@@ -140,7 +161,28 @@
       "status": "win",
       "closed_at": "2026-11-04T10:00:00Z",
       "exit_price": 158.508,
-      "news_note": "none in next 24h"
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 5h.",
+          "It moved your way fairly smoothly (worst point only -5.3 pips)."
+        ],
+        "hours": 5,
+        "mfe_r": 2.16,
+        "mae_r": 0.23,
+        "mfe_pips": 50.5,
+        "mae_pips": 5.3,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": false,
+          "adx_strong": true,
+          "session": "Asian",
+          "score_band": "70+"
+        }
+      }
     },
     {
       "id": "moderate-USDJPY-202611050800",
@@ -169,7 +211,28 @@
       "status": "loss",
       "closed_at": "2026-11-05T15:00:00Z",
       "exit_price": 157.899,
-      "news_note": "none in next 24h"
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "It was in profit first (+30.0 pips, 1.01R) before reversing. A 'move SL to break-even' or 'take partial profit' rule could have saved some of this.",
+          "Even with confidence 90/100 it lost: a score shows odds, not a guarantee."
+        ],
+        "hours": 8,
+        "mfe_r": 1.01,
+        "mae_r": 1.03,
+        "mfe_pips": 30.0,
+        "mae_pips": 30.6,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": true,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "London",
+          "score_band": "70+"
+        }
+      }
     },
     {
       "id": "high-USDJPY-202611050800",
@@ -198,7 +261,28 @@
       "status": "loss",
       "closed_at": "2026-11-05T15:00:00Z",
       "exit_price": 157.998,
-      "news_note": "none in next 24h"
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "It was in profit first (+30.0 pips, 1.51R) before reversing. A 'move SL to break-even' or 'take partial profit' rule could have saved some of this.",
+          "Even with confidence 90/100 it lost: a score shows odds, not a guarantee."
+        ],
+        "hours": 8,
+        "mfe_r": 1.51,
+        "mae_r": 1.54,
+        "mfe_pips": 30.0,
+        "mae_pips": 30.6,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": true,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "London",
+          "score_band": "70+"
+        }
+      }
     },
     {
       "id": "high-GBPUSD-202611051300",
@@ -337,7 +421,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-05T15:30:28Z",
+  "updated": "2026-11-05T15:36:03Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
@@ -384,5 +468,102 @@
       "low_48h": 3917.42
     }
   ],
-  "snapshot_time": "2026-11-05T15:10:18Z"
+  "snapshot_time": "2026-11-05T15:10:18Z",
+  "news_log": [
+    {
+      "time": "2026-11-03T03:30:00Z",
+      "currency": "AUD",
+      "title": "Cash Rate"
+    },
+    {
+      "time": "2026-11-03T03:30:00Z",
+      "currency": "AUD",
+      "title": "RBA Monetary Policy Statement"
+    },
+    {
+      "time": "2026-11-03T03:30:00Z",
+      "currency": "AUD",
+      "title": "RBA Rate Statement"
+    },
+    {
+      "time": "2026-11-03T04:30:00Z",
+      "currency": "AUD",
+      "title": "RBA Press Conference"
+    },
+    {
+      "time": "2026-11-03T15:16:00Z",
+      "currency": "USD",
+      "title": "Congressional Elections"
+    },
+    {
+      "time": "2026-11-03T21:45:00Z",
+      "currency": "NZD",
+      "title": "Employment Change q/q"
+    },
+    {
+      "time": "2026-11-03T21:45:00Z",
+      "currency": "NZD",
+      "title": "Unemployment Rate"
+    },
+    {
+      "time": "2026-11-05T12:00:00Z",
+      "currency": "GBP",
+      "title": "BOE Monetary Policy Report"
+    },
+    {
+      "time": "2026-11-05T12:00:00Z",
+      "currency": "GBP",
+      "title": "Monetary Policy Summary"
+    },
+    {
+      "time": "2026-11-05T12:00:00Z",
+      "currency": "GBP",
+      "title": "MPC Official Bank Rate Votes"
+    },
+    {
+      "time": "2026-11-05T12:00:00Z",
+      "currency": "GBP",
+      "title": "Official Bank Rate"
+    },
+    {
+      "time": "2026-11-05T12:30:00Z",
+      "currency": "GBP",
+      "title": "BOE Gov Bailey Speaks"
+    },
+    {
+      "time": "2026-11-06T13:30:00Z",
+      "currency": "CAD",
+      "title": "Employment Change"
+    },
+    {
+      "time": "2026-11-06T13:30:00Z",
+      "currency": "CAD",
+      "title": "Unemployment Rate"
+    },
+    {
+      "time": "2026-11-06T13:30:00Z",
+      "currency": "USD",
+      "title": "Average Hourly Earnings m/m"
+    },
+    {
+      "time": "2026-11-06T13:30:00Z",
+      "currency": "USD",
+      "title": "Non-Farm Employment Change"
+    },
+    {
+      "time": "2026-11-06T13:30:00Z",
+      "currency": "USD",
+      "title": "Unemployment Rate"
+    },
+    {
+      "time": "2026-11-06T16:00:00Z",
+      "currency": "JPY",
+      "title": "BOJ Gov Ueda Speaks"
+    },
+    {
+      "time": "2026-11-06T21:45:00Z",
+      "currency": "NZD",
+      "title": "Parliamentary Elections"
+    }
+  ]
 }
