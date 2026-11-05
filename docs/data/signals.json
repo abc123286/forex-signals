@@ -166,9 +166,9 @@
       "cons": [],
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
       "created": "2026-11-05T08:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
+      "status": "loss",
+      "closed_at": "2026-11-05T15:00:00Z",
+      "exit_price": 157.899,
       "news_note": "none in next 24h"
     },
     {
@@ -232,14 +232,6 @@
   ],
   "news_warned": [],
   "news": [
-    {
-      "time": "2026-11-05T13:30:00Z",
-      "currency": "USD",
-      "impact": "Medium",
-      "title": "Unemployment Claims",
-      "forecast": "197K",
-      "previous": "194K"
-    },
     {
       "time": "2026-11-05T15:30:00Z",
       "currency": "CAD",
@@ -345,7 +337,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-05T15:14:50Z",
+  "updated": "2026-11-05T15:30:28Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
