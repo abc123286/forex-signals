@@ -195,9 +195,9 @@
       "cons": [],
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
       "created": "2026-11-05T08:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
+      "status": "loss",
+      "closed_at": "2026-11-05T15:00:00Z",
+      "exit_price": 157.998,
       "news_note": "none in next 24h"
     },
     {
@@ -345,7 +345,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-05T15:10:18Z",
+  "updated": "2026-11-05T15:14:50Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
