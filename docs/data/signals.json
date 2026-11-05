@@ -369,14 +369,6 @@
   "news_warned": [],
   "news": [
     {
-      "time": "2026-11-05T18:00:00Z",
-      "currency": "EUR",
-      "impact": "Medium",
-      "title": "ECB President Lagarde Speaks",
-      "forecast": "",
-      "previous": ""
-    },
-    {
       "time": "2026-11-05T21:00:00Z",
       "currency": "CAD",
       "impact": "Medium",
@@ -465,7 +457,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-05T19:30:27Z",
+  "updated": "2026-11-05T20:00:32Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
