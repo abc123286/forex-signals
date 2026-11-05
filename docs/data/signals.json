@@ -199,6 +199,35 @@
       "closed_at": null,
       "exit_price": null,
       "news_note": "none in next 24h"
+    },
+    {
+      "id": "high-GBPUSD-202611051300",
+      "profile": "high",
+      "pair": "GBP/USD",
+      "direction": "BUY",
+      "entry": 1.347,
+      "sl": 1.34549,
+      "tp": 1.35003,
+      "sl_pips": 15.1,
+      "tp_pips": 30.3,
+      "rsi": 49.1,
+      "adx": 24.9,
+      "h4_trend": "up",
+      "score": 90,
+      "pros": [
+        "4-hour trend agrees",
+        "Moderate trend strength (ADX 25)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [],
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
+      "created": "2026-11-05T13:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "none in next 24h"
     }
   ],
   "news_warned": [],
@@ -364,7 +393,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-05T12:10:16Z",
+  "updated": "2026-11-05T13:00:33Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
