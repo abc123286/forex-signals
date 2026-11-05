@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-05T15:15:58Z",
+  "generated": "2026-11-05T15:37:20Z",
   "risk_usd_example": 3.0,
   "ranges": {
     "EUR/USD": {
@@ -700,6 +700,17 @@
           "profitable": false,
           "verdict": "Nothing to keep: no session or pair had at least 15 practice trades AND made money. There is no clear time/pair edge here."
         }
+      },
+      "review_stats": {
+        "losses": 56,
+        "wins": 50,
+        "loss_in_profit_half_r": 44.6,
+        "loss_in_profit_1r": 3.6,
+        "loss_never_in_profit": 32.1,
+        "loss_quick_2h": 39.3,
+        "win_near_sl_first": 40.0,
+        "avg_hours_win": 14.2,
+        "avg_hours_loss": 11.5
       }
     },
     "moderate": {
@@ -1387,6 +1398,17 @@
           "profitable": false,
           "verdict": "Partly helped: on unseen months it lost less than trading every session/pair, but it still did not make money. Caution: only 24 exam trades, so this could still be luck."
         }
+      },
+      "review_stats": {
+        "losses": 170,
+        "wins": 109,
+        "loss_in_profit_half_r": 55.9,
+        "loss_in_profit_1r": 22.4,
+        "loss_never_in_profit": 27.1,
+        "loss_quick_2h": 36.5,
+        "win_near_sl_first": 45.9,
+        "avg_hours_win": 13.8,
+        "avg_hours_loss": 12.0
       }
     },
     "high": {
@@ -2073,6 +2095,17 @@
           "profitable": false,
           "verdict": "Partly helped: on unseen months it lost less than trading every session/pair, but it still did not make money."
         }
+      },
+      "review_stats": {
+        "losses": 433,
+        "wins": 166,
+        "loss_in_profit_half_r": 55.7,
+        "loss_in_profit_1r": 29.8,
+        "loss_never_in_profit": 27.3,
+        "loss_quick_2h": 50.6,
+        "win_near_sl_first": 42.8,
+        "avg_hours_win": 10.4,
+        "avg_hours_loss": 7.4
       }
     },
     "focused": {
@@ -2671,6 +2704,17 @@
           "profitable": false,
           "verdict": "Did not pass: on unseen months the filter was not better. The good practice results were probably luck. Caution: only 27 exam trades, so this could still be luck."
         }
+      },
+      "review_stats": {
+        "losses": 42,
+        "wins": 30,
+        "loss_in_profit_half_r": 45.2,
+        "loss_in_profit_1r": 14.3,
+        "loss_never_in_profit": 40.5,
+        "loss_quick_2h": 50.0,
+        "win_near_sl_first": 33.3,
+        "avg_hours_win": 8.7,
+        "avg_hours_loss": 5.8
       }
     }
   },
