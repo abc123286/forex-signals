@@ -10,6 +10,10 @@ on:
         description: "Only send a test alert (to check Telegram / Gmail)"
         type: boolean
         default: false
+      resend_last_result:
+        description: "Only re-send the latest TP/SL result to Telegram"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -41,7 +45,9 @@ jobs:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: |
           export SITE_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/"
-          if [ "${{ inputs.test_alert }}" = "true" ]; then
+          if [ "${{ inputs.resend_last_result }}" = "true" ]; then
+            python signals.py --resend-last
+          elif [ "${{ inputs.test_alert }}" = "true" ]; then
             python signals.py --test-alert
           else
             python signals.py

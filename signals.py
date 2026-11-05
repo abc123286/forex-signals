@@ -799,8 +799,27 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
     return data
 
 
+def resend_last_result():
+    """Re-send the most recent TP/SL/expired result to Telegram only (if a message was lost)."""
+    data = load_data()
+    done = [s for s in data["signals"] if s["status"] != "open" and s.get("closed_at")]
+    if not done:
+        print("No closed trades to re-send.")
+        return
+    s = max(done, key=lambda x: x["closed_at"])
+    same = [x for x in data["signals"] if x["profile"] == s["profile"]]
+    text = "(re-sent)\n" + result_message(s, accuracy_text(same))
+    site = os.getenv("SITE_URL")
+    if site:
+        text += f"\n\nDashboard: {site}"
+    send_telegram(text)
+    print("Re-sent to Telegram:", s["id"], s["status"])
+
+
 if __name__ == "__main__":
-    if "--test-alert" in sys.argv:
+    if "--resend-last" in sys.argv:
+        resend_last_result()
+    elif "--test-alert" in sys.argv:
         notify("Forex bot test", "<b>✅ Test alert</b>\nYour forex signal bot can reach you.")
         print("Test alert sent (check Telegram / Gmail).")
     else:
