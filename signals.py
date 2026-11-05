@@ -45,8 +45,10 @@ SNAPSHOT_EVERY_MIN = 55     # save a market snapshot about once an hour
 MY_TIMEZONE = timezone(timedelta(hours=8))   # Malaysia time for alert messages
 
 # Which risk levels send Telegram/Gmail alerts. All levels are always recorded on the website.
-# High risk is OFF because the backtest showed it losing clearly (about -81R over ~8 months).
-ALERT_PROFILES = ["low", "moderate", "focused"]
+# High risk alerts are ON at the user's request (for demo practice), with a clear warning,
+# because the backtest showed it losing clearly (about -81R over ~8 months).
+ALERT_PROFILES = ["low", "moderate", "high", "focused"]
+ALERT_WARNINGS = {"high": "⚠️ Backtest: this level LOST over ~8 months (about -81R). Demo practice only."}
 
 PROFILES = {
     "low": {
@@ -88,7 +90,7 @@ PROFILES = {
         "news_before": 15, "news_after": 15, "news_medium": False,
         "desc": "Least picky: more trades, tight stop loss, TP is 2x the SL, confidence 40+. "
                 "Expect more losing trades but bigger wins. Only pauses 15 min around high impact news. "
-                "Telegram alerts are OFF: the backtest showed this level losing clearly.",
+                "Alerts are ON for demo practice only: the backtest showed this level losing clearly.",
     },
     "focused": {
         "label": "Focused", "icon": "🎯",
@@ -623,7 +625,8 @@ def tag(profile):
 def new_signal_message(s, upcoming=None):
     arrow = "🟢 BUY" if s["direction"] == "BUY" else "🔴 SELL"
     msg = (f"[{tag(s['profile'])}]\n"
-           f"<b>{arrow} {s['pair']}</b>\n"
+           + (f"{ALERT_WARNINGS[s['profile']]}\n" if s["profile"] in ALERT_WARNINGS else "")
+           + f"<b>{arrow} {s['pair']}</b>\n"
            f"Entry: {s['entry']}\n"
            f"Take Profit: {s['tp']}  (+{s['tp_pips']} pips)\n"
            f"Stop Loss: {s['sl']}  (-{s['sl_pips']} pips)\n"
