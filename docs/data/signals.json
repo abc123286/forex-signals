@@ -698,17 +698,8 @@
     "XAU/USD|2026-11-06T13:30:00Z|Non-Farm Employment Change",
     "XAU/USD|2026-11-06T13:30:00Z|Unemployment Rate"
   ],
-  "news": [
-    {
-      "time": "2026-11-06T21:45:00Z",
-      "currency": "NZD",
-      "impact": "High",
-      "title": "Parliamentary Elections",
-      "forecast": "",
-      "previous": ""
-    }
-  ],
-  "updated": "2026-11-06T23:10:17Z",
+  "news": [],
+  "updated": "2026-11-06T23:50:18Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
