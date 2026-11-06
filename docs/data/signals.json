@@ -585,6 +585,38 @@
       "closed_at": null,
       "exit_price": null,
       "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
+    },
+    {
+      "id": "high-XAUUSD-202611060900",
+      "profile": "high",
+      "pair": "XAU/USD",
+      "direction": "BUY",
+      "entry": 4075.2,
+      "sl": 4055.31,
+      "tp": 4114.98,
+      "sl_pips": 198.9,
+      "tp_pips": 397.8,
+      "rsi": 49.5,
+      "adx": 30.4,
+      "h4_trend": "up",
+      "score": 85,
+      "pros": [
+        "4-hour trend agrees",
+        "Strong trend (ADX 30)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [
+        "High-impact news within 6h (USD Average Hourly Earnings m/m)"
+      ],
+      "session": "London",
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
+      "created": "2026-11-06T09:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
     }
   ],
   "news_warned": [],
@@ -670,7 +702,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-06T08:10:18Z",
+  "updated": "2026-11-06T09:00:32Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
