@@ -517,10 +517,31 @@
       "session": "Asian",
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
       "created": "2026-11-06T02:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate; JPY BOJ Gov Ueda Speaks"
+      "status": "win",
+      "closed_at": "2026-11-06T10:00:00Z",
+      "exit_price": 158.358,
+      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate; JPY BOJ Gov Ueda Speaks",
+      "review": {
+        "reasons": [
+          "Reached TP in about 9h.",
+          "It went against you first (-20.2 pips, 0.88R of the way to SL) before turning: a narrow escape."
+        ],
+        "hours": 9,
+        "mfe_r": 2.05,
+        "mae_r": 0.88,
+        "mfe_pips": 47.1,
+        "mae_pips": 20.2,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": false,
+          "adx_strong": true,
+          "session": "Asian",
+          "score_band": "70+"
+        }
+      }
     },
     {
       "id": "moderate-XAUUSD-202611060800",
@@ -702,54 +723,54 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-06T09:10:16Z",
+  "updated": "2026-11-06T10:10:17Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.11784,
+      "price": 1.11748,
       "trend_1h": "up",
       "trend_4h": "flat",
-      "rsi": 28.6,
-      "adx": 24.0,
-      "atr_pips": 12.8,
+      "rsi": 25.2,
+      "adx": 25.5,
+      "atr_pips": 12.7,
       "high_48h": 1.12734,
       "low_48h": 1.11685
     },
     {
       "pair": "GBP/USD",
-      "price": 1.33922,
+      "price": 1.33873,
       "trend_1h": "up",
       "trend_4h": "flat",
-      "rsi": 23.5,
-      "adx": 24.9,
-      "atr_pips": 14.4,
+      "rsi": 21.0,
+      "adx": 27.2,
+      "atr_pips": 14.2,
       "high_48h": 1.35023,
-      "low_48h": 1.33945
+      "low_48h": 1.33861
     },
     {
       "pair": "USD/JPY",
-      "price": 158.173,
+      "price": 158.356,
       "trend_1h": "up",
       "trend_4h": "up",
-      "rsi": 55.6,
-      "adx": 26.1,
-      "atr_pips": 25.4,
+      "rsi": 60.8,
+      "adx": 24.5,
+      "atr_pips": 25.1,
       "high_48h": 158.695,
       "low_48h": 157.27
     },
     {
       "pair": "XAU/USD",
-      "price": 4078.87,
+      "price": 4071.06,
       "trend_1h": "up",
       "trend_4h": "up",
-      "rsi": 49.5,
-      "adx": 30.4,
-      "atr_pips": 198.9,
+      "rsi": 49.0,
+      "adx": 28.5,
+      "atr_pips": 190.8,
       "high_48h": 4147.6,
       "low_48h": 4029.91
     }
   ],
-  "snapshot_time": "2026-11-06T09:10:16Z",
+  "snapshot_time": "2026-11-06T10:10:17Z",
   "news_log": [
     {
       "time": "2026-11-03T03:30:00Z",
