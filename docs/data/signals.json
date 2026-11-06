@@ -634,10 +634,33 @@
       "session": "London",
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
       "created": "2026-11-06T09:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
+      "status": "loss",
+      "closed_at": "2026-11-06T13:00:00Z",
+      "exit_price": 4055.31,
+      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate",
+      "review": {
+        "reasons": [
+          "High-impact news during the trade: USD Average Hourly Earnings m/m (Fri 06 Nov, 09:30 PM (MYT)). News often causes sudden moves that hit stops.",
+          "It never really went into profit (best only +57.7 pips): the expected move in the trend direction did not happen.",
+          "Warning signs at entry: High-impact news within 6h (USD Average Hourly Earnings m/m).",
+          "Even with confidence 85/100 it lost: a score shows odds, not a guarantee."
+        ],
+        "hours": 5,
+        "mfe_r": 0.29,
+        "mae_r": 1.0,
+        "mfe_pips": 57.7,
+        "mae_pips": 199.8,
+        "spread_only": false,
+        "tags": {
+          "news_during": true,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": true,
+          "session": "London",
+          "score_band": "70+"
+        }
+      }
     }
   ],
   "news_warned": [
@@ -727,7 +750,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-06T13:10:16Z",
+  "updated": "2026-11-06T13:20:16Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
