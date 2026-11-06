@@ -413,10 +413,31 @@
       "session": "Asian",
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
       "created": "2026-11-06T00:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
+      "status": "loss",
+      "closed_at": "2026-11-06T03:00:00Z",
+      "exit_price": 1.34328,
+      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate",
+      "review": {
+        "reasons": [
+          "It never really went into profit (best only +7.1 pips): the expected move in the trend direction did not happen.",
+          "Warning signs at entry: Weak / choppy trend (ADX 17); Quiet market hours (low liquidity)."
+        ],
+        "hours": 4,
+        "mfe_r": 0.3,
+        "mae_r": 1.1,
+        "mfe_pips": 7.1,
+        "mae_pips": 25.8,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "Asian",
+          "score_band": "50-69"
+        }
+      }
     },
     {
       "id": "focused-GBPUSD-202611060000",
@@ -444,10 +465,31 @@
       "session": "Asian",
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
       "created": "2026-11-06T00:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
+      "status": "loss",
+      "closed_at": "2026-11-06T03:00:00Z",
+      "exit_price": 1.34328,
+      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate",
+      "review": {
+        "reasons": [
+          "It never really went into profit (best only +7.1 pips): the expected move in the trend direction did not happen.",
+          "Warning signs at entry: Weak / choppy trend (ADX 17); Quiet market hours (low liquidity)."
+        ],
+        "hours": 4,
+        "mfe_r": 0.3,
+        "mae_r": 1.1,
+        "mfe_pips": 7.1,
+        "mae_pips": 25.8,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "Asian",
+          "score_band": "50-69"
+        }
+      }
     },
     {
       "id": "high-USDJPY-202611060200",
@@ -564,7 +606,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-06T03:10:17Z",
+  "updated": "2026-11-06T03:50:17Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
