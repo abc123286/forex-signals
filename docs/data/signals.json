@@ -640,7 +640,11 @@
       "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
     }
   ],
-  "news_warned": [],
+  "news_warned": [
+    "XAU/USD|2026-11-06T13:30:00Z|Average Hourly Earnings m/m",
+    "XAU/USD|2026-11-06T13:30:00Z|Non-Farm Employment Change",
+    "XAU/USD|2026-11-06T13:30:00Z|Unemployment Rate"
+  ],
   "news": [
     {
       "time": "2026-11-06T13:30:00Z",
@@ -723,7 +727,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-06T12:10:16Z",
+  "updated": "2026-11-06T12:30:29Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
