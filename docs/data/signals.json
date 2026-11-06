@@ -670,46 +670,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-06T13:30:00Z",
-      "currency": "CAD",
-      "impact": "High",
-      "title": "Employment Change",
-      "forecast": "14.6K",
-      "previous": "-68.3K"
-    },
-    {
-      "time": "2026-11-06T13:30:00Z",
-      "currency": "CAD",
-      "impact": "High",
-      "title": "Unemployment Rate",
-      "forecast": "6.5%",
-      "previous": "6.5%"
-    },
-    {
-      "time": "2026-11-06T13:30:00Z",
-      "currency": "USD",
-      "impact": "High",
-      "title": "Average Hourly Earnings m/m",
-      "forecast": "0.3%",
-      "previous": "0.1%"
-    },
-    {
-      "time": "2026-11-06T13:30:00Z",
-      "currency": "USD",
-      "impact": "High",
-      "title": "Non-Farm Employment Change",
-      "forecast": "65K",
-      "previous": "29K"
-    },
-    {
-      "time": "2026-11-06T13:30:00Z",
-      "currency": "USD",
-      "impact": "High",
-      "title": "Unemployment Rate",
-      "forecast": "4.2%",
-      "previous": "4.2%"
-    },
-    {
       "time": "2026-11-06T15:00:00Z",
       "currency": "CAD",
       "impact": "Medium",
@@ -750,7 +710,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-06T15:10:16Z",
+  "updated": "2026-11-06T15:30:29Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
