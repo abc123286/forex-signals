@@ -448,6 +448,37 @@
       "closed_at": null,
       "exit_price": null,
       "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
+    },
+    {
+      "id": "high-USDJPY-202611060200",
+      "profile": "high",
+      "pair": "USD/JPY",
+      "direction": "BUY",
+      "entry": 157.898,
+      "sl": 157.668,
+      "tp": 158.358,
+      "sl_pips": 23.0,
+      "tp_pips": 46.0,
+      "rsi": 47.6,
+      "adx": 30.0,
+      "h4_trend": "flat",
+      "score": 75,
+      "pros": [
+        "Strong trend (ADX 30)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [
+        "4-hour trend is unclear"
+      ],
+      "session": "Asian",
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
+      "created": "2026-11-06T02:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate; JPY BOJ Gov Ueda Speaks"
     }
   ],
   "news_warned": [],
@@ -533,7 +564,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-06T01:20:16Z",
+  "updated": "2026-11-06T02:00:31Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
