@@ -364,6 +364,68 @@
       "closed_at": null,
       "exit_price": null,
       "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
+    },
+    {
+      "id": "moderate-GBPUSD-202611060000",
+      "profile": "moderate",
+      "pair": "GBP/USD",
+      "direction": "BUY",
+      "entry": 1.34562,
+      "sl": 1.34328,
+      "tp": 1.34913,
+      "sl_pips": 23.4,
+      "tp_pips": 35.1,
+      "rsi": 44.8,
+      "adx": 17.4,
+      "h4_trend": "up",
+      "score": 60,
+      "pros": [
+        "4-hour trend agrees",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction"
+      ],
+      "cons": [
+        "Weak / choppy trend (ADX 17)",
+        "Quiet market hours (low liquidity)"
+      ],
+      "session": "Asian",
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
+      "created": "2026-11-06T00:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
+    },
+    {
+      "id": "focused-GBPUSD-202611060000",
+      "profile": "focused",
+      "pair": "GBP/USD",
+      "direction": "BUY",
+      "entry": 1.34562,
+      "sl": 1.34328,
+      "tp": 1.34913,
+      "sl_pips": 23.4,
+      "tp_pips": 35.1,
+      "rsi": 44.8,
+      "adx": 17.4,
+      "h4_trend": "up",
+      "score": 60,
+      "pros": [
+        "4-hour trend agrees",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction"
+      ],
+      "cons": [
+        "Weak / choppy trend (ADX 17)",
+        "Quiet market hours (low liquidity)"
+      ],
+      "session": "Asian",
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
+      "created": "2026-11-06T00:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
     }
   ],
   "news_warned": [],
@@ -449,7 +511,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-05T23:10:15Z",
+  "updated": "2026-11-06T00:00:38Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
