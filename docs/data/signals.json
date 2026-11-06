@@ -521,6 +521,70 @@
       "closed_at": null,
       "exit_price": null,
       "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate; JPY BOJ Gov Ueda Speaks"
+    },
+    {
+      "id": "moderate-XAUUSD-202611060800",
+      "profile": "moderate",
+      "pair": "XAU/USD",
+      "direction": "BUY",
+      "entry": 4056.13,
+      "sl": 4026.9,
+      "tp": 4099.98,
+      "sl_pips": 292.3,
+      "tp_pips": 438.5,
+      "rsi": 42.4,
+      "adx": 32.0,
+      "h4_trend": "up",
+      "score": 85,
+      "pros": [
+        "4-hour trend agrees",
+        "Strong trend (ADX 32)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [
+        "High-impact news within 6h (USD Average Hourly Earnings m/m)"
+      ],
+      "session": "London",
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
+      "created": "2026-11-06T08:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
+    },
+    {
+      "id": "focused-XAUUSD-202611060800",
+      "profile": "focused",
+      "pair": "XAU/USD",
+      "direction": "BUY",
+      "entry": 4056.13,
+      "sl": 4026.9,
+      "tp": 4099.98,
+      "sl_pips": 292.3,
+      "tp_pips": 438.5,
+      "rsi": 42.4,
+      "adx": 32.0,
+      "h4_trend": "up",
+      "score": 85,
+      "pros": [
+        "4-hour trend agrees",
+        "Strong trend (ADX 32)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [
+        "High-impact news within 6h (USD Average Hourly Earnings m/m)"
+      ],
+      "session": "London",
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
+      "created": "2026-11-06T08:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "USD Average Hourly Earnings m/m; USD Non-Farm Employment Change; USD Unemployment Rate"
     }
   ],
   "news_warned": [],
@@ -606,7 +670,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-06T07:10:22Z",
+  "updated": "2026-11-06T08:00:31Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
