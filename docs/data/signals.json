@@ -699,54 +699,54 @@
     "XAU/USD|2026-11-06T13:30:00Z|Unemployment Rate"
   ],
   "news": [],
-  "updated": "2026-11-07T11:10:18Z",
+  "updated": "2026-11-07T12:10:15Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.11403,
+      "price": 1.11402,
       "trend_1h": "down",
       "trend_4h": "down",
-      "rsi": 31.6,
-      "adx": 29.5,
-      "atr_pips": 14.3,
+      "rsi": 31.5,
+      "adx": 28.8,
+      "atr_pips": 14.2,
       "high_48h": 1.12438,
       "low_48h": 1.1132
     },
     {
       "pair": "GBP/USD",
-      "price": 1.33521,
+      "price": 1.3353,
       "trend_1h": "down",
-      "trend_4h": "flat",
-      "rsi": 29.5,
-      "adx": 34.5,
-      "atr_pips": 8.0,
+      "trend_4h": "down",
+      "rsi": 29.3,
+      "adx": 33.4,
+      "atr_pips": 7.6,
       "high_48h": 1.34865,
       "low_48h": 1.3344
     },
     {
       "pair": "USD/JPY",
-      "price": 158.483,
+      "price": 158.486,
       "trend_1h": "up",
       "trend_4h": "up",
       "rsi": 61.6,
-      "adx": 7.2,
-      "atr_pips": 16.0,
+      "adx": 7.0,
+      "atr_pips": 15.0,
       "high_48h": 158.614,
       "low_48h": 157.27
     },
     {
       "pair": "XAU/USD",
-      "price": 4066.04,
+      "price": 4066.06,
       "trend_1h": "up",
       "trend_4h": "up",
-      "rsi": 49.0,
-      "adx": 11.4,
-      "atr_pips": 67.6,
-      "high_48h": 4139.78,
+      "rsi": 48.9,
+      "adx": 11.0,
+      "atr_pips": 62.9,
+      "high_48h": 4137.1,
       "low_48h": 4028.59
     }
   ],
-  "snapshot_time": "2026-11-07T11:10:18Z",
+  "snapshot_time": "2026-11-07T12:10:15Z",
   "news_log": [
     {
       "time": "2026-11-03T03:30:00Z",
