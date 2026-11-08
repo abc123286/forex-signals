@@ -698,8 +698,89 @@
     "XAU/USD|2026-11-06T13:30:00Z|Non-Farm Employment Change",
     "XAU/USD|2026-11-06T13:30:00Z|Unemployment Rate"
   ],
-  "news": [],
-  "updated": "2026-11-08T05:10:16Z",
+  "news": [
+    {
+      "time": "2026-11-09T17:25:00Z",
+      "currency": "GBP",
+      "impact": "Medium",
+      "title": "BOE Gov Bailey Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-10T09:00:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "FOMC Member Waller Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-10T13:30:00Z",
+      "currency": "USD",
+      "impact": "High",
+      "title": "Core CPI m/m",
+      "forecast": "0.2%",
+      "previous": "0.3%"
+    },
+    {
+      "time": "2026-11-10T13:30:00Z",
+      "currency": "USD",
+      "impact": "High",
+      "title": "CPI m/m",
+      "forecast": "0.3%",
+      "previous": "0.6%"
+    },
+    {
+      "time": "2026-11-12T07:00:00Z",
+      "currency": "GBP",
+      "impact": "High",
+      "title": "GDP m/m",
+      "forecast": "0.0%",
+      "previous": "0.1%"
+    },
+    {
+      "time": "2026-11-12T07:00:00Z",
+      "currency": "GBP",
+      "impact": "Medium",
+      "title": "Prelim GDP q/q",
+      "forecast": "0.7%",
+      "previous": "0.5%"
+    },
+    {
+      "time": "2026-11-12T13:30:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "Unemployment Claims",
+      "forecast": "194K",
+      "previous": "189K"
+    },
+    {
+      "time": "2026-11-12T19:30:00Z",
+      "currency": "EUR",
+      "impact": "Medium",
+      "title": "ECB President Lagarde Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-13T13:30:00Z",
+      "currency": "USD",
+      "impact": "High",
+      "title": "Core PPI m/m",
+      "forecast": "0.3%",
+      "previous": "0.7%"
+    },
+    {
+      "time": "2026-11-13T13:30:00Z",
+      "currency": "USD",
+      "impact": "High",
+      "title": "PPI m/m",
+      "forecast": "0.4%",
+      "previous": "1.3%"
+    }
+  ],
+  "updated": "2026-11-08T05:50:15Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
@@ -842,6 +923,31 @@
       "time": "2026-11-06T21:45:00Z",
       "currency": "NZD",
       "title": "Parliamentary Elections"
+    },
+    {
+      "time": "2026-11-10T13:30:00Z",
+      "currency": "USD",
+      "title": "Core CPI m/m"
+    },
+    {
+      "time": "2026-11-10T13:30:00Z",
+      "currency": "USD",
+      "title": "CPI m/m"
+    },
+    {
+      "time": "2026-11-12T07:00:00Z",
+      "currency": "GBP",
+      "title": "GDP m/m"
+    },
+    {
+      "time": "2026-11-13T13:30:00Z",
+      "currency": "USD",
+      "title": "Core PPI m/m"
+    },
+    {
+      "time": "2026-11-13T13:30:00Z",
+      "currency": "USD",
+      "title": "PPI m/m"
     }
   ]
 }
