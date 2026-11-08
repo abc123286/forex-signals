@@ -824,10 +824,32 @@
       "session": "Late / rollover",
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
       "created": "2026-11-08T23:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "none in next 24h"
+      "status": "loss",
+      "closed_at": "2026-11-08T23:00:00Z",
+      "exit_price": 158.312,
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Stopped out quickly (within ~1h): price turned against the trade almost right away.",
+          "It was in profit first (+9.9 pips, 0.87R) before reversing. A 'move SL to break-even' or 'take partial profit' rule could have saved some of this.",
+          "Warning signs at entry: Weak / choppy trend (ADX 19); The recent high sits before TP (17 pips away); Quiet market hours (low liquidity)."
+        ],
+        "hours": 1,
+        "mfe_r": 0.87,
+        "mae_r": 1.02,
+        "mfe_pips": 9.9,
+        "mae_pips": 11.7,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": true,
+          "in_profit_first": true,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "Late / rollover",
+          "score_band": "<50"
+        }
+      }
     }
   ],
   "news_warned": [
@@ -917,7 +939,7 @@
       "previous": "1.3%"
     }
   ],
-  "updated": "2026-11-08T23:10:17Z",
+  "updated": "2026-11-08T23:50:16Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
