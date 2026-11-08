@@ -718,10 +718,31 @@
       "session": "New York",
       "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 55",
       "created": "2026-11-08T19:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "none in next 24h"
+      "status": "loss",
+      "closed_at": "2026-11-08T22:00:00Z",
+      "exit_price": 1.11471,
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "It never really went into profit (best only +4.2 pips): the expected move in the trend direction did not happen.",
+          "Warning signs at entry: The recent low is very close (2 pips away)."
+        ],
+        "hours": 4,
+        "mfe_r": 0.42,
+        "mae_r": 1.45,
+        "mfe_pips": 4.2,
+        "mae_pips": 14.6,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": true,
+          "session": "New York",
+          "score_band": "70+"
+        }
+      }
     },
     {
       "id": "high-USDJPY-202611082000",
@@ -776,6 +797,37 @@
           "score_band": "50-69"
         }
       }
+    },
+    {
+      "id": "high-USDJPY-202611082300",
+      "profile": "high",
+      "pair": "USD/JPY",
+      "direction": "BUY",
+      "entry": 158.426,
+      "sl": 158.312,
+      "tp": 158.655,
+      "sl_pips": 11.4,
+      "tp_pips": 22.9,
+      "rsi": 47.1,
+      "adx": 19.2,
+      "h4_trend": "up",
+      "score": 45,
+      "pros": [
+        "4-hour trend agrees",
+        "Signal candle closed in the trade's direction"
+      ],
+      "cons": [
+        "Weak / choppy trend (ADX 19)",
+        "The recent high sits before TP (17 pips away)",
+        "Quiet market hours (low liquidity)"
+      ],
+      "session": "Late / rollover",
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
+      "created": "2026-11-08T23:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "none in next 24h"
     }
   ],
   "news_warned": [
@@ -865,7 +917,7 @@
       "previous": "1.3%"
     }
   ],
-  "updated": "2026-11-08T22:10:14Z",
+  "updated": "2026-11-08T23:00:32Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
