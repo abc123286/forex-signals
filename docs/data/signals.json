@@ -733,10 +733,32 @@
       "session": "New York",
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
       "created": "2026-11-06T17:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "none in next 24h"
+      "status": "win",
+      "closed_at": "2026-11-09T01:00:00Z",
+      "exit_price": 4105.8,
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 57h.",
+          "It went against you first (-143.6 pips, 0.76R of the way to SL) before turning: a narrow escape.",
+          "The 4-hour trend supported it."
+        ],
+        "hours": 57,
+        "mfe_r": 2.15,
+        "mae_r": 0.76,
+        "mfe_pips": 406.0,
+        "mae_pips": 143.6,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": true,
+          "session": "New York",
+          "score_band": "70+"
+        }
+      }
     },
     {
       "id": "high-EURUSD-202611081900",
@@ -960,6 +982,38 @@
       "closed_at": null,
       "exit_price": null,
       "news_note": "none in next 24h"
+    },
+    {
+      "id": "high-XAUUSD-202611090100",
+      "profile": "high",
+      "pair": "XAU/USD",
+      "direction": "BUY",
+      "entry": 4104.34,
+      "sl": 4098.25,
+      "tp": 4116.52,
+      "sl_pips": 60.9,
+      "tp_pips": 121.8,
+      "rsi": 77.9,
+      "adx": 20.0,
+      "h4_trend": "up",
+      "score": 60,
+      "pros": [
+        "4-hour trend agrees",
+        "Moderate trend strength (ADX 20)",
+        "Price is beyond the recent high (no nearby barrier)",
+        "Signal candle closed in the trade's direction"
+      ],
+      "cons": [
+        "Quiet market hours (low liquidity)",
+        "Market is unusually quiet"
+      ],
+      "session": "Asian",
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
+      "created": "2026-11-09T01:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "news_note": "none in next 24h"
     }
   ],
   "news_warned": [
@@ -1049,54 +1103,54 @@
       "previous": "1.3%"
     }
   ],
-  "updated": "2026-11-09T01:00:32Z",
+  "updated": "2026-11-09T01:10:18Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.11481,
+      "price": 1.11493,
       "trend_1h": "down",
       "trend_4h": "down",
-      "rsi": 53.7,
-      "adx": 38.0,
-      "atr_pips": 10.0,
+      "rsi": 53.9,
+      "adx": 35.5,
+      "atr_pips": 9.7,
       "high_48h": 1.1156,
       "low_48h": 1.11328
     },
     {
       "pair": "GBP/USD",
-      "price": 1.33618,
+      "price": 1.33649,
       "trend_1h": "down",
       "trend_4h": "down",
-      "rsi": 59.0,
-      "adx": 22.3,
+      "rsi": 60.7,
+      "adx": 21.5,
       "atr_pips": 8.1,
-      "high_48h": 1.33654,
+      "high_48h": 1.33675,
       "low_48h": 1.33377
     },
     {
       "pair": "USD/JPY",
-      "price": 158.17,
+      "price": 158.375,
       "trend_1h": "up",
       "trend_4h": "up",
-      "rsi": 34.2,
-      "adx": 18.3,
-      "atr_pips": 12.6,
+      "rsi": 37.7,
+      "adx": 18.7,
+      "atr_pips": 13.5,
       "high_48h": 158.598,
-      "low_48h": 158.236
+      "low_48h": 158.147
     },
     {
       "pair": "XAU/USD",
-      "price": 4066.09,
+      "price": 4101.42,
       "trend_1h": "up",
       "trend_4h": "up",
-      "rsi": 21.4,
-      "adx": 18.2,
-      "atr_pips": 27.2,
-      "high_48h": 4074.37,
+      "rsi": 77.9,
+      "adx": 20.0,
+      "atr_pips": 60.9,
+      "high_48h": 4104.92,
       "low_48h": 4054.86
     }
   ],
-  "snapshot_time": "2026-11-09T00:10:15Z",
+  "snapshot_time": "2026-11-09T01:10:18Z",
   "news_log": [
     {
       "time": "2026-11-03T03:30:00Z",
