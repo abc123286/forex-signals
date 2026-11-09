@@ -946,10 +946,32 @@
       "session": "Asian",
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
       "created": "2026-11-09T01:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "none in next 24h"
+      "status": "win",
+      "closed_at": "2026-11-09T01:00:00Z",
+      "exit_price": 4118.05,
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 1h.",
+          "It moved your way fairly smoothly (worst point only -32.9 pips).",
+          "The 4-hour trend supported it."
+        ],
+        "hours": 1,
+        "mfe_r": 2.45,
+        "mae_r": 0.36,
+        "mfe_pips": 223.4,
+        "mae_pips": 32.9,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "Asian",
+          "score_band": "50-69"
+        }
+      }
     },
     {
       "id": "focused-XAUUSD-202611090100",
@@ -978,10 +1000,32 @@
       "session": "Asian",
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
       "created": "2026-11-09T01:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "none in next 24h"
+      "status": "win",
+      "closed_at": "2026-11-09T01:00:00Z",
+      "exit_price": 4118.05,
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 1h.",
+          "It moved your way fairly smoothly (worst point only -32.9 pips).",
+          "The 4-hour trend supported it."
+        ],
+        "hours": 1,
+        "mfe_r": 2.45,
+        "mae_r": 0.36,
+        "mfe_pips": 223.4,
+        "mae_pips": 32.9,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "Asian",
+          "score_band": "50-69"
+        }
+      }
     },
     {
       "id": "high-XAUUSD-202611090100",
@@ -1010,10 +1054,32 @@
       "session": "Asian",
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
       "created": "2026-11-09T01:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "none in next 24h"
+      "status": "win",
+      "closed_at": "2026-11-09T01:00:00Z",
+      "exit_price": 4116.52,
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 1h.",
+          "It went against you first (-32.9 pips, 0.54R of the way to SL) before turning: a narrow escape.",
+          "The 4-hour trend supported it."
+        ],
+        "hours": 1,
+        "mfe_r": 3.67,
+        "mae_r": 0.54,
+        "mfe_pips": 223.4,
+        "mae_pips": 32.9,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "Asian",
+          "score_band": "50-69"
+        }
+      }
     }
   ],
   "news_warned": [
@@ -1103,7 +1169,7 @@
       "previous": "1.3%"
     }
   ],
-  "updated": "2026-11-09T01:10:18Z",
+  "updated": "2026-11-09T01:50:19Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
