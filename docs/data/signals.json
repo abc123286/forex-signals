@@ -1175,6 +1175,14 @@
       "previous": "0.6%"
     },
     {
+      "time": "2026-11-11T09:45:00Z",
+      "currency": "EUR",
+      "impact": "Medium",
+      "title": "ECB President Lagarde Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
       "time": "2026-11-12T07:00:00Z",
       "currency": "GBP",
       "impact": "High",
@@ -1223,7 +1231,7 @@
       "previous": "1.3%"
     }
   ],
-  "updated": "2026-11-09T17:10:16Z",
+  "updated": "2026-11-09T17:50:17Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
