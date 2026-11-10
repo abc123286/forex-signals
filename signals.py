@@ -44,6 +44,7 @@ EXPIRE_HOURS = 120 if INTERVAL_HOURS == 1 else 360   # close as "expired" after 
 NEWS_WARN_MIN = 60          # warn about open trades when high-impact news is within 60 min
 NEWS_ALERT_HOURS = 24       # list high-impact news for the next 24h inside each new alert
 SNAPSHOT_EVERY_MIN = 55     # save a market snapshot about once an hour
+MAX_ALERT_DELAY_MIN = 30    # never send a setup more than 30 min after its candle closed (price may have moved)
 MY_TIMEZONE = timezone(timedelta(hours=8))   # Malaysia time for alert messages
 
 # Typical broker spread (in pips). Prices from Twelve Data are MID prices, but a broker closes a
@@ -774,7 +775,9 @@ def new_signal_message(s, upcoming=None):
            f"Take Profit: {s['tp']}  (+{s['tp_pips']} pips)\n"
            f"Stop Loss: {s['sl']}  (-{s['sl_pips']} pips)\n"
            f"Confidence: <b>{s['score']}/100</b>\n"
-           f"Why: {s['reason']}\n")
+           + (f"Price now: {s['price_at_alert']} (entry = close of the candle at {my_time(from_iso(s['created']))[-14:-6]})\n"
+              if s.get("price_at_alert") is not None else "")
+           + f"Why: {s['reason']}\n")
     if s.get("pros"):
         msg += "\n".join(f"✅ {x}" for x in s["pros"]) + "\n"
     if s.get("cons"):
@@ -829,6 +832,7 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
     data["strategy"] = info
     signals = data["signals"]
     warned = data.setdefault("news_warned", [])
+    skipped = data.setdefault("skipped_setups", {})      # setup id -> why it was cancelled
     outbox = []          # (subject, text, profile or None)
 
     # Market snapshot about once an hour (keeps the number of saves low)
@@ -915,11 +919,24 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
             if not sig or any(s["id"] == sig["id"] for s in signals):
                 print(f"{label} {note if not sig else 'no new setup'}")
                 continue
+            if sig["id"] in skipped:
+                print(f"{label} setup was cancelled earlier ({skipped[sig['id']]}), not sending late")
+                continue
             impacts = ("High", "Medium") if p["news_medium"] else ("High",)
             block = news_for(pair, events, now, -p["news_after"], p["news_before"], impacts)
             if block:
-                print(f"{label} setup SKIPPED because of news: {block[0]['currency']} {block[0]['title']}")
+                # Cancel it for good: sending it after the news would use an out-of-date entry price
+                skipped[sig["id"]] = f"news: {block[0]['currency']} {block[0]['title']}"
+                changed = True
+                print(f"{label} setup CANCELLED because of news: {block[0]['currency']} {block[0]['title']}")
                 continue
+            age_min = (now - from_iso(sig["created"])).total_seconds() / 60
+            if age_min > MAX_ALERT_DELAY_MIN:
+                skipped[sig["id"]] = f"too late ({age_min:.0f} min after the candle closed)"
+                changed = True
+                print(f"{label} setup CANCELLED: found {age_min:.0f} min after its candle closed")
+                continue
+            sig["price_at_alert"] = round(candles[-1]["close"], decimals(pair))
             upcoming = None if events is None else news_for(pair, events, now, 0, NEWS_ALERT_HOURS * 60)
             sig["news_note"] = ("feed unavailable" if upcoming is None else
                                 "; ".join(f"{e['currency']} {e['title']}" for e in upcoming[:5]) or "none in next 24h")
@@ -930,6 +947,8 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
             print(f"{label} NEW {sig['direction']} at {sig['entry']} (confidence {sig['score']})")
 
     del warned[:-200]   # keep the list short
+    for k in sorted(skipped)[:-300]:
+        skipped.pop(k, None)
 
     if take_snapshot and snaps:
         data["snapshot"] = snaps
