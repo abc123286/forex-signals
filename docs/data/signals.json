@@ -1268,22 +1268,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-10T13:30:00Z",
-      "currency": "USD",
-      "impact": "High",
-      "title": "Core CPI m/m",
-      "forecast": "0.2%",
-      "previous": "0.3%"
-    },
-    {
-      "time": "2026-11-10T13:30:00Z",
-      "currency": "USD",
-      "impact": "High",
-      "title": "CPI m/m",
-      "forecast": "0.3%",
-      "previous": "0.6%"
-    },
-    {
       "time": "2026-11-11T09:45:00Z",
       "currency": "EUR",
       "impact": "Medium",
@@ -1340,29 +1324,29 @@
       "previous": "1.3%"
     }
   ],
-  "updated": "2026-11-10T14:30:27Z",
+  "updated": "2026-11-10T15:30:27Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.11919,
+      "price": 1.11782,
       "trend_1h": "up",
       "trend_4h": "up",
       "trend_daily": "down",
-      "rsi": 37.3,
-      "adx": 49.9,
-      "atr_pips": 12.2,
+      "rsi": 35.2,
+      "adx": 48.2,
+      "atr_pips": 12.4,
       "high_48h": 1.12513,
       "low_48h": 1.11328
     },
     {
       "pair": "GBP/USD",
-      "price": 1.33928,
+      "price": 1.33706,
       "trend_1h": "up",
       "trend_4h": "up",
       "trend_daily": "flat",
-      "rsi": 33.0,
-      "adx": 36.8,
-      "atr_pips": 12.1,
+      "rsi": 27.9,
+      "adx": 37.6,
+      "atr_pips": 12.7,
       "high_48h": 1.34604,
       "low_48h": 1.33377
     },
@@ -1372,26 +1356,26 @@
       "trend_1h": "up",
       "trend_4h": "up",
       "trend_daily": "up",
-      "rsi": 71.1,
-      "adx": 22.0,
-      "atr_pips": 15.9,
-      "high_48h": 158.598,
+      "rsi": 74.8,
+      "adx": 24.0,
+      "atr_pips": 16.5,
+      "high_48h": 158.705,
       "low_48h": 157.672
     },
     {
       "pair": "XAU/USD",
-      "price": 4048.69,
+      "price": 4048.47,
       "trend_1h": "up",
       "trend_4h": "up",
       "trend_daily": "flat",
-      "rsi": 29.0,
-      "adx": 24.5,
-      "atr_pips": 157.6,
+      "rsi": 25.7,
+      "adx": 26.4,
+      "atr_pips": 168.8,
       "high_48h": 4149.01,
-      "low_48h": 4039.91
+      "low_48h": 4029.7
     }
   ],
-  "snapshot_time": "2026-11-10T14:30:27Z",
+  "snapshot_time": "2026-11-10T15:30:27Z",
   "news_log": [
     {
       "time": "2026-11-03T03:30:00Z",
