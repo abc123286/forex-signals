@@ -54,39 +54,42 @@ SPREAD_PIPS = {"EUR/USD": 1.0, "GBP/USD": 1.5, "USD/JPY": 1.5, "XAU/USD": 3.0}
 # Which risk levels send Telegram/Gmail alerts. All levels are always recorded on the website.
 # High risk alerts are ON at the user's request (for demo practice), with a clear warning,
 # because the backtest showed it losing clearly (about -81R over ~8 months).
-ALERT_PROFILES = ["low", "moderate", "high", "focused", "focused4h"]
+ALERT_PROFILES = ["low", "moderate", "focused"]   # High risk: recorded on the website only (user's choice)
 ALERT_WARNINGS = {"high": "⚠️ Backtest: this level LOST over ~8 months (about -81R). Demo practice only."}
 
 PROFILES = {
+    # Since 10 Nov 2026 every level uses 4-hour candles (built from the 1-hour data) with the DAILY
+    # trend as the bigger picture: in the backtest 4H beat 1H at every level. Older trades were 1H.
     "low": {
-        "label": "Low risk", "icon": "🛡️",
+        "label": "Low risk", "icon": "🛡️", "interval": 4,
         "rsi_buy": 35, "rsi_sell": 65,      # needs a deeper pullback
         "sl_atr": 2.0, "tp_atr": 2.0,       # wide SL, TP same size as SL (1 : 1)
         "trend_slope": True,                # long-term trend must also be rising/falling
         "price_filter": True,               # price must be on the right side of EMA200
-        "h4_rule": "agree",                 # 4-hour trend MUST point the same way
+        "h4_rule": "agree",                 # DAILY trend must point the same way
         "min_adx": 20,                      # trend must have some strength
         "min_score": 70,                    # only high-confidence setups
         "news_before": 120, "news_after": 60, "news_medium": True,
-        "desc": "Very picky: only strong, clear trends where the 4-hour chart agrees, after a deep "
-                "pullback, with a confidence score of 70+. Wide stop loss and TP equal to SL. "
-                "Pauses 2h before to 1h after high AND medium impact news.",
+        "desc": "4-hour candles. Very picky: only strong, clear trends where the daily chart agrees, after a deep "
+                "pullback, with a confidence score of 70+. Wide stop loss and TP equal to SL. Pauses 2h before "
+                "to 1h after high AND medium impact news. Backtest (2.6 years, with spreads): about break-even (0R).",
     },
     "moderate": {
-        "label": "Moderate", "icon": "⚖️",
+        "label": "Moderate", "icon": "⚖️", "interval": 4,
         "rsi_buy": 40, "rsi_sell": 60,
         "sl_atr": 1.5, "tp_atr": 2.25,      # reward : risk = 1.5 : 1
         "trend_slope": False,
         "price_filter": True,
-        "h4_rule": "not_against",           # 4-hour trend must not point the other way
+        "h4_rule": "not_against",           # DAILY trend must not point the other way
         "min_adx": 0,
         "min_score": 55,
         "news_before": 60, "news_after": 30, "news_medium": False,
-        "desc": "Balanced: trend + normal pullback, 4-hour trend not against it, confidence 55+. "
-                "TP is 1.5x the SL. Pauses 1h before to 30 min after high impact news.",
+        "desc": "4-hour candles. Balanced: trend + normal pullback, daily trend not against it, confidence 55+. "
+                "TP is 1.5x the SL. Pauses 1h before to 30 min after high impact news. "
+                "Backtest (2.6 years, with spreads): about break-even (-1.5R).",
     },
     "high": {
-        "label": "High risk", "icon": "🔥",
+        "label": "High risk", "icon": "🔥", "interval": 4,
         "rsi_buy": 45, "rsi_sell": 55,      # small pullbacks count -> more trades
         "sl_atr": 1.0, "tp_atr": 2.0,       # tight SL, TP = 2x SL (2 : 1)
         "trend_slope": False,
@@ -95,12 +98,12 @@ PROFILES = {
         "min_adx": 0,
         "min_score": 40,
         "news_before": 15, "news_after": 15, "news_medium": False,
-        "desc": "Least picky: more trades, tight stop loss, TP is 2x the SL, confidence 40+. "
-                "Expect more losing trades but bigger wins. Only pauses 15 min around high impact news. "
-                "Alerts are ON for demo practice only: the backtest showed this level losing clearly.",
+        "desc": "4-hour candles. Least picky: more trades, tight stop loss, TP is 2x the SL, confidence 40+. "
+                "Backtest (2.6 years, with spreads): clearly losing (-53R). Recorded here only; "
+                "Telegram/Gmail alerts are OFF.",
     },
     "focused": {
-        "label": "Focused", "icon": "🎯",
+        "label": "Focused", "icon": "🎯", "interval": 4,
         "rsi_buy": 40, "rsi_sell": 60,      # same rules as Moderate...
         "sl_atr": 1.5, "tp_atr": 2.25,
         "trend_slope": False,
@@ -110,28 +113,11 @@ PROFILES = {
         "min_score": 55,
         "news_before": 60, "news_after": 30, "news_medium": False,
         "only_pairs": ["GBP/USD", "XAU/USD"],   # ...but only these pairs
-        "hours_utc": [0, 12],                    # ...and only Asian + London sessions (8am-8pm Malaysia time)
-        "desc": "Moderate rules, but only GBP/USD and gold, and only during the Asian + London sessions "
-                "(8am-8pm Malaysia time). Picked from the backtest's practice months; it then made +4R on "
-                "unseen months, but from only 21 trades, so it could still be luck. Demo-test it first.",
-    },
-    "focused4h": {
-        "label": "Focused 4H", "icon": "🕓",
-        "interval": 4,                       # uses 4-hour candles (built from the 1-hour data)
-        "rsi_buy": 40, "rsi_sell": 60,
-        "sl_atr": 1.5, "tp_atr": 2.25,
-        "trend_slope": False,
-        "price_filter": True,
-        "h4_rule": "not_against",            # on 4H candles this means: the DAILY trend must not be against it
-        "min_adx": 0,
-        "min_score": 55,
-        "news_before": 60, "news_after": 30, "news_medium": False,
-        "only_pairs": ["GBP/USD", "XAU/USD"],
-        "hours_utc": [0, 12],                # 4H candles closing 00:00, 04:00 or 08:00 UTC (8am, 12pm or 4pm Malaysia time)
-        "desc": "Focused rules on 4-hour candles (daily trend as the bigger picture): only GBP/USD and gold. "
+        "hours_utc": [0, 12],                    # ...4H candles closing 00/04/08 UTC (8am, 12pm, 4pm Malaysia time)
+        "desc": "4-hour candles. Moderate rules, but only GBP/USD and gold, signals at 8am, 12pm or 4pm Malaysia time. "
                 "Best backtest so far: +17.5R over 2.6 years with spreads (48% wins, profit factor 1.37), "
-                "and +10.5R in 2024-2025 data that played no part in choosing it. Fewer, slower trades "
-                "(about 3 a month) with wider stops. Still demo-test it first.",
+                "and +10.5R in 2024-2025 data that played no part in choosing it. Gold's strong 2024-2026 trend "
+                "helped a lot. About 3 trades a month with wider stops. Still demo-test it first.",
     },
 }
 
@@ -596,7 +582,7 @@ def update_open_signal(sig, candles, now):
     return False
 
 
-def snapshot(pair, ind, candles):
+def snapshot(pair, ind, candles, ind4=None):
     """Plain-numbers summary of the chart, for the website and the Claude check-ins."""
     i = len(ind["close"]) - 1
     if i < EMA_SLOW:
@@ -609,6 +595,7 @@ def snapshot(pair, ind, candles):
         "price": round(candles[-1]["close"], d),
         "trend_1h": "up" if ef > es else "down",
         "trend_4h": h4_trend(ind, i),
+        "trend_daily": h4_trend(ind4, len(ind4["close"]) - 1) if ind4 else None,
         "rsi": round(ind["rsi"][i], 1),
         "adx": None if ind["adx"][i] is None else round(ind["adx"][i], 1),
         "atr_pips": round(ind["atr"][i] / pip, 1),
@@ -883,7 +870,7 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
         closed4 = build_candles(closed, 4, now) if INTERVAL_HOURS == 1 else closed
         ind4 = indicators(closed4, 4) if len(closed4) > EMA_SLOW + 15 else None
         if ind and take_snapshot:
-            snap = snapshot(pair, ind, candles)
+            snap = snapshot(pair, ind, candles, ind4)
             if snap:
                 snaps.append(snap)
 

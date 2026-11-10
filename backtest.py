@@ -26,8 +26,8 @@ import signals as S
 HISTORY = 5000          # 1-hour candles per pair (Twelve Data free plan maximum)
 WARMUP = S.EMA_SLOW + S.ATR_AVG_LEN + 20
 RISK_USD = 3.0          # example: risking $3 per trade (1% of a $300 account)
-# Only test the levels that use this candle size (e.g. "Focused 4H" only in the 4-hour backtest)
-PROFS = [k for k, p in S.PROFILES.items() if p.get("interval", S.INTERVAL_HOURS) == S.INTERVAL_HOURS]
+# Every level is replayed on this backtest's candle size (4H = the live setup, 1H = comparison)
+PROFS = list(S.PROFILES)
 OUT_FILE = os.path.join(S.ROOT, os.getenv("BACKTEST_OUT", "docs/data/backtest.json"))
 
 

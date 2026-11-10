@@ -269,7 +269,8 @@ function renderTime(){
     <div style="margin-top:12px">${tbl("Day (UTC)", a.by_weekday)}</div>
     <p class="note">✅ = kept by the filter. Small groups (under ~30 trades) can look good or bad just by luck.</p>`;
 }
-function renderLessons(S){
+function renderLessons(S, Sall){
+  Sall = Sall || S;
   const closed = S.filter(s=>(s.status==="win"||s.status==="loss") && s.review && s.review.tags);
   const el = document.getElementById("lessons");
   if (!closed.length){ el.innerHTML = '<p class="mute">No closed trades with a review yet. Each TP/SL adds one.</p>'; }
@@ -298,10 +299,10 @@ function renderLessons(S){
       </div>
       <p class="note">Only ${closed.length} closed trade${closed.length>1?"s":""} so far. Patterns need about 30+ trades before they mean much; the backtest section below has a much bigger sample.</p>`;
   }
-  const rv = S.filter(s=>s.status!=="open" && s.review).slice().reverse().slice(0,10);
+  const rv = Sall.filter(s=>s.status!=="open" && s.review).slice().reverse().slice(0,10);
   document.getElementById("reviews").innerHTML = rv.length ? rv.map(s=>`
     <div class="sig" style="margin-bottom:10px">
-      <div class="row"><b class="${s.direction.toLowerCase()}">${s.direction} ${s.pair}</b><span class="pill ${s.status}">${{win:"✅ TP hit",loss:"❌ SL hit",expired:"⏱ Expired"}[s.status]}</span></div>
+      <div class="row"><b class="${s.direction.toLowerCase()}">${s.direction} ${s.pair} <span class="chip">${s.interval||1}H</span></b><span class="pill ${s.status}">${{win:"✅ TP hit",loss:"❌ SL hit",expired:"⏱ Expired"}[s.status]}</span></div>
       <div class="note">Opened ${fmt(s.created)} · closed ${fmt(s.closed_at)} · best +${s.review.mfe_pips} pips · worst −${s.review.mae_pips} pips</div>
       <div class="pc">${s.review.reasons.map(r=>`<div>• ${r}</div>`).join("")}</div>
     </div>`).join("") : '<p class="mute">No closed trades yet for this level.</p>';
@@ -310,14 +311,16 @@ function renderSnap(){
   const sn = DATA.snapshot || [];
   const t = v => v==="up" ? '<span class="buy">▲ Up</span>' : v==="down" ? '<span class="sell">▼ Down</span>' : '<span class="mute">– Flat</span>';
   document.getElementById("snap").innerHTML =
-    "<tr><th>Pair</th><th>Price</th><th>1H trend</th><th>4H trend</th><th>RSI</th><th>ADX</th><th>Normal move (1H)</th><th>48h high</th><th>48h low</th></tr>" +
-    (sn.length ? sn.map(x=>`<tr><td>${x.pair}</td><td>${x.price}</td><td>${t(x.trend_1h)}</td><td>${t(x.trend_4h)}</td>
+    "<tr><th>Pair</th><th>Price</th><th>1H trend</th><th>4H trend</th><th>Daily trend</th><th>RSI</th><th>ADX</th><th>Normal move (1H)</th><th>48h high</th><th>48h low</th></tr>" +
+    (sn.length ? sn.map(x=>`<tr><td>${x.pair}</td><td>${x.price}</td><td>${t(x.trend_1h)}</td><td>${t(x.trend_4h)}</td><td>${x.trend_daily ? t(x.trend_daily) : "–"}</td>
       <td>${x.rsi}</td><td>${x.adx??"–"}</td><td>${x.atr_pips} pips</td><td>${x.high_48h}</td><td>${x.low_48h}</td></tr>`).join("")
-      : '<tr><td colspan="9" class="mute">No snapshot yet.</td></tr>');
+      : '<tr><td colspan="10" class="mute">No snapshot yet.</td></tr>');
   document.getElementById("snapNote").textContent = (DATA.snapshot_time ? "Snapshot from " + fmt(DATA.snapshot_time) + ". " : "") +
-    "Updated about once an hour by the bot. ADX: under 20 = weak/choppy, over 25 = strong trend.";
+    "Updated about once an hour by the bot. All levels now trade on 4-hour candles with the daily trend as the bigger picture. ADX: under 20 = weak/choppy, over 25 = strong trend.";
 }
 function profiles(){ return (DATA.strategy && DATA.strategy.profiles) || DEFAULT_PROFILES; }
+// Trades made with the level's current candle size (all levels moved from 1H to 4H on 10 Nov 2026)
+function current4(list, k){ const iv = (profiles()[k]||{}).interval || 1; return list.filter(s=>(s.interval||1)===iv); }
 function sigs(){ return (DATA.signals||[]).map(s=>({...s, profile: s.profile || "moderate"})); }
 
 function chart(pair){
@@ -338,7 +341,7 @@ function renderNav(){
   const P = profiles(), S = sigs();
   const nav = document.getElementById("nav");
   nav.innerHTML = '<div class="navtitle">Risk level</div>' + Object.entries(P).map(([k,p])=>{
-    const c = counts(S.filter(s=>s.profile===k));
+    const c = counts(current4(S.filter(s=>s.profile===k), k));
     return `<button data-k="${k}" class="${k===current?"on":""}">
       <span class="nm">${p.icon} ${p.label}</span>
       <span class="sub">Accuracy ${c.acc} · ${c.o} open${p.alerts===false?" · 🔕":""}</span></button>`;
@@ -349,7 +352,8 @@ function render(){
   const P = profiles();
   if (!P[current]) current = "moderate";
   const p = P[current];
-  const all = sigs(), S = all.filter(s=>s.profile===current);
+  const all = sigs(), Sall = all.filter(s=>s.profile===current), S = current4(Sall, current);
+  const old = Sall.filter(s=>!S.includes(s));
   const st = DATA.strategy || {};
   if (st.pairs) pairs = st.pairs;
   document.getElementById("strategy").textContent = st.name ? `${st.name} · ${st.timeframe} candles · 3 risk levels` : "Waiting for first run";
@@ -372,21 +376,25 @@ function render(){
   ].filter(Boolean).map(t=>`<span class="chip">${t}</span>`).join("");
 
   const c = counts(S);
+  const oc = counts(old);
   document.getElementById("stats").innerHTML = [
     ["Accuracy", c.acc], ["Wins (TP hit)", c.w], ["Losses (SL hit)", c.l],
     ["Open", c.o], ["Expired", c.e], ["Total suggestions", c.t]
   ].map(([l,v])=>`<div class="stat"><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
 
+  const oldNote = document.getElementById("oldNote") || (()=>{ const p=document.createElement("p"); p.id="oldNote"; p.className="note";
+    document.getElementById("stats").after(p); return p; })();
+  oldNote.textContent = old.length ? `Counting 4-hour trades only (since 10 Nov 2026). Older 1-hour trades: ${oc.w} wins / ${oc.l} losses${oc.o?` / ${oc.o} still open`:""} (shown in History with a "1H" tag).` : "";
   document.getElementById("pairStats").innerHTML =
     "<tr><th>Pair</th><th>Accuracy</th><th>Wins</th><th>Losses</th><th>Open</th><th>Expired</th><th>Total</th></tr>" +
     pairs.map(pr=>{const k=counts(S.filter(s=>s.pair===pr));
       return `<tr><td>${pr}</td><td>${k.acc}</td><td>${k.w}</td><td>${k.l}</td><td>${k.o}</td><td>${k.e}</td><td>${k.t}</td></tr>`}).join("");
 
-  const open = S.filter(s=>s.status==="open");
+  const open = Sall.filter(s=>s.status==="open");
   document.getElementById("openList").innerHTML = open.length ? open.map(s=>`
     <div class="sig">
       <div class="row"><b class="${s.direction.toLowerCase()}">${s.direction} ${s.pair}</b>${scoreBadge(s.score)}</div>
-      <div class="row"><span class="mute">Opened</span><span class="mute">${fmt(s.created)}</span></div>
+      <div class="row"><span class="mute">Opened (${s.interval||1}H chart)</span><span class="mute">${fmt(s.created)}</span></div>
       <div class="row"><span>Entry</span><span>${s.entry}</span></div>
       <div class="row"><span>Take Profit</span><span class="buy">${s.tp} (+${s.tp_pips} pips)</span></div>
       <div class="row"><span>Stop Loss</span><span class="sell">${s.sl} (−${s.sl_pips} pips)</span></div>
@@ -405,20 +413,20 @@ function render(){
 
   renderBacktest();
   renderTime();
-  renderLessons(S);
+  renderLessons(S, Sall);
   renderSnap();
 
   const fp=document.getElementById("fPair");
   if (fp.options.length===1) pairs.forEach(pr=>fp.add(new Option(pr,pr)));
   const vp=fp.value, vs=document.getElementById("fStatus").value;
-  const rows = S.filter(s=>(!vp||s.pair===vp)&&(!vs||s.status===vs)).slice().reverse();
+  const rows = Sall.filter(s=>(!vp||s.pair===vp)&&(!vs||s.status===vs)).slice().reverse();
   const label={win:"Win",loss:"Loss",open:"Open",expired:"Expired"};
   document.getElementById("history").innerHTML =
-    "<tr><th>Time (MYT)</th><th>Pair</th><th>Side</th><th>Score</th><th>Entry</th><th>TP</th><th>SL</th><th>Result</th><th>Exit</th><th>Closed</th></tr>" +
-    (rows.length ? rows.map(s=>`<tr><td>${fmt(s.created)}</td><td>${s.pair}</td>
+    "<tr><th>Time (MYT)</th><th>Chart</th><th>Pair</th><th>Side</th><th>Score</th><th>Entry</th><th>TP</th><th>SL</th><th>Result</th><th>Exit</th><th>Closed</th></tr>" +
+    (rows.length ? rows.map(s=>`<tr><td>${fmt(s.created)}</td><td><span class="chip">${s.interval||1}H</span></td><td>${s.pair}</td>
       <td class="${s.direction.toLowerCase()}">${s.direction}</td><td>${s.score!=null?scoreBadge(s.score):"–"}</td><td>${s.entry}</td><td>${s.tp}</td><td>${s.sl}</td>
       <td><span class="pill ${s.status}">${label[s.status]}</span></td><td>${s.exit_price ?? "–"}</td><td>${fmt(s.closed_at)}</td></tr>`).join("")
-      : '<tr><td colspan="10" class="mute">No suggestions yet for this risk level. The bot checks every 15 minutes.</td></tr>');
+      : '<tr><td colspan="11" class="mute">No suggestions yet for this risk level. The bot checks every 10 minutes.</td></tr>');
 }
 
 document.getElementById("nav").onclick = e => {
