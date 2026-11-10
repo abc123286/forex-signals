@@ -26,7 +26,7 @@ import signals as S
 HISTORY = 5000          # 1-hour candles per pair (Twelve Data free plan maximum)
 WARMUP = S.EMA_SLOW + S.ATR_AVG_LEN + 20
 RISK_USD = 3.0          # example: risking $3 per trade (1% of a $300 account)
-OUT_FILE = os.path.join(S.ROOT, "docs", "data", "backtest.json")
+OUT_FILE = os.path.join(S.ROOT, os.getenv("BACKTEST_OUT", "docs/data/backtest.json"))
 
 
 def simulate(pair, ind, profile, use_filters):
@@ -53,7 +53,7 @@ def simulate(pair, ind, profile, use_filters):
                 ex = S.excursions(s, candles[open_i:i + 1], entry, S.from_iso(s["closed_at"])) or {}
                 trades.append({"pair": pair, "status": s["status"], "r": round(r, 3),
                                "mfe_r": ex.get("mfe_r", 0), "mae_r": ex.get("mae_r", 0),
-                               "hours": len(candles[open_i:i + 1]),
+                               "hours": len(candles[open_i:i + 1]) * S.INTERVAL_HOURS,
                                "score": s["score"], "closed": s["closed_at"], "created": s["created"],
                                "session": session_name(entry.hour), "weekday": entry.strftime("%a")})
                 open_sig = None
@@ -107,7 +107,7 @@ def review_stats(trades):
         "loss_in_profit_half_r": pc([t for t in losses if t["mfe_r"] >= 0.5], losses),
         "loss_in_profit_1r": pc([t for t in losses if t["mfe_r"] >= 1.0], losses),
         "loss_never_in_profit": pc([t for t in losses if t["mfe_r"] < 0.25], losses),
-        "loss_quick_2h": pc([t for t in losses if t["hours"] <= 2], losses),
+        "loss_quick_2h": pc([t for t in losses if t["hours"] <= 2 * S.INTERVAL_HOURS], losses),
         "win_near_sl_first": pc([t for t in wins if t["mae_r"] >= 0.5], wins),
         "avg_hours_win": round(sum(t["hours"] for t in wins) / len(wins), 1) if wins else None,
         "avg_hours_loss": round(sum(t["hours"] for t in losses) / len(losses), 1) if losses else None,
@@ -226,7 +226,7 @@ def run(fetch=None):
                 per[prof][variant] += t
                 print(f"[{pair}][{prof}][{variant}] {len(t)} trades")
 
-    result = {"generated": S.iso(now), "risk_usd_example": RISK_USD, "ranges": ranges,
+    result = {"generated": S.iso(now), "interval_hours": S.INTERVAL_HOURS, "risk_usd_example": RISK_USD, "ranges": ranges,
               "notes": ["Typical broker spreads are included. Commissions and slippage are not, so real results may be slightly worse.",
                         "The Forex Factory news filter is not included (no free history of past news).",
                         "Past results do not guarantee future results."],

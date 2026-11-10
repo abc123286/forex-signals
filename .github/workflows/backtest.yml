@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "17 2 * * 6"        # every Saturday 02:17 UTC (10:17am Malaysia), market closed
   workflow_dispatch:
+    inputs:
+      interval:
+        description: "Candle size in hours (1 = live version, 4 = test the 4-hour version)"
+        type: choice
+        options: ["1", "4"]
+        default: "1"
 
 permissions:
   contents: write
@@ -28,13 +34,15 @@ jobs:
       - name: Run backtest
         env:
           TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+          INTERVAL_HOURS: ${{ inputs.interval || '1' }}
+          BACKTEST_OUT: docs/data/backtest${{ inputs.interval == '4' && '_4h' || '' }}.json
         run: python backtest.py
 
       - name: Save results
         run: |
           git config user.name "forex-bot"
           git config user.email "forex-bot@users.noreply.github.com"
-          git add docs/data/backtest.json
+          git add docs/data/backtest*.json
           if ! git diff --cached --quiet; then
             git commit -m "Update backtest results"
             for attempt in 1 2 3 4; do

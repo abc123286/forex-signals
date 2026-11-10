@@ -29,7 +29,9 @@ import requests
 # Settings (safe to change)
 # ----------------------------------------------------------------------------
 PAIRS = ["EUR/USD", "GBP/USD", "USD/JPY", "XAU/USD"]
-INTERVAL_HOURS = 1          # 1-hour candles (shared by all risk levels)
+INTERVAL_HOURS = int(os.getenv("INTERVAL_HOURS", "1"))   # 1-hour candles (4 = test the 4-hour version)
+HTF_HOURS = 4 if INTERVAL_HOURS < 4 else 24                # "bigger picture" chart: 4-hour, or daily for 4H candles
+HTF_LABEL = "4-hour" if HTF_HOURS == 4 else "daily"
 CANDLES = 1000              # candles to download each run (also builds the 4-hour chart)
 EMA_FAST, EMA_SLOW = 50, 200        # 1-hour trend
 H4_FAST, H4_SLOW = 20, 50           # 4-hour (bigger picture) trend
@@ -38,7 +40,7 @@ ATR_LEN = 14
 ADX_LEN = 14                # trend strength
 ATR_AVG_LEN = 100           # "normal" volatility, to spot unusually quiet or wild markets
 SWING_BARS = 48             # look back 48 hours for recent highs / lows
-EXPIRE_HOURS = 120          # close a suggestion as "expired" after 5 days with no TP/SL
+EXPIRE_HOURS = 120 if INTERVAL_HOURS == 1 else 360   # close as "expired" after 5 days (15 days on 4H) with no TP/SL
 NEWS_WARN_MIN = 60          # warn about open trades when high-impact news is within 60 min
 NEWS_ALERT_HOURS = 24       # list high-impact news for the next 24h inside each new alert
 SNAPSHOT_EVERY_MIN = 55     # save a market snapshot about once an hour
@@ -224,11 +226,11 @@ def adx(highs, lows, closes, n=14):
 
 
 def to_h4(closed):
-    """Group 1-hour candles into 4-hour candles (00, 04, 08, 12, 16, 20 UTC)."""
+    """Group candles into the bigger-picture chart (4-hour candles, or daily ones in the 4H version)."""
     out = []
     for c in closed:
         t = c["time"]
-        key = t.replace(hour=t.hour - t.hour % 4, minute=0, second=0, microsecond=0)
+        key = t.replace(hour=t.hour - t.hour % HTF_HOURS, minute=0, second=0, microsecond=0)
         if out and out[-1]["time"] == key:
             g = out[-1]
             g["high"] = max(g["high"], c["high"])
@@ -254,7 +256,7 @@ def indicators(closed):
     h4idx, j = [], -1
     for c in closed:
         close_time = c["time"] + timedelta(hours=INTERVAL_HOURS)
-        while j + 1 < len(h4) and h4[j + 1]["time"] + timedelta(hours=4) <= close_time:
+        while j + 1 < len(h4) and h4[j + 1]["time"] + timedelta(hours=HTF_HOURS) <= close_time:
             j += 1
         h4idx.append(j)
     return {
@@ -438,11 +440,11 @@ def score_setup(pair, ind, i, direction, sl_dist, tp_dist, news_6h=None):
     h4 = h4_trend(ind, i)
     want = "up" if direction == "BUY" else "down"
     if h4 == want:
-        score += 15; pros.append("4-hour trend agrees")
+        score += 15; pros.append(f"{HTF_LABEL} trend agrees".capitalize())
     elif h4 in ("up", "down"):
-        score -= 20; cons.append("4-hour trend points the other way")
+        score -= 20; cons.append(f"{HTF_LABEL} trend points the other way".capitalize())
     else:
-        score -= 5; cons.append("4-hour trend is unclear")
+        score -= 5; cons.append(f"{HTF_LABEL} trend is unclear".capitalize())
 
     a = ind["adx"][i]
     if a is not None:
@@ -513,9 +515,9 @@ def evaluate(pair, ind, i, profile, use_filters=True, news_6h=None):
         want = "up" if direction == "BUY" else "down"
         against = h4 in ("up", "down") and h4 != want
         if p["h4_rule"] == "agree" and h4 != want:
-            return None, f"{direction} setup filtered: 4-hour trend does not agree"
+            return None, f"{direction} setup filtered: {HTF_LABEL} trend does not agree"
         if p["h4_rule"] == "not_against" and against:
-            return None, f"{direction} setup filtered: 4-hour trend is against it"
+            return None, f"{direction} setup filtered: {HTF_LABEL} trend is against it"
         if p["min_adx"] and (adx_v is None or adx_v < p["min_adx"]):
             return None, f"{direction} setup filtered: trend too weak (ADX {adx_v or 0:.0f})"
         if score < p["min_score"]:
