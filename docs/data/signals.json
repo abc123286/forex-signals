@@ -12,7 +12,7 @@
       "low": {
         "label": "Low risk",
         "icon": "🛡️",
-        "desc": "Very picky: only strong, clear trends where the 4-hour chart agrees, after a deep pullback, with a confidence score of 70+. Wide stop loss and TP equal to SL. Pauses 2h before to 1h after high AND medium impact news.",
+        "desc": "4-hour candles. Very picky: only strong, clear trends where the daily chart agrees, after a deep pullback, with a confidence score of 70+. Wide stop loss and TP equal to SL. Pauses 2h before to 1h after high AND medium impact news. Backtest (2.6 years, with spreads): about break-even (0R).",
         "reward_risk": 1.0,
         "sl_atr": 2.0,
         "tp_atr": 2.0,
@@ -23,13 +23,13 @@
         "min_adx": 20,
         "only_pairs": null,
         "hours_utc": null,
-        "interval": 1,
+        "interval": 4,
         "alerts": true
       },
       "moderate": {
         "label": "Moderate",
         "icon": "⚖️",
-        "desc": "Balanced: trend + normal pullback, 4-hour trend not against it, confidence 55+. TP is 1.5x the SL. Pauses 1h before to 30 min after high impact news.",
+        "desc": "4-hour candles. Balanced: trend + normal pullback, daily trend not against it, confidence 55+. TP is 1.5x the SL. Pauses 1h before to 30 min after high impact news. Backtest (2.6 years, with spreads): about break-even (-1.5R).",
         "reward_risk": 1.5,
         "sl_atr": 1.5,
         "tp_atr": 2.25,
@@ -40,13 +40,13 @@
         "min_adx": 0,
         "only_pairs": null,
         "hours_utc": null,
-        "interval": 1,
+        "interval": 4,
         "alerts": true
       },
       "high": {
         "label": "High risk",
         "icon": "🔥",
-        "desc": "Least picky: more trades, tight stop loss, TP is 2x the SL, confidence 40+. Expect more losing trades but bigger wins. Only pauses 15 min around high impact news. Alerts are ON for demo practice only: the backtest showed this level losing clearly.",
+        "desc": "4-hour candles. Least picky: more trades, tight stop loss, TP is 2x the SL, confidence 40+. Backtest (2.6 years, with spreads): clearly losing (-53R). Recorded here only; Telegram/Gmail alerts are OFF.",
         "reward_risk": 2.0,
         "sl_atr": 1.0,
         "tp_atr": 2.0,
@@ -57,36 +57,13 @@
         "min_adx": 0,
         "only_pairs": null,
         "hours_utc": null,
-        "interval": 1,
-        "alerts": true
+        "interval": 4,
+        "alerts": false
       },
       "focused": {
         "label": "Focused",
         "icon": "🎯",
-        "desc": "Moderate rules, but only GBP/USD and gold, and only during the Asian + London sessions (8am-8pm Malaysia time). Picked from the backtest's practice months; it then made +4R on unseen months, but from only 21 trades, so it could still be luck. Demo-test it first.",
-        "reward_risk": 1.5,
-        "sl_atr": 1.5,
-        "tp_atr": 2.25,
-        "rsi_buy": 40,
-        "rsi_sell": 60,
-        "min_score": 55,
-        "h4_rule": "not_against",
-        "min_adx": 0,
-        "only_pairs": [
-          "GBP/USD",
-          "XAU/USD"
-        ],
-        "hours_utc": [
-          0,
-          12
-        ],
-        "interval": 1,
-        "alerts": true
-      },
-      "focused4h": {
-        "label": "Focused 4H",
-        "icon": "🕓",
-        "desc": "Focused rules on 4-hour candles (daily trend as the bigger picture): only GBP/USD and gold. Best backtest so far: +17.5R over 2.6 years with spreads (48% wins, profit factor 1.37), and +10.5R in 2024-2025 data that played no part in choosing it. Fewer, slower trades (about 3 a month) with wider stops. Still demo-test it first.",
+        "desc": "4-hour candles. Moderate rules, but only GBP/USD and gold, signals at 8am, 12pm or 4pm Malaysia time. Best backtest so far: +17.5R over 2.6 years with spreads (48% wins, profit factor 1.37), and +10.5R in 2024-2025 data that played no part in choosing it. Gold's strong 2024-2026 trend helped a lot. About 3 trades a month with wider stops. Still demo-test it first.",
         "reward_risk": 1.5,
         "sl_atr": 1.5,
         "tp_atr": 2.25,
@@ -1281,7 +1258,7 @@
       "previous": "1.3%"
     }
   ],
-  "updated": "2026-11-10T05:30:24Z",
+  "updated": "2026-11-10T05:46:38Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
