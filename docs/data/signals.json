@@ -23,6 +23,7 @@
         "min_adx": 20,
         "only_pairs": null,
         "hours_utc": null,
+        "interval": 1,
         "alerts": true
       },
       "moderate": {
@@ -39,6 +40,7 @@
         "min_adx": 0,
         "only_pairs": null,
         "hours_utc": null,
+        "interval": 1,
         "alerts": true
       },
       "high": {
@@ -55,6 +57,7 @@
         "min_adx": 0,
         "only_pairs": null,
         "hours_utc": null,
+        "interval": 1,
         "alerts": true
       },
       "focused": {
@@ -77,6 +80,30 @@
           0,
           12
         ],
+        "interval": 1,
+        "alerts": true
+      },
+      "focused4h": {
+        "label": "Focused 4H",
+        "icon": "🕓",
+        "desc": "Focused rules on 4-hour candles (daily trend as the bigger picture): only GBP/USD and gold. Best backtest so far: +17.5R over 2.6 years with spreads (48% wins, profit factor 1.37), and +10.5R in 2024-2025 data that played no part in choosing it. Fewer, slower trades (about 3 a month) with wider stops. Still demo-test it first.",
+        "reward_risk": 1.5,
+        "sl_atr": 1.5,
+        "tp_atr": 2.25,
+        "rsi_buy": 40,
+        "rsi_sell": 60,
+        "min_score": 55,
+        "h4_rule": "not_against",
+        "min_adx": 0,
+        "only_pairs": [
+          "GBP/USD",
+          "XAU/USD"
+        ],
+        "hours_utc": [
+          0,
+          12
+        ],
+        "interval": 4,
         "alerts": true
       }
     }
@@ -1254,7 +1281,7 @@
       "previous": "1.3%"
     }
   ],
-  "updated": "2026-11-10T03:30:26Z",
+  "updated": "2026-11-10T04:14:42Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
