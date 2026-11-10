@@ -39,6 +39,7 @@
   .loss{background:rgba(239,68,68,.15);color:var(--red)}
   .open{background:rgba(59,130,246,.15);color:var(--blue)}
   .expired{background:rgba(245,158,11,.15);color:var(--amber)}
+  .void{background:rgba(141,152,176,.15);color:var(--mute)}
   .buy{color:var(--green);font-weight:700}.sell{color:var(--red);font-weight:700}
   .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
   select{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:inherit}
@@ -157,7 +158,7 @@
         <select id="fPair"><option value="">All pairs</option></select>
         <select id="fStatus">
           <option value="">All results</option><option value="win">Win (TP hit)</option>
-          <option value="loss">Loss (SL hit)</option><option value="open">Open</option><option value="expired">Expired</option>
+          <option value="loss">Loss (SL hit)</option><option value="open">Open</option><option value="expired">Expired</option><option value="void">Void (not tradeable)</option>
         </select>
       </div>
       <div class="wrap"><table id="history"></table></div>
@@ -334,7 +335,7 @@ function chart(pair){
 function counts(list){
   const w=list.filter(s=>s.status==="win").length, l=list.filter(s=>s.status==="loss").length;
   return {w,l,o:list.filter(s=>s.status==="open").length,e:list.filter(s=>s.status==="expired").length,
-          t:list.length, acc: w+l ? (100*w/(w+l)).toFixed(1)+"%" : "–"};
+          t:list.filter(s=>s.status!=="void").length, acc: w+l ? (100*w/(w+l)).toFixed(1)+"%" : "–"};
 }
 
 function renderNav(){
@@ -420,12 +421,12 @@ function render(){
   if (fp.options.length===1) pairs.forEach(pr=>fp.add(new Option(pr,pr)));
   const vp=fp.value, vs=document.getElementById("fStatus").value;
   const rows = Sall.filter(s=>(!vp||s.pair===vp)&&(!vs||s.status===vs)).slice().reverse();
-  const label={win:"Win",loss:"Loss",open:"Open",expired:"Expired"};
+  const label={win:"Win",loss:"Loss",open:"Open",expired:"Expired",void:"Void"};
   document.getElementById("history").innerHTML =
     "<tr><th>Time (MYT)</th><th>Chart</th><th>Pair</th><th>Side</th><th>Score</th><th>Entry</th><th>TP</th><th>SL</th><th>Result</th><th>Exit</th><th>Closed</th></tr>" +
     (rows.length ? rows.map(s=>`<tr><td>${fmt(s.created)}</td><td><span class="chip">${s.interval||1}H</span></td><td>${s.pair}</td>
       <td class="${s.direction.toLowerCase()}">${s.direction}</td><td>${s.score!=null?scoreBadge(s.score):"–"}</td><td>${s.entry}</td><td>${s.tp}</td><td>${s.sl}</td>
-      <td><span class="pill ${s.status}">${label[s.status]}</span></td><td>${s.exit_price ?? "–"}</td><td>${fmt(s.closed_at)}</td></tr>`).join("")
+      <td><span class="pill ${s.status}" title="${s.void_reason||""}">${label[s.status]}</span></td><td>${s.exit_price ?? "–"}</td><td>${fmt(s.closed_at)}</td></tr>`).join("")
       : '<tr><td colspan="11" class="mute">No suggestions yet for this risk level. The bot checks every 10 minutes.</td></tr>');
 }
 

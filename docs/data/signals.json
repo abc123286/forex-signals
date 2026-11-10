@@ -1251,7 +1251,7 @@
       "interval": 4,
       "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 65",
       "created": "2026-11-10T12:00:00Z",
-      "status": "win",
+      "status": "void",
       "closed_at": "2026-11-10T15:00:00Z",
       "exit_price": 1.11752,
       "news_note": "none in next 24h",
@@ -1277,7 +1277,9 @@
           "session": "London + New York",
           "score_band": "70+"
         }
-      }
+      },
+      "status_before_void": "win",
+      "void_reason": "Sent 2.5h late (held back by the US CPI news pause, then sent with the old 8pm entry price). Not tradeable, so not counted."
     }
   ],
   "news_warned": [
