@@ -45,6 +45,7 @@ NEWS_WARN_MIN = 60          # warn about open trades when high-impact news is wi
 NEWS_ALERT_HOURS = 24       # list high-impact news for the next 24h inside each new alert
 SNAPSHOT_EVERY_MIN = 55     # save a market snapshot about once an hour
 MAX_ALERT_DELAY_MIN = 30    # never send a setup more than 30 min after its candle closed (price may have moved)
+MAX_PRICE_DRIFT_R = 0.3     # never send a setup if price already moved more than 0.3 x the stop distance from entry
 MY_TIMEZONE = timezone(timedelta(hours=8))   # Malaysia time for alert messages
 
 # Typical broker spread (in pips). Prices from Twelve Data are MID prices, but a broker closes a
@@ -936,7 +937,15 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
                 changed = True
                 print(f"{label} setup CANCELLED: found {age_min:.0f} min after its candle closed")
                 continue
-            sig["price_at_alert"] = round(candles[-1]["close"], decimals(pair))
+            price_now = candles[-1]["close"]
+            drift_r = abs(price_now - sig["entry"]) / (abs(sig["entry"] - sig["sl"]) or 1e-9)
+            if drift_r > MAX_PRICE_DRIFT_R:
+                skipped[sig["id"]] = f"price already moved {drift_r:.2f}R from entry"
+                changed = True
+                print(f"{label} setup CANCELLED: price already {drift_r:.2f}R away from the entry")
+                continue
+            sig["price_at_alert"] = round(price_now, decimals(pair))
+            sig["alerted_at"] = iso(now)
             upcoming = None if events is None else news_for(pair, events, now, 0, NEWS_ALERT_HOURS * 60)
             sig["news_note"] = ("feed unavailable" if upcoming is None else
                                 "; ".join(f"{e['currency']} {e['title']}" for e in upcoming[:5]) or "none in next 24h")
