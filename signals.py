@@ -32,7 +32,7 @@ PAIRS = ["EUR/USD", "GBP/USD", "USD/JPY", "XAU/USD"]
 INTERVAL_HOURS = int(os.getenv("INTERVAL_HOURS", "1"))   # 1-hour candles (4 = test the 4-hour version)
 HTF_HOURS = 4 if INTERVAL_HOURS < 4 else 24                # "bigger picture" chart: 4-hour, or daily for 4H candles
 HTF_LABEL = "4-hour" if HTF_HOURS == 4 else "daily"
-CANDLES = 1000              # candles to download each run (also builds the 4-hour chart)
+CANDLES = 2000              # candles to download each run (also builds the 4-hour and daily charts)
 EMA_FAST, EMA_SLOW = 50, 200        # 1-hour trend
 H4_FAST, H4_SLOW = 20, 50           # 4-hour (bigger picture) trend
 RSI_LEN = 14
@@ -54,7 +54,7 @@ SPREAD_PIPS = {"EUR/USD": 1.0, "GBP/USD": 1.5, "USD/JPY": 1.5, "XAU/USD": 3.0}
 # Which risk levels send Telegram/Gmail alerts. All levels are always recorded on the website.
 # High risk alerts are ON at the user's request (for demo practice), with a clear warning,
 # because the backtest showed it losing clearly (about -81R over ~8 months).
-ALERT_PROFILES = ["low", "moderate", "high", "focused"]
+ALERT_PROFILES = ["low", "moderate", "high", "focused", "focused4h"]
 ALERT_WARNINGS = {"high": "⚠️ Backtest: this level LOST over ~8 months (about -81R). Demo practice only."}
 
 PROFILES = {
@@ -114,6 +114,24 @@ PROFILES = {
         "desc": "Moderate rules, but only GBP/USD and gold, and only during the Asian + London sessions "
                 "(8am-8pm Malaysia time). Picked from the backtest's practice months; it then made +4R on "
                 "unseen months, but from only 21 trades, so it could still be luck. Demo-test it first.",
+    },
+    "focused4h": {
+        "label": "Focused 4H", "icon": "🕓",
+        "interval": 4,                       # uses 4-hour candles (built from the 1-hour data)
+        "rsi_buy": 40, "rsi_sell": 60,
+        "sl_atr": 1.5, "tp_atr": 2.25,
+        "trend_slope": False,
+        "price_filter": True,
+        "h4_rule": "not_against",            # on 4H candles this means: the DAILY trend must not be against it
+        "min_adx": 0,
+        "min_score": 55,
+        "news_before": 60, "news_after": 30, "news_medium": False,
+        "only_pairs": ["GBP/USD", "XAU/USD"],
+        "hours_utc": [0, 12],                # 4H candles closing 00:00, 04:00 or 08:00 UTC (8am, 12pm or 4pm Malaysia time)
+        "desc": "Focused rules on 4-hour candles (daily trend as the bigger picture): only GBP/USD and gold. "
+                "Best backtest so far: +17.5R over 2.6 years with spreads (48% wins, profit factor 1.37), "
+                "and +10.5R in 2024-2025 data that played no part in choosing it. Fewer, slower trades "
+                "(about 3 a month) with wider stops. Still demo-test it first.",
     },
 }
 
@@ -225,12 +243,13 @@ def adx(highs, lows, closes, n=14):
     return out
 
 
-def to_h4(closed):
-    """Group candles into the bigger-picture chart (4-hour candles, or daily ones in the 4H version)."""
+def to_h4(closed, htf_hours=None):
+    """Group candles into a bigger chart: 4-hour candles (for the 1H levels) or daily candles (for 4H levels)."""
+    htf_hours = htf_hours or HTF_HOURS
     out = []
     for c in closed:
         t = c["time"]
-        key = t.replace(hour=t.hour - t.hour % HTF_HOURS, minute=0, second=0, microsecond=0)
+        key = t.replace(hour=t.hour - t.hour % htf_hours, minute=0, second=0, microsecond=0)
         if out and out[-1]["time"] == key:
             g = out[-1]
             g["high"] = max(g["high"], c["high"])
@@ -243,20 +262,29 @@ def to_h4(closed):
     return out
 
 
-def indicators(closed):
+def build_candles(closed_1h, hours, now):
+    """Turn 1-hour candles into bigger candles (e.g. 4-hour), keeping only fully finished ones."""
+    out = to_h4(closed_1h, hours)
+    return [{k: g[k] for k in ("time", "open", "high", "low", "close")} for g in out
+            if g["time"] + timedelta(hours=hours) <= now]
+
+
+def indicators(closed, interval=None):
     """Everything the strategy needs, computed once for the whole candle list."""
+    interval = interval or INTERVAL_HOURS
+    htf = 4 if interval < 4 else 24
     closes = [c["close"] for c in closed]
     highs = [c["high"] for c in closed]
     lows = [c["low"] for c in closed]
     a = atr(highs, lows, closes, ATR_LEN)
-    h4 = to_h4(closed)
+    h4 = to_h4(closed, htf)
     h4c = [g["close"] for g in h4]
     h4f, h4s = ema(h4c, H4_FAST), ema(h4c, H4_SLOW)
     # For each 1H candle, the latest 4H candle that had fully finished by then
     h4idx, j = [], -1
     for c in closed:
-        close_time = c["time"] + timedelta(hours=INTERVAL_HOURS)
-        while j + 1 < len(h4) and h4[j + 1]["time"] + timedelta(hours=HTF_HOURS) <= close_time:
+        close_time = c["time"] + timedelta(hours=interval)
+        while j + 1 < len(h4) and h4[j + 1]["time"] + timedelta(hours=htf) <= close_time:
             j += 1
         h4idx.append(j)
     return {
@@ -265,6 +293,7 @@ def indicators(closed):
         "rsi": rsi(closes, RSI_LEN), "atr": a, "atr_avg": sma(a, ATR_AVG_LEN),
         "adx": adx(highs, lows, closes, ADX_LEN),
         "h4": h4, "h4c": h4c, "h4f": h4f, "h4s": h4s, "h4idx": h4idx,
+        "interval": interval, "htf_label": "4-hour" if htf == 4 else "daily",
     }
 
 
@@ -326,6 +355,7 @@ def strategy_info():
                 "rsi_buy": p["rsi_buy"], "rsi_sell": p["rsi_sell"],
                 "min_score": p["min_score"], "h4_rule": p["h4_rule"], "min_adx": p["min_adx"],
                 "only_pairs": p.get("only_pairs"), "hours_utc": p.get("hours_utc"),
+                "interval": p.get("interval", INTERVAL_HOURS),
                 "alerts": k in ALERT_PROFILES}
             for k, p in PROFILES.items()
         },
@@ -440,11 +470,11 @@ def score_setup(pair, ind, i, direction, sl_dist, tp_dist, news_6h=None):
     h4 = h4_trend(ind, i)
     want = "up" if direction == "BUY" else "down"
     if h4 == want:
-        score += 15; pros.append(f"{HTF_LABEL} trend agrees".capitalize())
+        score += 15; pros.append(f"{ind['htf_label']} trend agrees".capitalize())
     elif h4 in ("up", "down"):
-        score -= 20; cons.append(f"{HTF_LABEL} trend points the other way".capitalize())
+        score -= 20; cons.append(f"{ind['htf_label']} trend points the other way".capitalize())
     else:
-        score -= 5; cons.append(f"{HTF_LABEL} trend is unclear".capitalize())
+        score -= 5; cons.append(f"{ind['htf_label']} trend is unclear".capitalize())
 
     a = ind["adx"][i]
     if a is not None:
@@ -476,7 +506,7 @@ def score_setup(pair, ind, i, direction, sl_dist, tp_dist, news_6h=None):
     else:
         score -= 5; cons.append("Signal candle closed against the trade")
 
-    hour = (c["time"] + timedelta(hours=INTERVAL_HOURS)).hour
+    hour = (c["time"] + timedelta(hours=ind["interval"])).hour
     if active_session(pair, hour):
         score += 5; pros.append("Busy market hours (good liquidity)")
     else:
@@ -502,7 +532,7 @@ def evaluate(pair, ind, i, profile, use_filters=True, news_6h=None):
     if p.get("only_pairs") and pair not in p["only_pairs"]:
         return None, "pair not traded at this level"
     if p.get("hours_utc"):
-        h = (ind["candles"][i]["time"] + timedelta(hours=INTERVAL_HOURS)).hour
+        h = (ind["candles"][i]["time"] + timedelta(hours=ind["interval"])).hour
         if not (p["hours_utc"][0] <= h < p["hours_utc"][1]):
             return None, "outside this level's trading hours"
     direction, reason = raw_setup(ind, i, p)
@@ -515,16 +545,16 @@ def evaluate(pair, ind, i, profile, use_filters=True, news_6h=None):
         want = "up" if direction == "BUY" else "down"
         against = h4 in ("up", "down") and h4 != want
         if p["h4_rule"] == "agree" and h4 != want:
-            return None, f"{direction} setup filtered: {HTF_LABEL} trend does not agree"
+            return None, f"{direction} setup filtered: {ind['htf_label']} trend does not agree"
         if p["h4_rule"] == "not_against" and against:
-            return None, f"{direction} setup filtered: {HTF_LABEL} trend is against it"
+            return None, f"{direction} setup filtered: {ind['htf_label']} trend is against it"
         if p["min_adx"] and (adx_v is None or adx_v < p["min_adx"]):
             return None, f"{direction} setup filtered: trend too weak (ADX {adx_v or 0:.0f})"
         if score < p["min_score"]:
             return None, f"{direction} setup filtered: confidence {score} < {p['min_score']}"
     d = decimals(pair)
     sl, tp = (price - risk, price + reward) if direction == "BUY" else (price + risk, price - reward)
-    t = ind["candles"][i]["time"] + timedelta(hours=INTERVAL_HOURS)   # candle close time
+    t = ind["candles"][i]["time"] + timedelta(hours=ind["interval"])   # candle close time
     return {
         "id": f"{profile}-{pair.replace('/', '')}-{t.strftime('%Y%m%d%H%M')}",
         "profile": profile, "pair": pair, "direction": direction,
@@ -533,6 +563,7 @@ def evaluate(pair, ind, i, profile, use_filters=True, news_6h=None):
         "rsi": round(ind["rsi"][i], 1), "adx": None if adx_v is None else round(adx_v, 1),
         "h4_trend": h4, "score": score, "pros": pros, "cons": cons,
         "session": session_label(t.hour),
+        "interval": ind["interval"],
         "reason": reason, "created": iso(t),
         "status": "open", "closed_at": None, "exit_price": None,
     }, "setup"
@@ -557,7 +588,8 @@ def update_open_signal(sig, candles, now):
         if hit_tp:
             sig.update(status="win", exit_price=sig["tp"], closed_at=iso(c["time"]))
             return True
-    if now - created > timedelta(hours=EXPIRE_HOURS) and candles:
+    expire = EXPIRE_HOURS if sig.get("interval", 1) < 4 else 360
+    if now - created > timedelta(hours=expire) and candles:
         sig.update(status="expired", exit_price=round(candles[-1]["close"], decimals(sig["pair"])),
                    closed_at=iso(now))
         return True
@@ -670,7 +702,7 @@ def review_trade(sig, candles, ind, news_log):
         if news:
             reasons.append(f"High-impact news during the trade ({news[0]['currency']} {news[0]['title']}) did not stop it.")
     else:
-        reasons.append(f"Neither TP nor SL was reached in {EXPIRE_HOURS // 24} days: the market went sideways.")
+        reasons.append(f"Neither TP nor SL was reached in {(EXPIRE_HOURS if sig.get('interval', 1) < 4 else 360) // 24} days: the market went sideways.")
 
     adx_v = sig.get("adx")
     return {
@@ -848,6 +880,8 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
             continue
         closed = [c for c in candles if c["time"] + timedelta(hours=INTERVAL_HOURS) <= now]
         ind = indicators(closed) if len(closed) > EMA_SLOW + 15 else None
+        closed4 = build_candles(closed, 4, now) if INTERVAL_HOURS == 1 else closed
+        ind4 = indicators(closed4, 4) if len(closed4) > EMA_SLOW + 15 else None
         if ind and take_snapshot:
             snap = snapshot(pair, ind, candles)
             if snap:
@@ -856,7 +890,7 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
         # 1) Update open suggestions (all risk levels), and review every trade that closes
         for s in signals:
             if s["pair"] == pair and s["status"] == "open" and update_open_signal(s, candles, now):
-                s["review"] = review_trade(s, candles, ind, log)
+                s["review"] = review_trade(s, candles, ind4 if s.get("interval", 1) == 4 else ind, log)
                 changed = True
                 same = [x for x in signals if x["profile"] == s["profile"]]
                 outbox.append((f"{s['pair']} {s['status'].upper()}",
@@ -886,10 +920,11 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
             if any(s["pair"] == pair and s["profile"] == prof and s["status"] == "open" for s in signals):
                 print(f"{label} open suggestion, waiting for TP/SL")
                 continue
-            if not ind:
+            use_ind = ind4 if p.get("interval", INTERVAL_HOURS) == 4 and INTERVAL_HOURS == 1 else ind
+            if not use_ind:
                 print(f"{label} not enough data")
                 continue
-            sig, note = evaluate(pair, ind, len(closed) - 1, prof, True, news_6h)
+            sig, note = evaluate(pair, use_ind, len(use_ind["close"]) - 1, prof, True, news_6h)
             if not sig or any(s["id"] == sig["id"] for s in signals):
                 print(f"{label} {note if not sig else 'no new setup'}")
                 continue

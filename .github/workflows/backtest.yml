@@ -38,6 +38,14 @@ jobs:
           BACKTEST_OUT: docs/data/backtest${{ inputs.interval == '4' && '_4h' || '' }}.json
         run: python backtest.py
 
+      - name: Run 4-hour backtest too (weekly run)
+        if: github.event_name == 'schedule'
+        env:
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+          INTERVAL_HOURS: "4"
+          BACKTEST_OUT: docs/data/backtest_4h.json
+        run: sleep 30 && python backtest.py
+
       - name: Save results
         run: |
           git config user.name "forex-bot"

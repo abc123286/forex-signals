@@ -26,6 +26,8 @@ import signals as S
 HISTORY = 5000          # 1-hour candles per pair (Twelve Data free plan maximum)
 WARMUP = S.EMA_SLOW + S.ATR_AVG_LEN + 20
 RISK_USD = 3.0          # example: risking $3 per trade (1% of a $300 account)
+# Only test the levels that use this candle size (e.g. "Focused 4H" only in the 4-hour backtest)
+PROFS = [k for k, p in S.PROFILES.items() if p.get("interval", S.INTERVAL_HOURS) == S.INTERVAL_HOURS]
 OUT_FILE = os.path.join(S.ROOT, os.getenv("BACKTEST_OUT", "docs/data/backtest.json"))
 
 
@@ -202,7 +204,7 @@ def run(fetch=None):
     fetch = fetch or (lambda pair, key: S.fetch_candles(pair, key, HISTORY))
     key = os.getenv("TWELVEDATA_API_KEY", "")
     now = datetime.now(timezone.utc)
-    per = {p: {"filtered": [], "basic": []} for p in S.PROFILES}
+    per = {p: {"filtered": [], "basic": []} for p in PROFS}
     ranges = {}
     for n, pair in enumerate(S.PAIRS):
         if n:
@@ -220,7 +222,7 @@ def run(fetch=None):
         ranges[pair] = {"from": S.iso(closed[WARMUP]["time"]), "to": S.iso(closed[-1]["time"]),
                         "split": S.iso(closed[split_i]["time"]), "candles": len(closed) - WARMUP}
         ind = S.indicators(closed)
-        for prof in S.PROFILES:
+        for prof in PROFS:
             for variant, flt in (("filtered", True), ("basic", False)):
                 t = simulate(pair, ind, prof, flt)
                 per[prof][variant] += t
@@ -232,7 +234,7 @@ def run(fetch=None):
                         "Past results do not guarantee future results."],
               "profiles": {}}
     all_basic = []
-    for prof in S.PROFILES:
+    for prof in PROFS:
         entry = {}
         for variant in ("filtered", "basic"):
             tr = per[prof][variant]

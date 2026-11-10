@@ -177,11 +177,13 @@ const DEFAULT_PROFILES = {
   low:{label:"Low risk",icon:"🛡️",desc:"",reward_risk:1,sl_atr:2,tp_atr:2},
   moderate:{label:"Moderate",icon:"⚖️",desc:"",reward_risk:1.5,sl_atr:1.5,tp_atr:2.25},
   high:{label:"High risk",icon:"🔥",desc:"",reward_risk:2,sl_atr:1,tp_atr:2}};
-const NEWS_RULE = {low:"Pauses 2h before → 1h after high & medium news", moderate:"Pauses 1h before → 30 min after high news", high:"Pauses 15 min before → 15 min after high news", focused:"Pauses 1h before → 30 min after high news"};
+const NEWS_RULE = {low:"Pauses 2h before → 1h after high & medium news", moderate:"Pauses 1h before → 30 min after high news", high:"Pauses 15 min before → 15 min after high news", focused:"Pauses 1h before → 30 min after high news", focused4h:"Pauses 1h before → 30 min after high news"};
 let DATA = {signals:[]}, pairs = Object.keys(TV), current = "moderate";
 try { current = localStorage.getItem("riskTab") || "moderate"; } catch(e) {}
 
-let BT = null;
+let BT = null, BT4 = null;
+// Backtest results for the current tab: 4-hour levels use the 4-hour backtest
+function btSrc(){ const p = profiles()[current] || {}; return (p.interval === 4) ? BT4 : BT; }
 function scoreBadge(v){ if (v==null) return ""; const c = v>=70?"s-hi":v>=50?"s-mid":"s-lo"; return `<span class="score ${c}">${v}/100</span>`; }
 const sign = v => v==null ? "–" : `<span class="${v>0?"pos":v<0?"neg":""}">${v>0?"+":""}${v}</span>`;
 const pct = v => v==null ? "–" : v + "%";
@@ -197,16 +199,17 @@ function eqSvg(pts){
 }
 function renderBacktest(){
   const el = document.getElementById("bt");
-  if (!BT || !BT.profiles || !BT.profiles[current]) return;
-  const e = BT.profiles[current], f = e.filtered, b = e.basic, risk = BT.risk_usd_example || 3;
-  const r0 = Object.values(BT.ranges||{})[0];
+  const src = btSrc();
+  if (!src || !src.profiles || !src.profiles[current]) { el.innerHTML = '<p class="mute">No backtest yet for this level.</p>'; return; }
+  const e = src.profiles[current], f = e.filtered, b = e.basic, risk = src.risk_usd_example || 3;
+  const r0 = Object.values(src.ranges||{})[0];
   const rows = [
     ["Trades", f.trades, b.trades], ["Win rate", pct(f.win_rate), pct(b.win_rate)],
     ["Net result (R)", sign(f.net_r), sign(b.net_r)], [`Net result if risking $${risk}/trade`, sign(f.net_usd!=null?Math.round(f.net_usd):null), sign(b.net_usd!=null?Math.round(b.net_usd):null)],
     ["Average per trade (R)", sign(f.avg_r), sign(b.avg_r)], ["Profit factor", f.profit_factor ?? "–", b.profit_factor ?? "–"],
     ["Worst losing streak", f.worst_losing_streak, b.worst_losing_streak], ["Biggest drop (R)", f.max_drawdown_r, b.max_drawdown_r]];
   el.innerHTML = `
-    <p class="mute" style="margin-top:0">Replayed on past 1-hour prices${r0?` from ${fmt(r0.from).split(",")[0]} to ${fmt(r0.to).split(",")[0]}`:""} · last run ${fmt(BT.generated)}.
+    <p class="mute" style="margin-top:0">Replayed on past ${src.interval_hours||1}-hour prices${r0?` from ${fmt(r0.from).split(",")[0]} to ${fmt(r0.to).split(",")[0]}`:""} · last run ${fmt(src.generated)}.
       <b>R</b> = how many times the risk you won or lost (a loss = −1R).</p>
     <div class="bt-grid">
       <div class="wrap"><table>
@@ -234,11 +237,12 @@ function renderBacktest(){
       <tr><th>Confidence</th><th>Trades</th><th>Win rate</th><th>Average per trade (R)</th></tr>
       ${(e.score_buckets||[]).map(x=>`<tr><td>${x.band}</td><td>${x.trades}</td><td>${pct(x.win_rate)}</td><td>${sign(x.avg_r)}</td></tr>`).join("")}
     </table></div>
-    <p class="note">If higher confidence rows show a better average per trade, the score is helping. ${(BT.notes||[]).join(" ")}</p>`;
+    <p class="note">If higher confidence rows show a better average per trade, the score is helping. ${(src.notes||[]).join(" ")}</p>`;
 }
 function renderTime(){
   const el = document.getElementById("ta");
-  const a = BT && BT.profiles && BT.profiles[current] && BT.profiles[current].time_analysis;
+  const src = btSrc();
+  const a = src && src.profiles && src.profiles[current] && src.profiles[current].time_analysis;
   if (!a) return;
   const f = a.filter, cls = f.profitable ? "win" : f.helps ? "expired" : "loss";
   const label = f.profitable ? "PASSED" : f.helps ? "PARTLY HELPED" : "DID NOT PASS";
@@ -359,8 +363,9 @@ function render(){
     `Stop Loss: ${p.sl_atr} × ATR`, `Take Profit: ${p.tp_atr} × ATR`, `Reward : risk = ${p.reward_risk} : 1`,
     `Break-even win rate ≈ ${(100/(1+p.reward_risk)).toFixed(0)}%`,
     p.min_score!=null ? `Min confidence: ${p.min_score}/100` : "",
-    p.h4_rule==="agree" ? "4H trend must agree" : p.h4_rule==="not_against" ? "4H trend must not be against" : "",
+    p.h4_rule==="agree" ? `${p.interval===4?"Daily":"4H"} trend must agree` : p.h4_rule==="not_against" ? `${p.interval===4?"Daily":"4H"} trend must not be against` : "",
     p.min_adx ? `ADX ≥ ${p.min_adx}` : "",
+    p.interval === 4 ? "🕓 4-hour candles · daily trend as bigger picture" : "",
     p.only_pairs ? `Pairs: ${p.only_pairs.join(", ")}` : "",
     p.hours_utc ? `Hours: ${String((p.hours_utc[0]+8)%24).padStart(2,"0")}:00–${String((p.hours_utc[1]+8)%24).padStart(2,"0")}:00 MYT` : "",
     p.alerts === false ? "🔕 Telegram alerts OFF" : "", NEWS_RULE[current] || ""
@@ -455,6 +460,7 @@ async function botStatus(){
 async function load(){
   const d = await getJson("signals.json"); if (d) DATA = d;
   const b = await getJson("backtest.json"); if (b) BT = b;
+  const b4 = await getJson("backtest_4h.json"); if (b4) BT4 = b4;
   botStatus();
   render();
 }
