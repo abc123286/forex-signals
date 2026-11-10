@@ -1251,10 +1251,33 @@
       "interval": 4,
       "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 65",
       "created": "2026-11-10T12:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
-      "news_note": "none in next 24h"
+      "status": "win",
+      "closed_at": "2026-11-10T15:00:00Z",
+      "exit_price": 1.11752,
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 4h.",
+          "It moved your way fairly smoothly (worst point only -1.6 pips).",
+          "The 4-hour trend supported it.",
+          "High-impact news during the trade (USD Core CPI m/m) did not stop it."
+        ],
+        "hours": 4,
+        "mfe_r": 1.13,
+        "mae_r": 0.04,
+        "mfe_pips": 49.2,
+        "mae_pips": 1.6,
+        "spread_only": false,
+        "tags": {
+          "news_during": true,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": true,
+          "session": "London + New York",
+          "score_band": "70+"
+        }
+      }
     }
   ],
   "news_warned": [
@@ -1324,7 +1347,7 @@
       "previous": "1.3%"
     }
   ],
-  "updated": "2026-11-10T15:30:27Z",
+  "updated": "2026-11-10T15:40:19Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
