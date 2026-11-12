@@ -1427,22 +1427,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-12T07:00:00Z",
-      "currency": "GBP",
-      "impact": "High",
-      "title": "GDP m/m",
-      "forecast": "0.0%",
-      "previous": "0.1%"
-    },
-    {
-      "time": "2026-11-12T07:00:00Z",
-      "currency": "GBP",
-      "impact": "Medium",
-      "title": "Prelim GDP q/q",
-      "forecast": "0.7%",
-      "previous": "0.5%"
-    },
-    {
       "time": "2026-11-12T13:30:00Z",
       "currency": "USD",
       "impact": "Medium",
@@ -1475,58 +1459,58 @@
       "previous": "1.3%"
     }
   ],
-  "updated": "2026-11-12T08:00:30Z",
+  "updated": "2026-11-12T09:00:29Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.10863,
+      "price": 1.10933,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 39.2,
-      "adx": 60.5,
-      "atr_pips": 11.2,
+      "rsi": 43.7,
+      "adx": 58.5,
+      "atr_pips": 11.0,
       "high_48h": 1.12513,
       "low_48h": 1.10667
     },
     {
       "pair": "GBP/USD",
-      "price": 1.32707,
+      "price": 1.32711,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 39.9,
-      "adx": 37.3,
-      "atr_pips": 13.1,
-      "high_48h": 1.34604,
+      "rsi": 40.2,
+      "adx": 36.1,
+      "atr_pips": 12.9,
+      "high_48h": 1.34553,
       "low_48h": 1.32506
     },
     {
       "pair": "USD/JPY",
-      "price": 159.702,
+      "price": 159.697,
       "trend_1h": "up",
       "trend_4h": "up",
       "trend_daily": "up",
-      "rsi": 58.7,
-      "adx": 45.8,
+      "rsi": 58.4,
+      "adx": 44.4,
       "atr_pips": 16.0,
       "high_48h": 159.948,
-      "low_48h": 157.904
+      "low_48h": 157.934
     },
     {
       "pair": "XAU/USD",
-      "price": 3966.46,
+      "price": 3931.49,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 27.9,
-      "adx": 47.1,
-      "atr_pips": 132.9,
-      "high_48h": 4121.5,
-      "low_48h": 3955.7
+      "rsi": 19.4,
+      "adx": 49.2,
+      "atr_pips": 149.9,
+      "high_48h": 4119.62,
+      "low_48h": 3929.33
     }
   ],
-  "snapshot_time": "2026-11-12T08:00:30Z",
+  "snapshot_time": "2026-11-12T09:00:29Z",
   "news_log": [
     {
       "time": "2026-11-03T03:30:00Z",
