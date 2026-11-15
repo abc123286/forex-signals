@@ -1425,8 +1425,233 @@
     "XAU/USD|2026-11-10T13:30:00Z|Core CPI m/m",
     "XAU/USD|2026-11-10T13:30:00Z|CPI m/m"
   ],
-  "news": [],
-  "updated": "2026-11-15T05:00:32Z",
+  "news": [
+    {
+      "time": "2026-11-16T13:30:00Z",
+      "currency": "CAD",
+      "impact": "High",
+      "title": "CPI m/m",
+      "forecast": "0.3%",
+      "previous": "0.1%"
+    },
+    {
+      "time": "2026-11-16T13:30:00Z",
+      "currency": "CAD",
+      "impact": "High",
+      "title": "Median CPI y/y",
+      "forecast": "2.0%",
+      "previous": "1.9%"
+    },
+    {
+      "time": "2026-11-16T13:30:00Z",
+      "currency": "CAD",
+      "impact": "High",
+      "title": "Trimmed CPI y/y",
+      "forecast": "1.9%",
+      "previous": "1.8%"
+    },
+    {
+      "time": "2026-11-16T13:30:00Z",
+      "currency": "CAD",
+      "impact": "Medium",
+      "title": "Common CPI y/y",
+      "forecast": "2.5%",
+      "previous": "2.4%"
+    },
+    {
+      "time": "2026-11-16T17:00:00Z",
+      "currency": "USD",
+      "impact": "High",
+      "title": "Fed Chairman Warsh Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-16T22:50:00Z",
+      "currency": "AUD",
+      "impact": "High",
+      "title": "RBA Gov Bullock Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-17T02:00:00Z",
+      "currency": "NZD",
+      "impact": "High",
+      "title": "Inflation Expectations q/q",
+      "forecast": "",
+      "previous": "2.34%"
+    },
+    {
+      "time": "2026-11-17T07:00:00Z",
+      "currency": "GBP",
+      "impact": "Medium",
+      "title": "Average Earnings Index 3m/y",
+      "forecast": "3.5%",
+      "previous": "3.7%"
+    },
+    {
+      "time": "2026-11-17T13:30:00Z",
+      "currency": "USD",
+      "impact": "High",
+      "title": "Core Retail Sales m/m",
+      "forecast": "0.4%",
+      "previous": "0.9%"
+    },
+    {
+      "time": "2026-11-17T13:30:00Z",
+      "currency": "USD",
+      "impact": "High",
+      "title": "Retail Sales m/m",
+      "forecast": "0.2%",
+      "previous": "0.8%"
+    },
+    {
+      "time": "2026-11-18T00:30:00Z",
+      "currency": "AUD",
+      "impact": "Medium",
+      "title": "Wage Price Index q/q",
+      "forecast": "0.9%",
+      "previous": "0.8%"
+    },
+    {
+      "time": "2026-11-18T07:00:00Z",
+      "currency": "GBP",
+      "impact": "High",
+      "title": "CPI y/y",
+      "forecast": "3.6%",
+      "previous": "3.5%"
+    },
+    {
+      "time": "2026-11-18T07:30:00Z",
+      "currency": "GBP",
+      "impact": "High",
+      "title": "BOE Gov Bailey Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-18T09:00:00Z",
+      "currency": "EUR",
+      "impact": "Medium",
+      "title": "ECB Financial Stability Review",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-18T14:25:00Z",
+      "currency": "EUR",
+      "impact": "Medium",
+      "title": "ECB President Lagarde Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-18T15:00:00Z",
+      "currency": "GBP",
+      "impact": "High",
+      "title": "BOE Gov Bailey Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-18T18:00:00Z",
+      "currency": "NZD",
+      "impact": "Medium",
+      "title": "RBNZ Gov Breman Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-18T19:00:00Z",
+      "currency": "USD",
+      "impact": "High",
+      "title": "FOMC Meeting Minutes",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-19T00:30:00Z",
+      "currency": "AUD",
+      "impact": "High",
+      "title": "Employment Change",
+      "forecast": "25.2K",
+      "previous": "-39.3K"
+    },
+    {
+      "time": "2026-11-19T00:30:00Z",
+      "currency": "AUD",
+      "impact": "High",
+      "title": "Unemployment Rate",
+      "forecast": "4.7%",
+      "previous": "4.7%"
+    },
+    {
+      "time": "2026-11-19T13:30:00Z",
+      "currency": "EUR",
+      "impact": "Medium",
+      "title": "ECB President Lagarde Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-19T13:30:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "Philly Fed Manufacturing Index",
+      "forecast": "19.2",
+      "previous": "20.9"
+    },
+    {
+      "time": "2026-11-19T13:30:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "Unemployment Claims",
+      "forecast": "199K",
+      "previous": "200K"
+    },
+    {
+      "time": "2026-11-20T07:00:00Z",
+      "currency": "GBP",
+      "impact": "Medium",
+      "title": "Retail Sales m/m",
+      "forecast": "0.0%",
+      "previous": "-0.4%"
+    },
+    {
+      "time": "2026-11-20T08:15:00Z",
+      "currency": "EUR",
+      "impact": "Medium",
+      "title": "ECB President Lagarde Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-20T13:25:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "FOMC Member Waller Speaks",
+      "forecast": "",
+      "previous": ""
+    },
+    {
+      "time": "2026-11-20T15:00:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "Revised UoM Consumer Sentiment",
+      "forecast": "52.1",
+      "previous": "51.0"
+    },
+    {
+      "time": "2026-11-20T15:00:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "Revised UoM Inflation Expectations",
+      "forecast": "",
+      "previous": "4.3%"
+    }
+  ],
+  "updated": "2026-11-15T05:50:16Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
@@ -1598,6 +1823,76 @@
       "time": "2026-11-13T13:30:00Z",
       "currency": "USD",
       "title": "PPI m/m"
+    },
+    {
+      "time": "2026-11-16T13:30:00Z",
+      "currency": "CAD",
+      "title": "CPI m/m"
+    },
+    {
+      "time": "2026-11-16T13:30:00Z",
+      "currency": "CAD",
+      "title": "Median CPI y/y"
+    },
+    {
+      "time": "2026-11-16T13:30:00Z",
+      "currency": "CAD",
+      "title": "Trimmed CPI y/y"
+    },
+    {
+      "time": "2026-11-16T17:00:00Z",
+      "currency": "USD",
+      "title": "Fed Chairman Warsh Speaks"
+    },
+    {
+      "time": "2026-11-16T22:50:00Z",
+      "currency": "AUD",
+      "title": "RBA Gov Bullock Speaks"
+    },
+    {
+      "time": "2026-11-17T02:00:00Z",
+      "currency": "NZD",
+      "title": "Inflation Expectations q/q"
+    },
+    {
+      "time": "2026-11-17T13:30:00Z",
+      "currency": "USD",
+      "title": "Core Retail Sales m/m"
+    },
+    {
+      "time": "2026-11-17T13:30:00Z",
+      "currency": "USD",
+      "title": "Retail Sales m/m"
+    },
+    {
+      "time": "2026-11-18T07:00:00Z",
+      "currency": "GBP",
+      "title": "CPI y/y"
+    },
+    {
+      "time": "2026-11-18T07:30:00Z",
+      "currency": "GBP",
+      "title": "BOE Gov Bailey Speaks"
+    },
+    {
+      "time": "2026-11-18T15:00:00Z",
+      "currency": "GBP",
+      "title": "BOE Gov Bailey Speaks"
+    },
+    {
+      "time": "2026-11-18T19:00:00Z",
+      "currency": "USD",
+      "title": "FOMC Meeting Minutes"
+    },
+    {
+      "time": "2026-11-19T00:30:00Z",
+      "currency": "AUD",
+      "title": "Employment Change"
+    },
+    {
+      "time": "2026-11-19T00:30:00Z",
+      "currency": "AUD",
+      "title": "Unemployment Rate"
     }
   ],
   "skipped_setups": {}
