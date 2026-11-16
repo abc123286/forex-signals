@@ -1463,7 +1463,7 @@
       "currency": "USD",
       "impact": "High",
       "title": "Retail Sales m/m",
-      "forecast": "0.2%",
+      "forecast": "0.1%",
       "previous": "0.8%"
     },
     {
@@ -1471,7 +1471,7 @@
       "currency": "AUD",
       "impact": "Medium",
       "title": "Wage Price Index q/q",
-      "forecast": "0.9%",
+      "forecast": "1.0%",
       "previous": "0.8%"
     },
     {
@@ -1535,7 +1535,7 @@
       "currency": "AUD",
       "impact": "High",
       "title": "Employment Change",
-      "forecast": "25.2K",
+      "forecast": "25.5K",
       "previous": "-39.3K"
     },
     {
@@ -1603,7 +1603,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-16T21:20:16Z",
+  "updated": "2026-11-16T21:50:31Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
