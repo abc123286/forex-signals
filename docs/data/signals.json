@@ -1525,7 +1525,7 @@
     {
       "time": "2026-11-18T07:30:00Z",
       "currency": "GBP",
-      "impact": "High",
+      "impact": "Medium",
       "title": "BOE Gov Bailey Speaks",
       "forecast": "",
       "previous": ""
@@ -1627,14 +1627,6 @@
       "previous": ""
     },
     {
-      "time": "2026-11-20T13:25:00Z",
-      "currency": "USD",
-      "impact": "Medium",
-      "title": "FOMC Member Waller Speaks",
-      "forecast": "",
-      "previous": ""
-    },
-    {
       "time": "2026-11-20T15:00:00Z",
       "currency": "USD",
       "impact": "Medium",
@@ -1651,7 +1643,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-16T00:00:30Z",
+  "updated": "2026-11-16T00:50:17Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
