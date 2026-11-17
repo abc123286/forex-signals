@@ -1414,6 +1414,39 @@
           "score_band": "70+"
         }
       }
+    },
+    {
+      "id": "moderate-USDJPY-202611172000",
+      "profile": "moderate",
+      "pair": "USD/JPY",
+      "direction": "BUY",
+      "entry": 159.337,
+      "sl": 158.91,
+      "tp": 159.978,
+      "sl_pips": 42.7,
+      "tp_pips": 64.1,
+      "rsi": 43.2,
+      "adx": 31.0,
+      "h4_trend": "up",
+      "score": 95,
+      "pros": [
+        "Daily trend agrees",
+        "Strong trend (ADX 31)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [],
+      "session": "New York",
+      "interval": 4,
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
+      "created": "2026-11-17T20:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 159.337,
+      "alerted_at": "2026-11-17T20:00:37Z",
+      "news_note": "USD FOMC Meeting Minutes"
     }
   ],
   "news_warned": [
@@ -1563,7 +1596,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-17T19:20:16Z",
+  "updated": "2026-11-17T20:00:37Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
