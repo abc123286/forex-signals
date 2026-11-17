@@ -1427,10 +1427,10 @@
   ],
   "news": [
     {
-      "time": "2026-11-16T22:50:00Z",
-      "currency": "AUD",
-      "impact": "High",
-      "title": "RBA Gov Bullock Speaks",
+      "time": "2026-11-17T00:00:00Z",
+      "currency": "NZD",
+      "impact": "Medium",
+      "title": "RBNZ Gov Breman Speaks",
       "forecast": "",
       "previous": ""
     },
@@ -1603,7 +1603,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-17T00:20:16Z",
+  "updated": "2026-11-17T00:50:27Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
