@@ -1552,7 +1552,7 @@
       "currency": "USD",
       "impact": "Medium",
       "title": "Philly Fed Manufacturing Index",
-      "forecast": "19.2",
+      "forecast": "20.6",
       "previous": "20.9"
     },
     {
@@ -1560,7 +1560,7 @@
       "currency": "USD",
       "impact": "Medium",
       "title": "Unemployment Claims",
-      "forecast": "199K",
+      "forecast": "198K",
       "previous": "200K"
     },
     {
@@ -1584,7 +1584,7 @@
       "currency": "USD",
       "impact": "Medium",
       "title": "Revised UoM Consumer Sentiment",
-      "forecast": "52.1",
+      "forecast": "51.7",
       "previous": "51.0"
     },
     {
@@ -1596,7 +1596,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-17T21:20:19Z",
+  "updated": "2026-11-17T21:50:25Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
