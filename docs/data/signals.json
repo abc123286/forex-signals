@@ -1548,14 +1548,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-18T19:00:00Z",
-      "currency": "USD",
-      "impact": "High",
-      "title": "FOMC Meeting Minutes",
-      "forecast": "",
-      "previous": ""
-    },
-    {
       "time": "2026-11-19T00:30:00Z",
       "currency": "AUD",
       "impact": "High",
@@ -1628,7 +1620,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-18T20:20:16Z",
+  "updated": "2026-11-18T21:00:35Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
