@@ -1547,14 +1547,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-18T15:00:00Z",
-      "currency": "GBP",
-      "impact": "High",
-      "title": "BOE Gov Bailey Speaks",
-      "forecast": "",
-      "previous": ""
-    },
-    {
       "time": "2026-11-18T18:00:00Z",
       "currency": "NZD",
       "impact": "Medium",
@@ -1643,7 +1635,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-18T16:30:35Z",
+  "updated": "2026-11-18T17:00:35Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
