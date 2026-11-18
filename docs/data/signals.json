@@ -1547,14 +1547,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-18T07:30:00Z",
-      "currency": "GBP",
-      "impact": "Medium",
-      "title": "BOE Gov Bailey Speaks",
-      "forecast": "",
-      "previous": ""
-    },
-    {
       "time": "2026-11-18T09:00:00Z",
       "currency": "EUR",
       "impact": "Medium",
@@ -1667,7 +1659,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-18T09:20:16Z",
+  "updated": "2026-11-18T09:30:28Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
