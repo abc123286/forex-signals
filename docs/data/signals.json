@@ -1493,14 +1493,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-18T00:30:00Z",
-      "currency": "AUD",
-      "impact": "Medium",
-      "title": "Wage Price Index q/q",
-      "forecast": "1.0%",
-      "previous": "0.8%"
-    },
-    {
       "time": "2026-11-18T07:00:00Z",
       "currency": "GBP",
       "impact": "High",
@@ -1629,7 +1621,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-18T02:20:17Z",
+  "updated": "2026-11-18T02:30:24Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
