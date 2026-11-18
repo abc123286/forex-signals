@@ -1547,14 +1547,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-18T07:00:00Z",
-      "currency": "GBP",
-      "impact": "High",
-      "title": "CPI y/y",
-      "forecast": "3.6%",
-      "previous": "3.5%"
-    },
-    {
       "time": "2026-11-18T07:30:00Z",
       "currency": "GBP",
       "impact": "Medium",
@@ -1675,7 +1667,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-18T08:20:17Z",
+  "updated": "2026-11-18T09:00:33Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
