@@ -1543,7 +1543,8 @@
     "USD/JPY|2026-11-10T13:30:00Z|Core CPI m/m",
     "USD/JPY|2026-11-10T13:30:00Z|CPI m/m",
     "XAU/USD|2026-11-10T13:30:00Z|Core CPI m/m",
-    "XAU/USD|2026-11-10T13:30:00Z|CPI m/m"
+    "XAU/USD|2026-11-10T13:30:00Z|CPI m/m",
+    "USD/JPY|2026-11-18T19:00:00Z|FOMC Meeting Minutes"
   ],
   "news": [
     {
@@ -1635,7 +1636,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-18T17:20:17Z",
+  "updated": "2026-11-18T18:00:31Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
