@@ -1548,14 +1548,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-18T18:00:00Z",
-      "currency": "NZD",
-      "impact": "Medium",
-      "title": "RBNZ Gov Breman Speaks",
-      "forecast": "",
-      "previous": ""
-    },
-    {
       "time": "2026-11-18T19:00:00Z",
       "currency": "USD",
       "impact": "High",
@@ -1636,7 +1628,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-18T19:20:17Z",
+  "updated": "2026-11-18T20:00:32Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
