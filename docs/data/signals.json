@@ -1474,12 +1474,33 @@
       "interval": 4,
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
       "created": "2026-11-18T00:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
+      "status": "loss",
+      "closed_at": "2026-11-18T04:00:00Z",
+      "exit_price": 159.248,
       "price_at_alert": 159.531,
       "alerted_at": "2026-11-18T00:00:39Z",
-      "news_note": "USD FOMC Meeting Minutes"
+      "news_note": "USD FOMC Meeting Minutes",
+      "review": {
+        "reasons": [
+          "It never really went into profit (best only +11.8 pips): the expected move in the trend direction did not happen.",
+          "Even with confidence 95/100 it lost: a score shows odds, not a guarantee."
+        ],
+        "hours": 5,
+        "mfe_r": 0.42,
+        "mae_r": 1.0,
+        "mfe_pips": 11.8,
+        "mae_pips": 28.3,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": true,
+          "session": "Asian",
+          "score_band": "70+"
+        }
+      }
     }
   ],
   "news_warned": [
@@ -1621,7 +1642,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-18T04:20:16Z",
+  "updated": "2026-11-18T04:40:18Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
