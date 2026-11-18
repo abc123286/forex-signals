@@ -1501,6 +1501,39 @@
           "score_band": "70+"
         }
       }
+    },
+    {
+      "id": "high-USDJPY-202611180800",
+      "profile": "high",
+      "pair": "USD/JPY",
+      "direction": "BUY",
+      "entry": 159.349,
+      "sl": 159.061,
+      "tp": 159.925,
+      "sl_pips": 28.8,
+      "tp_pips": 57.6,
+      "rsi": 45.2,
+      "adx": 26.0,
+      "h4_trend": "up",
+      "score": 95,
+      "pros": [
+        "Daily trend agrees",
+        "Strong trend (ADX 26)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [],
+      "session": "London",
+      "interval": 4,
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
+      "created": "2026-11-18T08:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 159.349,
+      "alerted_at": "2026-11-18T08:00:33Z",
+      "news_note": "USD FOMC Meeting Minutes"
     }
   ],
   "news_warned": [
@@ -1642,7 +1675,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-18T07:20:18Z",
+  "updated": "2026-11-18T08:00:33Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
