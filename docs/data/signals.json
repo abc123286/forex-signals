@@ -1547,14 +1547,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-18T09:00:00Z",
-      "currency": "EUR",
-      "impact": "Medium",
-      "title": "ECB Financial Stability Review",
-      "forecast": "",
-      "previous": ""
-    },
-    {
       "time": "2026-11-18T14:25:00Z",
       "currency": "EUR",
       "impact": "Medium",
@@ -1659,7 +1651,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-18T10:20:15Z",
+  "updated": "2026-11-18T11:00:36Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
