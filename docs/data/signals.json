@@ -1548,22 +1548,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-19T00:30:00Z",
-      "currency": "AUD",
-      "impact": "High",
-      "title": "Employment Change",
-      "forecast": "25.5K",
-      "previous": "-39.3K"
-    },
-    {
-      "time": "2026-11-19T00:30:00Z",
-      "currency": "AUD",
-      "impact": "High",
-      "title": "Unemployment Rate",
-      "forecast": "4.7%",
-      "previous": "4.7%"
-    },
-    {
       "time": "2026-11-19T13:30:00Z",
       "currency": "EUR",
       "impact": "Medium",
@@ -1620,7 +1604,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-19T02:20:17Z",
+  "updated": "2026-11-19T02:30:25Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
