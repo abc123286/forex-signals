@@ -1528,12 +1528,35 @@
       "interval": 4,
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
       "created": "2026-11-18T08:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
+      "status": "win",
+      "closed_at": "2026-11-19T10:00:00Z",
+      "exit_price": 159.925,
       "price_at_alert": 159.349,
       "alerted_at": "2026-11-18T08:00:33Z",
-      "news_note": "USD FOMC Meeting Minutes"
+      "news_note": "USD FOMC Meeting Minutes",
+      "review": {
+        "reasons": [
+          "Reached TP in about 27h.",
+          "It went against you first (-19.7 pips, 0.69R of the way to SL) before turning: a narrow escape.",
+          "The 4-hour trend supported it.",
+          "High-impact news during the trade (USD FOMC Meeting Minutes) did not stop it."
+        ],
+        "hours": 27,
+        "mfe_r": 2.05,
+        "mae_r": 0.69,
+        "mfe_pips": 59.0,
+        "mae_pips": 19.7,
+        "spread_only": false,
+        "tags": {
+          "news_during": true,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": true,
+          "session": "London",
+          "score_band": "70+"
+        }
+      }
     }
   ],
   "news_warned": [
@@ -1604,7 +1627,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-19T10:20:20Z",
+  "updated": "2026-11-19T10:40:18Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
