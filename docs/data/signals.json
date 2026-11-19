@@ -1604,58 +1604,58 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-19T08:20:16Z",
+  "updated": "2026-11-19T09:20:18Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.09851,
+      "price": 1.09953,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 54.6,
-      "adx": 31.3,
-      "atr_pips": 9.8,
+      "rsi": 57.9,
+      "adx": 29.6,
+      "atr_pips": 9.7,
       "high_48h": 1.10238,
       "low_48h": 1.09537
     },
     {
       "pair": "GBP/USD",
-      "price": 1.31551,
+      "price": 1.31543,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 49.7,
-      "adx": 51.0,
-      "atr_pips": 11.7,
+      "rsi": 50.0,
+      "adx": 48.9,
+      "atr_pips": 11.4,
       "high_48h": 1.32283,
       "low_48h": 1.31211
     },
     {
       "pair": "USD/JPY",
-      "price": 159.796,
+      "price": 159.835,
       "trend_1h": "up",
       "trend_4h": "up",
       "trend_daily": "up",
-      "rsi": 69.2,
-      "adx": 12.9,
-      "atr_pips": 13.5,
-      "high_48h": 159.75,
+      "rsi": 69.6,
+      "adx": 14.2,
+      "atr_pips": 13.3,
+      "high_48h": 159.805,
       "low_48h": 158.865
     },
     {
       "pair": "XAU/USD",
-      "price": 3737.52,
+      "price": 3733.87,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 44.4,
-      "adx": 33.5,
-      "atr_pips": 187.0,
+      "rsi": 44.2,
+      "adx": 32.5,
+      "atr_pips": 181.0,
       "high_48h": 3891.96,
       "low_48h": 3695.08
     }
   ],
-  "snapshot_time": "2026-11-19T08:20:16Z",
+  "snapshot_time": "2026-11-19T09:20:18Z",
   "news_log": [
     {
       "time": "2026-11-03T03:30:00Z",
