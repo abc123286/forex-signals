@@ -1608,9 +1608,17 @@
       "title": "Revised UoM Inflation Expectations",
       "forecast": "",
       "previous": "4.3%"
+    },
+    {
+      "time": "2026-11-20T17:00:00Z",
+      "currency": "USD",
+      "impact": "Medium",
+      "title": "President Trump Speaks",
+      "forecast": "",
+      "previous": ""
     }
   ],
-  "updated": "2026-11-20T13:20:21Z",
+  "updated": "2026-11-20T13:50:22Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
