@@ -1594,22 +1594,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-20T15:00:00Z",
-      "currency": "USD",
-      "impact": "Medium",
-      "title": "Revised UoM Consumer Sentiment",
-      "forecast": "51.7",
-      "previous": "51.0"
-    },
-    {
-      "time": "2026-11-20T15:00:00Z",
-      "currency": "USD",
-      "impact": "Medium",
-      "title": "Revised UoM Inflation Expectations",
-      "forecast": "",
-      "previous": "4.3%"
-    },
-    {
       "time": "2026-11-20T17:00:00Z",
       "currency": "USD",
       "impact": "Medium",
@@ -1618,7 +1602,7 @@
       "previous": ""
     }
   ],
-  "updated": "2026-11-20T16:20:22Z",
+  "updated": "2026-11-20T17:00:35Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
