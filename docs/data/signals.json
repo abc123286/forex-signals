@@ -1441,12 +1441,35 @@
       "interval": 4,
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
       "created": "2026-11-17T20:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
+      "status": "loss",
+      "closed_at": "2026-11-20T09:00:00Z",
+      "exit_price": 158.91,
       "price_at_alert": 159.337,
       "alerted_at": "2026-11-17T20:00:37Z",
-      "news_note": "USD FOMC Meeting Minutes"
+      "news_note": "USD FOMC Meeting Minutes",
+      "review": {
+        "reasons": [
+          "High-impact news during the trade: USD FOMC Meeting Minutes (Thu 19 Nov, 03:00 AM (MYT)). News often causes sudden moves that hit stops.",
+          "It was in profit first (+64.2 pips, 1.5R) before reversing. A 'move SL to break-even' or 'take partial profit' rule could have saved some of this.",
+          "Only hit because of the spread: the market's middle price stayed just above/below the SL.",
+          "Even with confidence 95/100 it lost: a score shows odds, not a guarantee."
+        ],
+        "hours": 62,
+        "mfe_r": 1.5,
+        "mae_r": 1.0,
+        "mfe_pips": 64.2,
+        "mae_pips": 42.6,
+        "spread_only": true,
+        "tags": {
+          "news_during": true,
+          "quick_stop": false,
+          "in_profit_first": true,
+          "h4_agreed": true,
+          "adx_strong": true,
+          "session": "New York",
+          "score_band": "70+"
+        }
+      }
     },
     {
       "id": "high-USDJPY-202611180000",
@@ -1595,7 +1618,7 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-20T09:20:21Z",
+  "updated": "2026-11-20T09:40:24Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
