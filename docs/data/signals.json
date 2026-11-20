@@ -1594,14 +1594,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-20T08:15:00Z",
-      "currency": "EUR",
-      "impact": "Medium",
-      "title": "ECB President Lagarde Speaks",
-      "forecast": "",
-      "previous": ""
-    },
-    {
       "time": "2026-11-20T15:00:00Z",
       "currency": "USD",
       "impact": "Medium",
@@ -1618,58 +1610,58 @@
       "previous": "4.3%"
     }
   ],
-  "updated": "2026-11-20T09:40:24Z",
+  "updated": "2026-11-20T10:20:20Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.09666,
+      "price": 1.0966,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 43.3,
-      "adx": 14.8,
-      "atr_pips": 10.4,
+      "rsi": 46.2,
+      "adx": 14.9,
+      "atr_pips": 10.8,
       "high_48h": 1.101,
       "low_48h": 1.09537
     },
     {
       "pair": "GBP/USD",
-      "price": 1.31003,
+      "price": 1.31021,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 42.6,
-      "adx": 32.9,
-      "atr_pips": 13.4,
+      "rsi": 43.6,
+      "adx": 31.7,
+      "atr_pips": 13.7,
       "high_48h": 1.3176,
       "low_48h": 1.30798
     },
     {
       "pair": "USD/JPY",
-      "price": 159.046,
+      "price": 158.779,
       "trend_1h": "up",
       "trend_4h": "flat",
       "trend_daily": "up",
-      "rsi": 26.6,
-      "adx": 39.2,
-      "atr_pips": 17.3,
+      "rsi": 19.8,
+      "adx": 41.5,
+      "atr_pips": 18.6,
       "high_48h": 159.979,
-      "low_48h": 158.959
+      "low_48h": 158.75
     },
     {
       "pair": "XAU/USD",
-      "price": 3580.46,
+      "price": 3578.43,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 34.8,
-      "adx": 58.0,
-      "atr_pips": 270.9,
+      "rsi": 32.7,
+      "adx": 56.8,
+      "atr_pips": 265.8,
       "high_48h": 3789.1,
       "low_48h": 3515.19
     }
   ],
-  "snapshot_time": "2026-11-20T09:20:21Z",
+  "snapshot_time": "2026-11-20T10:20:20Z",
   "news_log": [
     {
       "time": "2026-11-03T03:30:00Z",
