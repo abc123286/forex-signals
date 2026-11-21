@@ -1593,58 +1593,58 @@
     "USD/JPY|2026-11-18T19:00:00Z|FOMC Meeting Minutes"
   ],
   "news": [],
-  "updated": "2026-11-21T04:20:25Z",
+  "updated": "2026-11-21T05:20:19Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.09683,
+      "price": 1.09682,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 45.9,
-      "adx": 10.1,
-      "atr_pips": 10.4,
+      "rsi": 45.8,
+      "adx": 9.6,
+      "atr_pips": 10.2,
       "high_48h": 1.101,
-      "low_48h": 1.09567
+      "low_48h": 1.09578
     },
     {
       "pair": "GBP/USD",
-      "price": 1.30883,
+      "price": 1.30879,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
       "rsi": 42.5,
-      "adx": 20.1,
-      "atr_pips": 13.2,
+      "adx": 19.7,
+      "atr_pips": 13.0,
       "high_48h": 1.31735,
       "low_48h": 1.30757
     },
     {
       "pair": "USD/JPY",
-      "price": 158.557,
+      "price": 158.556,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "up",
       "rsi": 33.4,
-      "adx": 36.4,
-      "atr_pips": 20.9,
+      "adx": 35.1,
+      "atr_pips": 20.8,
       "high_48h": 159.979,
       "low_48h": 158.418
     },
     {
       "pair": "XAU/USD",
-      "price": 3532.9,
+      "price": 3532.81,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
       "rsi": 34.4,
-      "adx": 57.1,
-      "atr_pips": 173.0,
+      "adx": 57.3,
+      "atr_pips": 160.8,
       "high_48h": 3743.35,
       "low_48h": 3503.98
     }
   ],
-  "snapshot_time": "2026-11-21T04:20:25Z",
+  "snapshot_time": "2026-11-21T05:20:19Z",
   "news_log": [
     {
       "time": "2026-11-03T03:30:00Z",
