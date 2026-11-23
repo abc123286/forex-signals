@@ -1964,7 +1964,7 @@
       "currency": "USD",
       "impact": "Medium",
       "title": "CB Consumer Confidence",
-      "forecast": "92.1",
+      "forecast": "92.4",
       "previous": "91.7"
     },
     {
@@ -1988,7 +1988,7 @@
       "currency": "AUD",
       "impact": "High",
       "title": "CPI y/y",
-      "forecast": "4.8%",
+      "forecast": "4.7%",
       "previous": "4.3%"
     },
     {
@@ -2032,7 +2032,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-23T20:20:22Z",
+  "updated": "2026-11-23T20:50:23Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
