@@ -1693,22 +1693,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-23T08:30:00Z",
-      "currency": "EUR",
-      "impact": "Medium",
-      "title": "German Flash Manufacturing PMI",
-      "forecast": "54.1",
-      "previous": "54.2"
-    },
-    {
-      "time": "2026-11-23T08:30:00Z",
-      "currency": "EUR",
-      "impact": "Medium",
-      "title": "German Flash Services PMI",
-      "forecast": "52.4",
-      "previous": "51.7"
-    },
-    {
       "time": "2026-11-23T09:30:00Z",
       "currency": "GBP",
       "impact": "Medium",
@@ -1821,7 +1805,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-23T10:20:26Z",
+  "updated": "2026-11-23T10:30:27Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
