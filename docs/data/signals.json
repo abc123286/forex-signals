@@ -1707,12 +1707,34 @@
       "interval": 4,
       "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 60",
       "created": "2026-11-23T12:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
+      "status": "win",
+      "closed_at": "2026-11-23T13:00:00Z",
+      "exit_price": 1.09179,
       "price_at_alert": 1.09598,
       "alerted_at": "2026-11-23T12:00:46Z",
-      "news_note": "none in next 24h"
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 2h.",
+          "It moved your way fairly smoothly (worst point only -4.5 pips).",
+          "The 4-hour trend supported it."
+        ],
+        "hours": 2,
+        "mfe_r": 1.84,
+        "mae_r": 0.16,
+        "mfe_pips": 51.3,
+        "mae_pips": 4.5,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "London + New York",
+          "score_band": "50-69"
+        }
+      }
     },
     {
       "id": "high-EURUSD-202611231200",
@@ -1741,12 +1763,34 @@
       "interval": 4,
       "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 55",
       "created": "2026-11-23T12:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
+      "status": "win",
+      "closed_at": "2026-11-23T13:00:00Z",
+      "exit_price": 1.09226,
       "price_at_alert": 1.09598,
       "alerted_at": "2026-11-23T12:00:46Z",
-      "news_note": "none in next 24h"
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 2h.",
+          "It moved your way fairly smoothly (worst point only -4.5 pips).",
+          "The 4-hour trend supported it."
+        ],
+        "hours": 2,
+        "mfe_r": 2.76,
+        "mae_r": 0.24,
+        "mfe_pips": 51.3,
+        "mae_pips": 4.5,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "London + New York",
+          "score_band": "50-69"
+        }
+      }
     },
     {
       "id": "high-GBPUSD-202611231200",
@@ -1775,12 +1819,34 @@
       "interval": 4,
       "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 55",
       "created": "2026-11-23T12:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
+      "status": "win",
+      "closed_at": "2026-11-23T13:00:00Z",
+      "exit_price": 1.30591,
       "price_at_alert": 1.3099,
       "alerted_at": "2026-11-23T12:00:46Z",
-      "news_note": "none in next 24h"
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 2h.",
+          "It moved your way fairly smoothly (worst point only -1.2 pips).",
+          "The 4-hour trend supported it."
+        ],
+        "hours": 2,
+        "mfe_r": 2.25,
+        "mae_r": 0.06,
+        "mfe_pips": 44.9,
+        "mae_pips": 1.2,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": true,
+          "session": "London + New York",
+          "score_band": "70+"
+        }
+      }
     }
   ],
   "news_warned": [
@@ -1891,7 +1957,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-23T13:20:22Z",
+  "updated": "2026-11-23T14:00:35Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
