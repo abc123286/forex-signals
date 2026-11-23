@@ -1580,6 +1580,105 @@
           "score_band": "70+"
         }
       }
+    },
+    {
+      "id": "low-USDJPY-202611230000",
+      "profile": "low",
+      "pair": "USD/JPY",
+      "direction": "BUY",
+      "entry": 158.921,
+      "sl": 158.466,
+      "tp": 159.375,
+      "sl_pips": 45.4,
+      "tp_pips": 45.4,
+      "rsi": 51.8,
+      "adx": 24.7,
+      "h4_trend": "up",
+      "score": 90,
+      "pros": [
+        "Daily trend agrees",
+        "Moderate trend strength (ADX 25)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [],
+      "session": "Asian",
+      "interval": 4,
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 35",
+      "created": "2026-11-23T00:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 158.921,
+      "alerted_at": "2026-11-23T00:00:38Z",
+      "news_note": "none in next 24h"
+    },
+    {
+      "id": "moderate-USDJPY-202611230000",
+      "profile": "moderate",
+      "pair": "USD/JPY",
+      "direction": "BUY",
+      "entry": 158.921,
+      "sl": 158.58,
+      "tp": 159.432,
+      "sl_pips": 34.1,
+      "tp_pips": 51.1,
+      "rsi": 51.8,
+      "adx": 24.7,
+      "h4_trend": "up",
+      "score": 90,
+      "pros": [
+        "Daily trend agrees",
+        "Moderate trend strength (ADX 25)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [],
+      "session": "Asian",
+      "interval": 4,
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
+      "created": "2026-11-23T00:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 158.921,
+      "alerted_at": "2026-11-23T00:00:38Z",
+      "news_note": "none in next 24h"
+    },
+    {
+      "id": "high-USDJPY-202611230000",
+      "profile": "high",
+      "pair": "USD/JPY",
+      "direction": "BUY",
+      "entry": 158.921,
+      "sl": 158.694,
+      "tp": 159.375,
+      "sl_pips": 22.7,
+      "tp_pips": 45.4,
+      "rsi": 51.8,
+      "adx": 24.7,
+      "h4_trend": "up",
+      "score": 90,
+      "pros": [
+        "Daily trend agrees",
+        "Moderate trend strength (ADX 25)",
+        "Clear room to TP before the recent high",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [],
+      "session": "Asian",
+      "interval": 4,
+      "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 45",
+      "created": "2026-11-23T00:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 158.921,
+      "alerted_at": "2026-11-23T00:00:38Z",
+      "news_note": "none in next 24h"
     }
   ],
   "news_warned": [
@@ -1738,7 +1837,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-22T23:20:24Z",
+  "updated": "2026-11-23T00:00:38Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
