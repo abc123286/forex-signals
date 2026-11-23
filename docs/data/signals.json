@@ -1662,12 +1662,34 @@
       "interval": 4,
       "reason": "Uptrend (EMA50 above EMA200); RSI bounced back above 40",
       "created": "2026-11-23T00:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
+      "status": "win",
+      "closed_at": "2026-11-23T16:00:00Z",
+      "exit_price": 159.432,
       "price_at_alert": 158.921,
       "alerted_at": "2026-11-23T00:00:38Z",
-      "news_note": "none in next 24h"
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 17h.",
+          "It moved your way fairly smoothly (worst point only -11.8 pips).",
+          "The 4-hour trend supported it."
+        ],
+        "hours": 17,
+        "mfe_r": 1.55,
+        "mae_r": 0.35,
+        "mfe_pips": 52.9,
+        "mae_pips": 11.8,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": false,
+          "session": "Asian",
+          "score_band": "70+"
+        }
+      }
     },
     {
       "id": "high-USDJPY-202611230000",
@@ -2001,7 +2023,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-23T15:20:35Z",
+  "updated": "2026-11-23T16:10:23Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
