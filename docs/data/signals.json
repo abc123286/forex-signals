@@ -1693,22 +1693,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-23T08:15:00Z",
-      "currency": "EUR",
-      "impact": "Medium",
-      "title": "French Flash Manufacturing PMI",
-      "forecast": "49.8",
-      "previous": "49.3"
-    },
-    {
-      "time": "2026-11-23T08:15:00Z",
-      "currency": "EUR",
-      "impact": "Medium",
-      "title": "French Flash Services PMI",
-      "forecast": "47.4",
-      "previous": "48.4"
-    },
-    {
       "time": "2026-11-23T08:30:00Z",
       "currency": "EUR",
       "impact": "Medium",
@@ -1837,58 +1821,58 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-23T09:20:33Z",
+  "updated": "2026-11-23T10:20:26Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.0983,
+      "price": 1.09696,
       "trend_1h": "down",
       "trend_4h": "flat",
       "trend_daily": "down",
-      "rsi": 62.9,
-      "adx": 44.1,
-      "atr_pips": 8.9,
+      "rsi": 47.9,
+      "adx": 42.0,
+      "atr_pips": 9.3,
       "high_48h": 1.10055,
       "low_48h": 1.09578
     },
     {
       "pair": "GBP/USD",
-      "price": 1.31263,
+      "price": 1.3108,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 77.4,
-      "adx": 43.8,
-      "atr_pips": 10.3,
+      "rsi": 60.2,
+      "adx": 46.4,
+      "atr_pips": 10.7,
       "high_48h": 1.31457,
       "low_48h": 1.30773
     },
     {
       "pair": "USD/JPY",
-      "price": 159.146,
+      "price": 159.141,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "up",
-      "rsi": 81.1,
-      "adx": 44.8,
-      "atr_pips": 11.8,
-      "high_48h": 159.184,
+      "rsi": 76.1,
+      "adx": 46.5,
+      "atr_pips": 11.6,
+      "high_48h": 159.188,
       "low_48h": 158.464
     },
     {
       "pair": "XAU/USD",
-      "price": 3625.88,
+      "price": 3620.17,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 73.9,
-      "adx": 58.6,
-      "atr_pips": 137.7,
+      "rsi": 74.0,
+      "adx": 58.8,
+      "atr_pips": 138.7,
       "high_48h": 3636.76,
       "low_48h": 3521.75
     }
   ],
-  "snapshot_time": "2026-11-23T09:20:33Z",
+  "snapshot_time": "2026-11-23T10:20:26Z",
   "news_log": [
     {
       "time": "2026-11-03T03:30:00Z",
