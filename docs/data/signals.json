@@ -1693,22 +1693,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-23T09:30:00Z",
-      "currency": "GBP",
-      "impact": "Medium",
-      "title": "Flash Manufacturing PMI",
-      "forecast": "53.0",
-      "previous": "52.8"
-    },
-    {
-      "time": "2026-11-23T09:30:00Z",
-      "currency": "GBP",
-      "impact": "Medium",
-      "title": "Flash Services PMI",
-      "forecast": "53.0",
-      "previous": "53.1"
-    },
-    {
       "time": "2026-11-23T14:45:00Z",
       "currency": "USD",
       "impact": "Medium",
@@ -1805,7 +1789,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-23T11:20:23Z",
+  "updated": "2026-11-23T11:30:26Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
