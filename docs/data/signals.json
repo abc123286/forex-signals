@@ -1679,6 +1679,108 @@
       "price_at_alert": 158.921,
       "alerted_at": "2026-11-23T00:00:38Z",
       "news_note": "none in next 24h"
+    },
+    {
+      "id": "moderate-EURUSD-202611231200",
+      "profile": "moderate",
+      "pair": "EUR/USD",
+      "direction": "SELL",
+      "entry": 1.09598,
+      "sl": 1.09877,
+      "tp": 1.09179,
+      "sl_pips": 27.9,
+      "tp_pips": 41.9,
+      "rsi": 42.3,
+      "adx": 21.8,
+      "h4_trend": "down",
+      "score": 65,
+      "pros": [
+        "Daily trend agrees",
+        "Moderate trend strength (ADX 22)",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [
+        "The recent low is very close (6 pips away)"
+      ],
+      "session": "London + New York",
+      "interval": 4,
+      "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 60",
+      "created": "2026-11-23T12:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 1.09598,
+      "alerted_at": "2026-11-23T12:00:46Z",
+      "news_note": "none in next 24h"
+    },
+    {
+      "id": "high-EURUSD-202611231200",
+      "profile": "high",
+      "pair": "EUR/USD",
+      "direction": "SELL",
+      "entry": 1.09598,
+      "sl": 1.09784,
+      "tp": 1.09226,
+      "sl_pips": 18.6,
+      "tp_pips": 37.2,
+      "rsi": 42.3,
+      "adx": 21.8,
+      "h4_trend": "down",
+      "score": 65,
+      "pros": [
+        "Daily trend agrees",
+        "Moderate trend strength (ADX 22)",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [
+        "The recent low is very close (6 pips away)"
+      ],
+      "session": "London + New York",
+      "interval": 4,
+      "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 55",
+      "created": "2026-11-23T12:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 1.09598,
+      "alerted_at": "2026-11-23T12:00:46Z",
+      "news_note": "none in next 24h"
+    },
+    {
+      "id": "high-GBPUSD-202611231200",
+      "profile": "high",
+      "pair": "GBP/USD",
+      "direction": "SELL",
+      "entry": 1.3099,
+      "sl": 1.3119,
+      "tp": 1.30591,
+      "sl_pips": 20.0,
+      "tp_pips": 39.9,
+      "rsi": 45.3,
+      "adx": 34.5,
+      "h4_trend": "down",
+      "score": 80,
+      "pros": [
+        "Daily trend agrees",
+        "Strong trend (ADX 35)",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [
+        "The recent low sits before TP (23 pips away)"
+      ],
+      "session": "London + New York",
+      "interval": 4,
+      "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 55",
+      "created": "2026-11-23T12:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 1.3099,
+      "alerted_at": "2026-11-23T12:00:46Z",
+      "news_note": "none in next 24h"
     }
   ],
   "news_warned": [
@@ -1789,7 +1891,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-23T11:30:26Z",
+  "updated": "2026-11-23T12:00:46Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
