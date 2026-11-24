@@ -1946,6 +1946,40 @@
       "price_at_alert": 3643.42,
       "alerted_at": "2026-11-23T20:00:33Z",
       "news_note": "none in next 24h"
+    },
+    {
+      "id": "high-XAUUSD-202611240000",
+      "profile": "high",
+      "pair": "XAU/USD",
+      "direction": "SELL",
+      "entry": 3629.03,
+      "sl": 3659.33,
+      "tp": 3568.42,
+      "sl_pips": 303.0,
+      "tp_pips": 606.1,
+      "rsi": 53.3,
+      "adx": 47.0,
+      "h4_trend": "down",
+      "score": 80,
+      "pros": [
+        "Daily trend agrees",
+        "Strong trend (ADX 47)",
+        "Clear room to TP before the recent low",
+        "Signal candle closed in the trade's direction"
+      ],
+      "cons": [
+        "Quiet market hours (low liquidity)"
+      ],
+      "session": "Asian",
+      "interval": 4,
+      "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 55",
+      "created": "2026-11-24T00:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 3629.03,
+      "alerted_at": "2026-11-24T00:00:41Z",
+      "news_note": "none in next 24h"
     }
   ],
   "news_warned": [
@@ -2032,7 +2066,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-23T23:20:21Z",
+  "updated": "2026-11-24T00:00:41Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
