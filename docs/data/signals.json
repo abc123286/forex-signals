@@ -1940,12 +1940,34 @@
       "interval": 4,
       "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 60",
       "created": "2026-11-23T20:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
+      "status": "win",
+      "closed_at": "2026-11-24T15:00:00Z",
+      "exit_price": 3574.5,
       "price_at_alert": 3643.42,
       "alerted_at": "2026-11-23T20:00:33Z",
-      "news_note": "none in next 24h"
+      "news_note": "none in next 24h",
+      "review": {
+        "reasons": [
+          "Reached TP in about 20h.",
+          "It went against you first (-377.8 pips, 0.82R of the way to SL) before turning: a narrow escape.",
+          "The 4-hour trend supported it."
+        ],
+        "hours": 20,
+        "mfe_r": 1.66,
+        "mae_r": 0.82,
+        "mfe_pips": 760.7,
+        "mae_pips": 377.8,
+        "spread_only": false,
+        "tags": {
+          "news_during": false,
+          "quick_stop": false,
+          "in_profit_first": false,
+          "h4_agreed": true,
+          "adx_strong": true,
+          "session": "New York",
+          "score_band": "70+"
+        }
+      }
     },
     {
       "id": "high-XAUUSD-202611240000",
@@ -2089,7 +2111,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-24T15:20:32Z",
+  "updated": "2026-11-24T16:00:33Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
