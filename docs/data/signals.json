@@ -2039,14 +2039,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-24T15:00:00Z",
-      "currency": "USD",
-      "impact": "Medium",
-      "title": "CB Consumer Confidence",
-      "forecast": "92.4",
-      "previous": "91.7"
-    },
-    {
       "time": "2026-11-24T17:25:00Z",
       "currency": "CAD",
       "impact": "Medium",
@@ -2111,7 +2103,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-24T16:20:31Z",
+  "updated": "2026-11-24T17:00:35Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
