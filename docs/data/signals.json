@@ -2039,14 +2039,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-24T17:25:00Z",
-      "currency": "CAD",
-      "impact": "Medium",
-      "title": "BOC Gov Macklem Speaks",
-      "forecast": "",
-      "previous": ""
-    },
-    {
       "time": "2026-11-25T00:30:00Z",
       "currency": "AUD",
       "impact": "High",
@@ -2103,7 +2095,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-24T19:20:21Z",
+  "updated": "2026-11-24T19:30:31Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
