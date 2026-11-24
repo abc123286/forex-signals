@@ -125,6 +125,7 @@ PROFILES = {
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(ROOT, "docs", "data", "signals.json")
+HISTORY_DIR = os.path.join(ROOT, "data", "history")   # growing 1-hour price history, added to every Saturday
 API_URL = "https://api.twelvedata.com/time_series"
 NEWS_URL = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"   # Forex Factory calendar feed
 
@@ -353,6 +354,41 @@ def strategy_info():
 # ----------------------------------------------------------------------------
 # Price data
 # ----------------------------------------------------------------------------
+def history_file(pair):
+    return os.path.join(HISTORY_DIR, pair.replace("/", "") + "_1h.csv")
+
+
+def load_history(pair):
+    """Saved 1-hour candles (oldest first). Empty list if none saved yet."""
+    path = history_file(pair)
+    if not os.path.exists(path):
+        return []
+    out = []
+    with open(path, encoding="utf-8") as f:
+        next(f, None)                      # header
+        for line in f:
+            p = line.strip().split(",")
+            if len(p) == 5:
+                out.append({"time": from_iso(p[0]), "open": float(p[1]), "high": float(p[2]),
+                            "low": float(p[3]), "close": float(p[4])})
+    return out
+
+
+def save_history(pair, candles):
+    os.makedirs(HISTORY_DIR, exist_ok=True)
+    with open(history_file(pair), "w", encoding="utf-8") as f:
+        f.write("time,open,high,low,close\n")
+        for c in candles:
+            f.write(f"{iso(c['time'])},{c['open']},{c['high']},{c['low']},{c['close']}\n")
+
+
+def merge_candles(old, new):
+    """Join saved history with freshly downloaded candles (newer download wins on overlaps)."""
+    by_time = {c["time"]: c for c in old}
+    by_time.update({c["time"]: c for c in new})
+    return [by_time[t] for t in sorted(by_time)]
+
+
 def fetch_candles(pair, api_key, size=CANDLES):
     params = {"symbol": pair, "interval": f"{INTERVAL_HOURS}h", "outputsize": size,
               "timezone": "UTC", "apikey": api_key}
@@ -866,7 +902,7 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
         if n:
             time.sleep(2)   # stay inside the free plan's per-minute limit
         try:
-            candles = fetch(pair, api_key)
+            candles = merge_candles(load_history(pair), fetch(pair, api_key))
         except Exception as e:
             print(f"[{pair}] could not get prices: {e}")
             continue
