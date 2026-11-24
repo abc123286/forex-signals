@@ -13,9 +13,12 @@ from datetime import datetime, timedelta, timezone
 
 import signals as S
 
+ARCHIVE_CANDLES = 5000      # free-plan maximum per request
+
 
 def run(fetch=None, now=None):
-    fetch = fetch or (lambda pair, key: S.fetch_candles(pair, key, S.CANDLES))
+    # 5,000 candles (~7 months) costs the same 1 credit as 2,000, and also fills any missed week
+    fetch = fetch or (lambda pair, key: S.fetch_candles(pair, key, ARCHIVE_CANDLES))
     now = now or datetime.now(timezone.utc)
     key = os.getenv("TWELVEDATA_API_KEY", "")
     for n, pair in enumerate(S.PAIRS):
