@@ -2089,64 +2089,59 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-24T14:20:21Z",
+  "updated": "2026-11-24T15:20:32Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.09731,
+      "price": 1.09655,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 69.5,
-      "adx": 34.4,
-      "atr_pips": 12.6,
+      "rsi": 71.9,
+      "adx": 34.8,
+      "atr_pips": 12.8,
       "high_48h": 1.10055,
       "low_48h": 1.08816
     },
     {
       "pair": "GBP/USD",
-      "price": 1.31001,
+      "price": 1.31061,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 69.4,
-      "adx": 29.3,
-      "atr_pips": 14.4,
+      "rsi": 73.8,
+      "adx": 30.8,
+      "atr_pips": 15.0,
       "high_48h": 1.31457,
       "low_48h": 1.30119
     },
     {
       "pair": "USD/JPY",
-      "price": 159.186,
+      "price": 159.296,
       "trend_1h": "down",
       "trend_4h": "flat",
       "trend_daily": "up",
-      "rsi": 49.7,
-      "adx": 25.1,
-      "atr_pips": 17.5,
+      "rsi": 54.0,
+      "adx": 24.1,
+      "atr_pips": 17.6,
       "high_48h": 159.59,
       "low_48h": 158.464
     },
     {
       "pair": "XAU/USD",
-      "price": 3620.26,
+      "price": 3583.99,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 45.0,
-      "adx": 25.1,
-      "atr_pips": 181.9,
+      "rsi": 48.9,
+      "adx": 23.4,
+      "atr_pips": 183.8,
       "high_48h": 3689.08,
       "low_48h": 3521.75
     }
   ],
-  "snapshot_time": "2026-11-24T14:20:21Z",
+  "snapshot_time": "2026-11-24T15:20:32Z",
   "news_log": [
-    {
-      "time": "2026-11-03T15:16:00Z",
-      "currency": "USD",
-      "title": "Congressional Elections"
-    },
     {
       "time": "2026-11-03T21:45:00Z",
       "currency": "NZD",
