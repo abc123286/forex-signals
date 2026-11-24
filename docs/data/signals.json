@@ -2089,64 +2089,59 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-24T04:20:27Z",
+  "updated": "2026-11-24T05:20:25Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.0909,
+      "price": 1.09073,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 37.7,
-      "adx": 44.1,
-      "atr_pips": 11.7,
+      "rsi": 37.4,
+      "adx": 43.3,
+      "atr_pips": 11.2,
       "high_48h": 1.10055,
       "low_48h": 1.08816
     },
     {
       "pair": "GBP/USD",
-      "price": 1.30371,
+      "price": 1.3041,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 40.3,
-      "adx": 36.2,
-      "atr_pips": 12.5,
+      "rsi": 40.0,
+      "adx": 34.5,
+      "atr_pips": 12.6,
       "high_48h": 1.31457,
       "low_48h": 1.30119
     },
     {
       "pair": "USD/JPY",
-      "price": 158.988,
+      "price": 159.103,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "up",
-      "rsi": 49.8,
-      "adx": 28.4,
-      "atr_pips": 15.3,
+      "rsi": 48.9,
+      "adx": 27.2,
+      "atr_pips": 14.7,
       "high_48h": 159.509,
       "low_48h": 158.464
     },
     {
       "pair": "XAU/USD",
-      "price": 3630.08,
+      "price": 3635.63,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 52.6,
-      "adx": 45.5,
-      "atr_pips": 191.2,
+      "rsi": 52.2,
+      "adx": 43.1,
+      "atr_pips": 186.7,
       "high_48h": 3689.08,
       "low_48h": 3521.75
     }
   ],
-  "snapshot_time": "2026-11-24T04:20:27Z",
+  "snapshot_time": "2026-11-24T05:20:25Z",
   "news_log": [
-    {
-      "time": "2026-11-03T04:30:00Z",
-      "currency": "AUD",
-      "title": "RBA Press Conference"
-    },
     {
       "time": "2026-11-03T15:16:00Z",
       "currency": "USD",
