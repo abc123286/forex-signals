@@ -2089,74 +2089,59 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-24T03:20:20Z",
+  "updated": "2026-11-24T04:20:27Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.09123,
+      "price": 1.0909,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 38.2,
-      "adx": 45.1,
-      "atr_pips": 12.2,
+      "rsi": 37.7,
+      "adx": 44.1,
+      "atr_pips": 11.7,
       "high_48h": 1.10055,
       "low_48h": 1.08816
     },
     {
       "pair": "GBP/USD",
-      "price": 1.30413,
+      "price": 1.30371,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 40.1,
-      "adx": 37.3,
-      "atr_pips": 13.0,
+      "rsi": 40.3,
+      "adx": 36.2,
+      "atr_pips": 12.5,
       "high_48h": 1.31457,
       "low_48h": 1.30119
     },
     {
       "pair": "USD/JPY",
-      "price": 158.903,
+      "price": 158.988,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "up",
-      "rsi": 47.8,
-      "adx": 29.7,
-      "atr_pips": 15.8,
+      "rsi": 49.8,
+      "adx": 28.4,
+      "atr_pips": 15.3,
       "high_48h": 159.509,
       "low_48h": 158.464
     },
     {
       "pair": "XAU/USD",
-      "price": 3634.81,
+      "price": 3630.08,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 56.5,
-      "adx": 47.9,
-      "atr_pips": 194.2,
+      "rsi": 52.6,
+      "adx": 45.5,
+      "atr_pips": 191.2,
       "high_48h": 3689.08,
       "low_48h": 3521.75
     }
   ],
-  "snapshot_time": "2026-11-24T03:20:20Z",
+  "snapshot_time": "2026-11-24T04:20:27Z",
   "news_log": [
-    {
-      "time": "2026-11-03T03:30:00Z",
-      "currency": "AUD",
-      "title": "Cash Rate"
-    },
-    {
-      "time": "2026-11-03T03:30:00Z",
-      "currency": "AUD",
-      "title": "RBA Monetary Policy Statement"
-    },
-    {
-      "time": "2026-11-03T03:30:00Z",
-      "currency": "AUD",
-      "title": "RBA Rate Statement"
-    },
     {
       "time": "2026-11-03T04:30:00Z",
       "currency": "AUD",
