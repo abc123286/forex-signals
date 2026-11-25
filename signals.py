@@ -797,7 +797,17 @@ def find_telegram_chats():
         print("Telegram said:", r)
         return
     seen = {}
-    for u in r.get("result", []):
+    res = r.get("result", [])
+    kinds = sorted({k for u in res for k in u if k != "update_id"})
+    types = sorted({(u.get(k) or {}).get("chat", {}).get("type", "?") for u in res for k in u
+                    if isinstance(u.get(k), dict)})
+    print(f"Telegram has {len(res)} recent update(s); kinds: {kinds}; chat types: {types}")
+    try:
+        wh = requests.get(f"https://api.telegram.org/bot{token}/getWebhookInfo", timeout=20).json()
+        print("Webhook set:", bool((wh.get("result") or {}).get("url")))
+    except Exception as e:
+        print("Webhook check failed:", e)
+    for u in res:
         for key in ("message", "my_chat_member", "channel_post", "chat_member"):
             chat = (u.get(key) or {}).get("chat")
             if chat and chat.get("type") in ("group", "supergroup", "channel"):
