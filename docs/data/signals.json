@@ -2075,14 +2075,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-25T14:15:00Z",
-      "currency": "GBP",
-      "impact": "Medium",
-      "title": "Monetary Policy Report Hearings",
-      "forecast": "",
-      "previous": ""
-    },
-    {
       "time": "2026-11-26T23:30:00Z",
       "currency": "JPY",
       "impact": "Medium",
@@ -2091,58 +2083,58 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-25T15:30:31Z",
+  "updated": "2026-11-25T16:30:28Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.09355,
+      "price": 1.09478,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 46.0,
-      "adx": 17.2,
-      "atr_pips": 11.3,
+      "rsi": 52.8,
+      "adx": 16.1,
+      "atr_pips": 11.5,
       "high_48h": 1.09807,
       "low_48h": 1.08816
     },
     {
       "pair": "GBP/USD",
-      "price": 1.30577,
+      "price": 1.30699,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 38.1,
-      "adx": 30.4,
-      "atr_pips": 15.5,
+      "rsi": 40.9,
+      "adx": 30.5,
+      "atr_pips": 15.6,
       "high_48h": 1.31249,
       "low_48h": 1.30119
     },
     {
       "pair": "USD/JPY",
-      "price": 159.156,
+      "price": 159.039,
       "trend_1h": "up",
       "trend_4h": "up",
       "trend_daily": "up",
-      "rsi": 49.6,
-      "adx": 15.0,
+      "rsi": 43.8,
+      "adx": 15.8,
       "atr_pips": 18.7,
       "high_48h": 159.59,
       "low_48h": 158.76
     },
     {
       "pair": "XAU/USD",
-      "price": 3431.08,
+      "price": 3463.25,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 28.2,
-      "adx": 33.8,
-      "atr_pips": 242.5,
+      "rsi": 25.5,
+      "adx": 36.1,
+      "atr_pips": 259.1,
       "high_48h": 3681.2,
-      "low_48h": 3456.57
+      "low_48h": 3426.48
     }
   ],
-  "snapshot_time": "2026-11-25T15:20:30Z",
+  "snapshot_time": "2026-11-25T16:30:28Z",
   "news_log": [
     {
       "time": "2026-11-05T12:00:00Z",
