@@ -755,6 +755,9 @@ def telegram_chats():
     return [c.strip() for c in (os.getenv("TELEGRAM_CHAT_ID") or "").split(",") if c.strip()]
 
 
+TELEGRAM_ISSUES = []   # problems seen this run; saved into signals.json for the check-ins
+
+
 def _send_one(token, chat, text):
     for attempt in range(1, 4):          # retry: short network hiccups happen
         try:
@@ -770,13 +773,16 @@ def _send_one(token, chat, text):
                 new_id = None
             if new_id:                   # group was upgraded to a "supergroup": its ID changed
                 print(f"!! Group {chat} moved to new ID {new_id} - update the TELEGRAM_CHAT_ID secret.")
+                TELEGRAM_ISSUES.append(f"group ID changed: {chat} -> {new_id} (update TELEGRAM_CHAT_ID)")
                 chat = str(new_id)
                 continue                 # deliver this alert to the new ID straight away
             if r.status_code < 500 and r.status_code != 429:
+                TELEGRAM_ISSUES.append(f"chat {chat}: {r.text[:150]}")
                 return False             # a real error (e.g. bot removed) - retrying won't help
         except Exception as e:
             print(f"Telegram error for chat {chat} (attempt {attempt}):", e)
         time.sleep(5 * attempt)
+    TELEGRAM_ISSUES.append(f"chat {chat}: could not deliver after 3 tries")
     return False
 
 
@@ -1053,6 +1059,11 @@ def run(fetch=fetch_candles, now=None, news_fetch=fetch_news):
     for subject, text, prof in outbox:
         if prof is None or prof in ALERT_PROFILES:
             notify(subject, text)
+    if TELEGRAM_ISSUES:
+        log = data.setdefault("telegram_issues", [])
+        log += [{"time": iso(now), "issue": t} for t in TELEGRAM_ISSUES]
+        del log[:-20]
+        changed = True
 
     if changed or not os.path.exists(DATA_FILE):
         data["updated"] = iso(now)
