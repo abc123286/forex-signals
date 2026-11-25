@@ -14,6 +14,10 @@ on:
         description: "Only re-send the latest TP/SL result to Telegram"
         type: boolean
         default: false
+      find_chats:
+        description: "Only list Telegram groups the bot was added to (to get the group ID)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -45,7 +49,9 @@ jobs:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: |
           export SITE_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/"
-          if [ "${{ inputs.resend_last_result }}" = "true" ]; then
+          if [ "${{ inputs.find_chats }}" = "true" ]; then
+            python signals.py --find-chats
+          elif [ "${{ inputs.resend_last_result }}" = "true" ]; then
             python signals.py --resend-last
           elif [ "${{ inputs.test_alert }}" = "true" ]; then
             python signals.py --test-alert

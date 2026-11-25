@@ -749,23 +749,63 @@ def review_trade(sig, candles, ind, news_log):
 # ----------------------------------------------------------------------------
 # Alerts
 # ----------------------------------------------------------------------------
-def send_telegram(text):
-    token, chat = os.getenv("TELEGRAM_BOT_TOKEN"), os.getenv("TELEGRAM_CHAT_ID")
-    if not token or not chat:
-        return
+def telegram_chats():
+    """TELEGRAM_CHAT_ID can hold several chats separated by commas
+    (e.g. your own chat and a group). Each one gets every alert."""
+    return [c.strip() for c in (os.getenv("TELEGRAM_CHAT_ID") or "").split(",") if c.strip()]
+
+
+def _send_one(token, chat, text):
     for attempt in range(1, 4):          # retry: short network hiccups happen
         try:
             r = requests.post(f"https://api.telegram.org/bot{token}/sendMessage",
                               data={"chat_id": chat, "text": text, "parse_mode": "HTML",
                                     "disable_web_page_preview": "true"}, timeout=20)
             if r.ok:
-                return
-            print(f"Telegram error (attempt {attempt}):", r.text)
+                return True
+            print(f"Telegram error for chat {chat} (attempt {attempt}):", r.text)
+            try:
+                new_id = (r.json().get("parameters") or {}).get("migrate_to_chat_id")
+            except Exception:
+                new_id = None
+            if new_id:                   # group was upgraded to a "supergroup": its ID changed
+                print(f"!! Group {chat} moved to new ID {new_id} - update the TELEGRAM_CHAT_ID secret.")
+                chat = str(new_id)
+                continue                 # deliver this alert to the new ID straight away
             if r.status_code < 500 and r.status_code != 429:
-                return                   # a real error (e.g. bad token) - retrying won't help
+                return False             # a real error (e.g. bot removed) - retrying won't help
         except Exception as e:
-            print(f"Telegram error (attempt {attempt}):", e)
+            print(f"Telegram error for chat {chat} (attempt {attempt}):", e)
         time.sleep(5 * attempt)
+    return False
+
+
+def send_telegram(text):
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
+    if not token:
+        return
+    for chat in telegram_chats():        # one failing chat never stops the others
+        _send_one(token, chat, text)
+
+
+def find_telegram_chats():
+    """Print the groups/channels the bot has been added to, so we can get their ID.
+    Only group names and IDs are printed (logs of a public repo are public)."""
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
+    r = requests.get(f"https://api.telegram.org/bot{token}/getUpdates", timeout=20).json()
+    if not r.get("ok"):
+        print("Telegram said:", r)
+        return
+    seen = {}
+    for u in r.get("result", []):
+        for key in ("message", "my_chat_member", "channel_post", "chat_member"):
+            chat = (u.get(key) or {}).get("chat")
+            if chat and chat.get("type") in ("group", "supergroup", "channel"):
+                seen[chat["id"]] = (chat.get("title"), chat.get("type"))
+    if not seen:
+        print("No groups found yet. Add the bot to the group, send a message there, then run again.")
+    for cid, (title, kind) in seen.items():
+        print(f"FOUND {kind}: '{title}'  ->  chat ID {cid}")
 
 
 def send_email(subject, text):
@@ -1028,7 +1068,9 @@ def resend_last_result():
 
 
 if __name__ == "__main__":
-    if "--resend-last" in sys.argv:
+    if "--find-chats" in sys.argv:
+        find_telegram_chats()
+    elif "--resend-last" in sys.argv:
         resend_last_result()
     elif "--test-alert" in sys.argv:
         notify("Forex bot test", "<b>✅ Test alert</b>\nYour forex signal bot can reach you.")
