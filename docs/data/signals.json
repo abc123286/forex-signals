@@ -2025,6 +2025,40 @@
           "score_band": "70+"
         }
       }
+    },
+    {
+      "id": "high-GBPUSD-202611250400",
+      "profile": "high",
+      "pair": "GBP/USD",
+      "direction": "SELL",
+      "entry": 1.30921,
+      "sl": 1.31167,
+      "tp": 1.30429,
+      "sl_pips": 24.6,
+      "tp_pips": 49.2,
+      "rsi": 49.9,
+      "adx": 26.4,
+      "h4_trend": "down",
+      "score": 80,
+      "pros": [
+        "Daily trend agrees",
+        "Strong trend (ADX 26)",
+        "Clear room to TP before the recent low",
+        "Signal candle closed in the trade's direction"
+      ],
+      "cons": [
+        "Quiet market hours (low liquidity)"
+      ],
+      "session": "Asian",
+      "interval": 4,
+      "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 55",
+      "created": "2026-11-25T04:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 1.30921,
+      "alerted_at": "2026-11-25T04:00:31Z",
+      "news_note": "USD Core PCE Price Index m/m; USD Prelim GDP q/q"
     }
   ],
   "news_warned": [
@@ -2071,7 +2105,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-25T03:20:21Z",
+  "updated": "2026-11-25T04:00:31Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
