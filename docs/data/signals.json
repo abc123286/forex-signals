@@ -2053,12 +2053,35 @@
       "interval": 4,
       "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 55",
       "created": "2026-11-25T04:00:00Z",
-      "status": "open",
-      "closed_at": null,
-      "exit_price": null,
+      "status": "loss",
+      "closed_at": "2026-11-25T17:00:00Z",
+      "exit_price": 1.31167,
       "price_at_alert": 1.30921,
       "alerted_at": "2026-11-25T04:00:31Z",
-      "news_note": "USD Core PCE Price Index m/m; USD Prelim GDP q/q"
+      "news_note": "USD Core PCE Price Index m/m; USD Prelim GDP q/q",
+      "review": {
+        "reasons": [
+          "High-impact news during the trade: USD Core PCE Price Index m/m (Wed 25 Nov, 09:30 PM (MYT)). News often causes sudden moves that hit stops.",
+          "It was in profit first (+46.2 pips, 1.88R) before reversing. A 'move SL to break-even' or 'take partial profit' rule could have saved some of this.",
+          "Warning signs at entry: Quiet market hours (low liquidity).",
+          "Even with confidence 80/100 it lost: a score shows odds, not a guarantee."
+        ],
+        "hours": 14,
+        "mfe_r": 1.88,
+        "mae_r": 1.2,
+        "mfe_pips": 46.2,
+        "mae_pips": 29.4,
+        "spread_only": false,
+        "tags": {
+          "news_during": true,
+          "quick_stop": false,
+          "in_profit_first": true,
+          "h4_agreed": true,
+          "adx_strong": true,
+          "session": "Asian",
+          "score_band": "70+"
+        }
+      }
     }
   ],
   "news_warned": [
@@ -2083,58 +2106,58 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-25T16:30:28Z",
+  "updated": "2026-11-25T17:30:28Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.09478,
+      "price": 1.09866,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 52.8,
-      "adx": 16.1,
-      "atr_pips": 11.5,
+      "rsi": 69.5,
+      "adx": 17.4,
+      "atr_pips": 13.1,
       "high_48h": 1.09807,
-      "low_48h": 1.08816
+      "low_48h": 1.08819
     },
     {
       "pair": "GBP/USD",
-      "price": 1.30699,
+      "price": 1.3117,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 40.9,
-      "adx": 30.5,
-      "atr_pips": 15.6,
+      "rsi": 58.6,
+      "adx": 29.2,
+      "atr_pips": 17.9,
       "high_48h": 1.31249,
       "low_48h": 1.30119
     },
     {
       "pair": "USD/JPY",
-      "price": 159.039,
+      "price": 158.838,
       "trend_1h": "up",
       "trend_4h": "up",
       "trend_daily": "up",
-      "rsi": 43.8,
-      "adx": 15.8,
-      "atr_pips": 18.7,
+      "rsi": 32.0,
+      "adx": 18.5,
+      "atr_pips": 20.9,
       "high_48h": 159.59,
-      "low_48h": 158.76
+      "low_48h": 158.655
     },
     {
       "pair": "XAU/USD",
-      "price": 3463.25,
+      "price": 3500.88,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 25.5,
-      "adx": 36.1,
-      "atr_pips": 259.1,
+      "rsi": 31.6,
+      "adx": 38.3,
+      "atr_pips": 256.8,
       "high_48h": 3681.2,
       "low_48h": 3426.48
     }
   ],
-  "snapshot_time": "2026-11-25T16:30:28Z",
+  "snapshot_time": "2026-11-25T17:30:28Z",
   "news_log": [
     {
       "time": "2026-11-05T12:00:00Z",
