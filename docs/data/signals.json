@@ -2039,30 +2039,6 @@
   ],
   "news": [
     {
-      "time": "2026-11-25T00:30:00Z",
-      "currency": "AUD",
-      "impact": "High",
-      "title": "CPI m/m",
-      "forecast": "0.4%",
-      "previous": "0.8%"
-    },
-    {
-      "time": "2026-11-25T00:30:00Z",
-      "currency": "AUD",
-      "impact": "High",
-      "title": "CPI y/y",
-      "forecast": "4.7%",
-      "previous": "4.3%"
-    },
-    {
-      "time": "2026-11-25T00:30:00Z",
-      "currency": "AUD",
-      "impact": "High",
-      "title": "Trimmed Mean CPI m/m",
-      "forecast": "0.3%",
-      "previous": "0.3%"
-    },
-    {
       "time": "2026-11-25T13:30:00Z",
       "currency": "USD",
       "impact": "High",
@@ -2095,7 +2071,7 @@
       "previous": "2.6%"
     }
   ],
-  "updated": "2026-11-25T02:20:22Z",
+  "updated": "2026-11-25T02:30:28Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
