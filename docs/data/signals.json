@@ -2164,68 +2164,59 @@
     "GBP/USD|2026-11-25T13:30:00Z|Core PCE Price Index m/m",
     "GBP/USD|2026-11-25T13:30:00Z|Prelim GDP q/q"
   ],
-  "news": [
-    {
-      "time": "2026-11-26T23:30:00Z",
-      "currency": "JPY",
-      "impact": "Medium",
-      "title": "Tokyo Core CPI y/y",
-      "forecast": "3.0%",
-      "previous": "2.6%"
-    }
-  ],
-  "updated": "2026-11-27T00:30:27Z",
+  "news": [],
+  "updated": "2026-11-27T01:30:29Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.09646,
+      "price": 1.09673,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 50.9,
-      "adx": 26.5,
-      "atr_pips": 7.8,
+      "rsi": 43.4,
+      "adx": 25.1,
+      "atr_pips": 7.9,
       "high_48h": 1.09925,
       "low_48h": 1.09316
     },
     {
       "pair": "GBP/USD",
-      "price": 1.30995,
+      "price": 1.31038,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 51.1,
-      "adx": 18.4,
-      "atr_pips": 11.4,
+      "rsi": 43.1,
+      "adx": 17.3,
+      "atr_pips": 11.6,
       "high_48h": 1.31305,
       "low_48h": 1.30459
     },
     {
       "pair": "USD/JPY",
-      "price": 159.352,
+      "price": 159.287,
       "trend_1h": "up",
       "trend_4h": "up",
       "trend_daily": "up",
-      "rsi": 55.1,
-      "adx": 9.5,
+      "rsi": 58.7,
+      "adx": 9.6,
       "atr_pips": 8.9,
       "high_48h": 159.497,
       "low_48h": 158.655
     },
     {
       "pair": "XAU/USD",
-      "price": 3569.81,
+      "price": 3576.48,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 51.4,
-      "adx": 8.2,
-      "atr_pips": 127.1,
+      "rsi": 48.0,
+      "adx": 8.6,
+      "atr_pips": 129.3,
       "high_48h": 3606.46,
       "low_48h": 3426.48
     }
   ],
-  "snapshot_time": "2026-11-27T00:30:27Z",
+  "snapshot_time": "2026-11-27T01:30:29Z",
   "news_log": [
     {
       "time": "2026-11-06T13:30:00Z",
