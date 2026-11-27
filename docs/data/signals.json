@@ -2231,64 +2231,59 @@
     "GBP/USD|2026-11-25T13:30:00Z|Prelim GDP q/q"
   ],
   "news": [],
-  "updated": "2026-11-27T21:30:30Z",
+  "updated": "2026-11-27T22:30:28Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.09335,
+      "price": 1.09428,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
       "rsi": 30.3,
-      "adx": 27.7,
-      "atr_pips": 8.9,
+      "adx": 28.9,
+      "atr_pips": 8.5,
       "high_48h": 1.0989,
-      "low_48h": 1.09321
+      "low_48h": 1.09312
     },
     {
       "pair": "GBP/USD",
-      "price": 1.30954,
+      "price": 1.3099,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 37.1,
-      "adx": 25.3,
-      "atr_pips": 12.6,
+      "rsi": 40.8,
+      "adx": 25.2,
+      "atr_pips": 12.5,
       "high_48h": 1.31365,
       "low_48h": 1.30904
     },
     {
       "pair": "USD/JPY",
-      "price": 159.584,
+      "price": 159.52,
       "trend_1h": "up",
       "trend_4h": "up",
       "trend_daily": "up",
-      "rsi": 62.5,
-      "adx": 16.7,
-      "atr_pips": 8.7,
+      "rsi": 62.7,
+      "adx": 17.7,
+      "atr_pips": 8.4,
       "high_48h": 159.596,
       "low_48h": 158.956
     },
     {
       "pair": "XAU/USD",
-      "price": 3654.4,
+      "price": 3654.57,
       "trend_1h": "down",
       "trend_4h": "flat",
       "trend_daily": "down",
       "rsi": 60.6,
-      "adx": 25.2,
-      "atr_pips": 166.0,
+      "adx": 24.6,
+      "atr_pips": 154.6,
       "high_48h": 3684.87,
       "low_48h": 3546.21
     }
   ],
-  "snapshot_time": "2026-11-27T21:30:30Z",
+  "snapshot_time": "2026-11-27T22:30:28Z",
   "news_log": [
-    {
-      "time": "2026-11-06T21:45:00Z",
-      "currency": "NZD",
-      "title": "Parliamentary Elections"
-    },
     {
       "time": "2026-11-10T13:30:00Z",
       "currency": "USD",
