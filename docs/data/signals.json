@@ -2165,84 +2165,59 @@
     "GBP/USD|2026-11-25T13:30:00Z|Prelim GDP q/q"
   ],
   "news": [],
-  "updated": "2026-11-27T12:30:29Z",
+  "updated": "2026-11-27T13:30:36Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
-      "price": 1.09659,
+      "price": 1.09449,
       "trend_1h": "down",
       "trend_4h": "down",
       "trend_daily": "down",
-      "rsi": 46.7,
-      "adx": 20.2,
+      "rsi": 47.4,
+      "adx": 18.8,
       "atr_pips": 9.3,
       "high_48h": 1.09925,
       "low_48h": 1.09346
     },
     {
       "pair": "GBP/USD",
-      "price": 1.3134,
+      "price": 1.31097,
       "trend_1h": "down",
       "trend_4h": "flat",
       "trend_daily": "down",
-      "rsi": 61.4,
-      "adx": 26.5,
-      "atr_pips": 12.2,
-      "high_48h": 1.31354,
+      "rsi": 63.0,
+      "adx": 27.4,
+      "atr_pips": 11.9,
+      "high_48h": 1.31365,
       "low_48h": 1.30459
     },
     {
       "pair": "USD/JPY",
-      "price": 159.467,
+      "price": 159.546,
       "trend_1h": "up",
       "trend_4h": "up",
       "trend_daily": "up",
-      "rsi": 57.0,
-      "adx": 12.1,
+      "rsi": 60.7,
+      "adx": 12.0,
       "atr_pips": 9.6,
       "high_48h": 159.571,
       "low_48h": 158.655
     },
     {
       "pair": "XAU/USD",
-      "price": 3670.13,
+      "price": 3647.52,
       "trend_1h": "down",
       "trend_4h": "flat",
       "trend_daily": "down",
-      "rsi": 75.0,
-      "adx": 33.8,
-      "atr_pips": 164.1,
+      "rsi": 72.2,
+      "adx": 35.2,
+      "atr_pips": 160.9,
       "high_48h": 3684.87,
       "low_48h": 3426.48
     }
   ],
-  "snapshot_time": "2026-11-27T12:30:29Z",
+  "snapshot_time": "2026-11-27T13:30:36Z",
   "news_log": [
-    {
-      "time": "2026-11-06T13:30:00Z",
-      "currency": "CAD",
-      "title": "Employment Change"
-    },
-    {
-      "time": "2026-11-06T13:30:00Z",
-      "currency": "CAD",
-      "title": "Unemployment Rate"
-    },
-    {
-      "time": "2026-11-06T13:30:00Z",
-      "currency": "USD",
-      "title": "Average Hourly Earnings m/m"
-    },
-    {
-      "time": "2026-11-06T13:30:00Z",
-      "currency": "USD",
-      "title": "Non-Farm Employment Change"
-    },
-    {
-      "time": "2026-11-06T13:30:00Z",
-      "currency": "USD",
-      "title": "Unemployment Rate"
-    },
     {
       "time": "2026-11-06T16:00:00Z",
       "currency": "JPY",
