@@ -2150,6 +2150,72 @@
       "price_at_alert": 1.31114,
       "alerted_at": "2026-11-26T00:00:38Z",
       "news_note": "none in next 24h"
+    },
+    {
+      "id": "low-XAUUSD-202611271600",
+      "profile": "low",
+      "pair": "XAU/USD",
+      "direction": "SELL",
+      "entry": 3628.88,
+      "sl": 3712.01,
+      "tp": 3545.75,
+      "sl_pips": 831.3,
+      "tp_pips": 831.3,
+      "rsi": 56.0,
+      "adx": 23.4,
+      "h4_trend": "down",
+      "score": 90,
+      "pros": [
+        "Daily trend agrees",
+        "Moderate trend strength (ADX 23)",
+        "Clear room to TP before the recent low",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [],
+      "session": "New York",
+      "interval": 4,
+      "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 65",
+      "created": "2026-11-27T16:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 3628.88,
+      "alerted_at": "2026-11-27T16:00:42Z",
+      "news_note": "none in next 24h"
+    },
+    {
+      "id": "moderate-XAUUSD-202611271600",
+      "profile": "moderate",
+      "pair": "XAU/USD",
+      "direction": "SELL",
+      "entry": 3628.88,
+      "sl": 3691.23,
+      "tp": 3535.36,
+      "sl_pips": 623.5,
+      "tp_pips": 935.2,
+      "rsi": 56.0,
+      "adx": 23.4,
+      "h4_trend": "down",
+      "score": 90,
+      "pros": [
+        "Daily trend agrees",
+        "Moderate trend strength (ADX 23)",
+        "Clear room to TP before the recent low",
+        "Signal candle closed in the trade's direction",
+        "Busy market hours (good liquidity)"
+      ],
+      "cons": [],
+      "session": "New York",
+      "interval": 4,
+      "reason": "Downtrend (EMA50 below EMA200); RSI dropped back below 60",
+      "created": "2026-11-27T16:00:00Z",
+      "status": "open",
+      "closed_at": null,
+      "exit_price": null,
+      "price_at_alert": 3628.88,
+      "alerted_at": "2026-11-27T16:00:42Z",
+      "news_note": "none in next 24h"
     }
   ],
   "news_warned": [
@@ -2165,7 +2231,7 @@
     "GBP/USD|2026-11-25T13:30:00Z|Prelim GDP q/q"
   ],
   "news": [],
-  "updated": "2026-11-27T15:30:28Z",
+  "updated": "2026-11-27T16:00:42Z",
   "snapshot": [
     {
       "pair": "EUR/USD",
@@ -2218,11 +2284,6 @@
   ],
   "snapshot_time": "2026-11-27T15:30:28Z",
   "news_log": [
-    {
-      "time": "2026-11-06T16:00:00Z",
-      "currency": "JPY",
-      "title": "BOJ Gov Ueda Speaks"
-    },
     {
       "time": "2026-11-06T21:45:00Z",
       "currency": "NZD",
