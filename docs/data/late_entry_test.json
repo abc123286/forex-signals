@@ -1,0 +1,482 @@
+{
+  "generated": "2026-11-28T10:10:34Z",
+  "levels": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "profiles": {
+    "low": {
+      "all": {
+        "on_time": {
+          "trades": 109,
+          "wins": 54,
+          "losses": 55,
+          "win_rate": 49.5,
+          "net_r": -1.0,
+          "avg_r": -0.009
+        },
+        "late_0.25": {
+          "trades": 91,
+          "wins": 36,
+          "losses": 55,
+          "win_rate": 39.6,
+          "net_r": 3.7,
+          "avg_r": 0.041
+        },
+        "same_signals_on_time_0.25": {
+          "trades": 91,
+          "wins": 36,
+          "losses": 55,
+          "win_rate": 39.6,
+          "net_r": -19.0,
+          "avg_r": -0.209
+        },
+        "late_0.5": {
+          "trades": 79,
+          "wins": 24,
+          "losses": 55,
+          "win_rate": 30.4,
+          "net_r": 8.5,
+          "avg_r": 0.108
+        },
+        "same_signals_on_time_0.5": {
+          "trades": 79,
+          "wins": 24,
+          "losses": 55,
+          "win_rate": 30.4,
+          "net_r": -31.0,
+          "avg_r": -0.392
+        },
+        "late_0.75": {
+          "trades": 63,
+          "wins": 8,
+          "losses": 55,
+          "win_rate": 12.7,
+          "net_r": 0.2,
+          "avg_r": 0.004
+        },
+        "same_signals_on_time_0.75": {
+          "trades": 63,
+          "wins": 8,
+          "losses": 55,
+          "win_rate": 12.7,
+          "net_r": -47.0,
+          "avg_r": -0.746
+        }
+      },
+      "gold": {
+        "on_time": {
+          "trades": 24,
+          "wins": 13,
+          "losses": 11,
+          "win_rate": 54.2,
+          "net_r": 2.0,
+          "avg_r": 0.083
+        },
+        "late_0.25": {
+          "trades": 19,
+          "wins": 8,
+          "losses": 11,
+          "win_rate": 42.1,
+          "net_r": 1.8,
+          "avg_r": 0.092
+        },
+        "same_signals_on_time_0.25": {
+          "trades": 19,
+          "wins": 8,
+          "losses": 11,
+          "win_rate": 42.1,
+          "net_r": -3.0,
+          "avg_r": -0.158
+        },
+        "late_0.5": {
+          "trades": 14,
+          "wins": 3,
+          "losses": 11,
+          "win_rate": 21.4,
+          "net_r": -1.0,
+          "avg_r": -0.071
+        },
+        "same_signals_on_time_0.5": {
+          "trades": 14,
+          "wins": 3,
+          "losses": 11,
+          "win_rate": 21.4,
+          "net_r": -8.0,
+          "avg_r": -0.571
+        },
+        "late_0.75": {
+          "trades": 11,
+          "wins": 0,
+          "losses": 11,
+          "win_rate": 0.0,
+          "net_r": -2.8,
+          "avg_r": -0.25
+        },
+        "same_signals_on_time_0.75": {
+          "trades": 11,
+          "wins": 0,
+          "losses": 11,
+          "win_rate": 0.0,
+          "net_r": -11.0,
+          "avg_r": -1.0
+        }
+      }
+    },
+    "moderate": {
+      "all": {
+        "on_time": {
+          "trades": 333,
+          "wins": 134,
+          "losses": 199,
+          "win_rate": 40.2,
+          "net_r": 2.0,
+          "avg_r": 0.006
+        },
+        "late_0.25": {
+          "trades": 283,
+          "wins": 84,
+          "losses": 199,
+          "win_rate": 29.7,
+          "net_r": -2.2,
+          "avg_r": -0.008
+        },
+        "same_signals_on_time_0.25": {
+          "trades": 283,
+          "wins": 84,
+          "losses": 199,
+          "win_rate": 29.7,
+          "net_r": -73.0,
+          "avg_r": -0.258
+        },
+        "late_0.5": {
+          "trades": 249,
+          "wins": 50,
+          "losses": 199,
+          "win_rate": 20.1,
+          "net_r": 0.5,
+          "avg_r": 0.002
+        },
+        "same_signals_on_time_0.5": {
+          "trades": 249,
+          "wins": 50,
+          "losses": 199,
+          "win_rate": 20.1,
+          "net_r": -124.0,
+          "avg_r": -0.498
+        },
+        "late_0.75": {
+          "trades": 221,
+          "wins": 22,
+          "losses": 199,
+          "win_rate": 10.0,
+          "net_r": -0.2,
+          "avg_r": -0.001
+        },
+        "same_signals_on_time_0.75": {
+          "trades": 221,
+          "wins": 22,
+          "losses": 199,
+          "win_rate": 10.0,
+          "net_r": -166.0,
+          "avg_r": -0.751
+        }
+      },
+      "gold": {
+        "on_time": {
+          "trades": 62,
+          "wins": 30,
+          "losses": 32,
+          "win_rate": 48.4,
+          "net_r": 13.0,
+          "avg_r": 0.21
+        },
+        "late_0.25": {
+          "trades": 49,
+          "wins": 17,
+          "losses": 32,
+          "win_rate": 34.7,
+          "net_r": 5.8,
+          "avg_r": 0.117
+        },
+        "same_signals_on_time_0.25": {
+          "trades": 49,
+          "wins": 17,
+          "losses": 32,
+          "win_rate": 34.7,
+          "net_r": -6.5,
+          "avg_r": -0.133
+        },
+        "late_0.5": {
+          "trades": 43,
+          "wins": 11,
+          "losses": 32,
+          "win_rate": 25.6,
+          "net_r": 6.0,
+          "avg_r": 0.14
+        },
+        "same_signals_on_time_0.5": {
+          "trades": 43,
+          "wins": 11,
+          "losses": 32,
+          "win_rate": 25.6,
+          "net_r": -15.5,
+          "avg_r": -0.36
+        },
+        "late_0.75": {
+          "trades": 36,
+          "wins": 4,
+          "losses": 32,
+          "win_rate": 11.1,
+          "net_r": 1.0,
+          "avg_r": 0.028
+        },
+        "same_signals_on_time_0.75": {
+          "trades": 36,
+          "wins": 4,
+          "losses": 32,
+          "win_rate": 11.1,
+          "net_r": -26.0,
+          "avg_r": -0.722
+        }
+      }
+    },
+    "focused": {
+      "all": {
+        "on_time": {
+          "trades": 90,
+          "wins": 43,
+          "losses": 47,
+          "win_rate": 47.8,
+          "net_r": 17.5,
+          "avg_r": 0.194
+        },
+        "late_0.25": {
+          "trades": 69,
+          "wins": 22,
+          "losses": 47,
+          "win_rate": 31.9,
+          "net_r": 3.3,
+          "avg_r": 0.047
+        },
+        "same_signals_on_time_0.25": {
+          "trades": 69,
+          "wins": 22,
+          "losses": 47,
+          "win_rate": 31.9,
+          "net_r": -14.0,
+          "avg_r": -0.203
+        },
+        "late_0.5": {
+          "trades": 59,
+          "wins": 12,
+          "losses": 47,
+          "win_rate": 20.3,
+          "net_r": 0.5,
+          "avg_r": 0.008
+        },
+        "same_signals_on_time_0.5": {
+          "trades": 59,
+          "wins": 12,
+          "losses": 47,
+          "win_rate": 20.3,
+          "net_r": -29.0,
+          "avg_r": -0.492
+        },
+        "late_0.75": {
+          "trades": 51,
+          "wins": 4,
+          "losses": 47,
+          "win_rate": 7.8,
+          "net_r": -2.8,
+          "avg_r": -0.054
+        },
+        "same_signals_on_time_0.75": {
+          "trades": 51,
+          "wins": 4,
+          "losses": 47,
+          "win_rate": 7.8,
+          "net_r": -41.0,
+          "avg_r": -0.804
+        }
+      },
+      "gold": {
+        "on_time": {
+          "trades": 37,
+          "wins": 18,
+          "losses": 19,
+          "win_rate": 48.6,
+          "net_r": 8.0,
+          "avg_r": 0.216
+        },
+        "late_0.25": {
+          "trades": 29,
+          "wins": 10,
+          "losses": 19,
+          "win_rate": 34.5,
+          "net_r": 3.2,
+          "avg_r": 0.112
+        },
+        "same_signals_on_time_0.25": {
+          "trades": 29,
+          "wins": 10,
+          "losses": 19,
+          "win_rate": 34.5,
+          "net_r": -4.0,
+          "avg_r": -0.138
+        },
+        "late_0.5": {
+          "trades": 25,
+          "wins": 6,
+          "losses": 19,
+          "win_rate": 24.0,
+          "net_r": 2.5,
+          "avg_r": 0.1
+        },
+        "same_signals_on_time_0.5": {
+          "trades": 25,
+          "wins": 6,
+          "losses": 19,
+          "win_rate": 24.0,
+          "net_r": -10.0,
+          "avg_r": -0.4
+        },
+        "late_0.75": {
+          "trades": 21,
+          "wins": 2,
+          "losses": 19,
+          "win_rate": 9.5,
+          "net_r": -0.2,
+          "avg_r": -0.012
+        },
+        "same_signals_on_time_0.75": {
+          "trades": 21,
+          "wins": 2,
+          "losses": 19,
+          "win_rate": 9.5,
+          "net_r": -16.0,
+          "avg_r": -0.762
+        }
+      }
+    },
+    "high": {
+      "all": {
+        "on_time": {
+          "trades": 659,
+          "wins": 204,
+          "losses": 455,
+          "win_rate": 31.0,
+          "net_r": -47.0,
+          "avg_r": -0.071
+        },
+        "late_0.25": {
+          "trades": 585,
+          "wins": 130,
+          "losses": 455,
+          "win_rate": 22.2,
+          "net_r": -48.8,
+          "avg_r": -0.083
+        },
+        "same_signals_on_time_0.25": {
+          "trades": 585,
+          "wins": 130,
+          "losses": 455,
+          "win_rate": 22.2,
+          "net_r": -195.0,
+          "avg_r": -0.333
+        },
+        "late_0.5": {
+          "trades": 537,
+          "wins": 82,
+          "losses": 455,
+          "win_rate": 15.3,
+          "net_r": -22.5,
+          "avg_r": -0.042
+        },
+        "same_signals_on_time_0.5": {
+          "trades": 537,
+          "wins": 82,
+          "losses": 455,
+          "win_rate": 15.3,
+          "net_r": -291.0,
+          "avg_r": -0.542
+        },
+        "late_0.75": {
+          "trades": 500,
+          "wins": 45,
+          "losses": 455,
+          "win_rate": 9.0,
+          "net_r": 10.0,
+          "avg_r": 0.02
+        },
+        "same_signals_on_time_0.75": {
+          "trades": 500,
+          "wins": 45,
+          "losses": 455,
+          "win_rate": 9.0,
+          "net_r": -365.0,
+          "avg_r": -0.73
+        }
+      },
+      "gold": {
+        "on_time": {
+          "trades": 139,
+          "wins": 54,
+          "losses": 85,
+          "win_rate": 38.8,
+          "net_r": 23.0,
+          "avg_r": 0.165
+        },
+        "late_0.25": {
+          "trades": 120,
+          "wins": 35,
+          "losses": 85,
+          "win_rate": 29.2,
+          "net_r": 15.0,
+          "avg_r": 0.125
+        },
+        "same_signals_on_time_0.25": {
+          "trades": 120,
+          "wins": 35,
+          "losses": 85,
+          "win_rate": 29.2,
+          "net_r": -15.0,
+          "avg_r": -0.125
+        },
+        "late_0.5": {
+          "trades": 105,
+          "wins": 20,
+          "losses": 85,
+          "win_rate": 19.0,
+          "net_r": 7.5,
+          "avg_r": 0.071
+        },
+        "same_signals_on_time_0.5": {
+          "trades": 105,
+          "wins": 20,
+          "losses": 85,
+          "win_rate": 19.0,
+          "net_r": -45.0,
+          "avg_r": -0.429
+        },
+        "late_0.75": {
+          "trades": 93,
+          "wins": 8,
+          "losses": 85,
+          "win_rate": 8.6,
+          "net_r": 0.8,
+          "avg_r": 0.008
+        },
+        "same_signals_on_time_0.75": {
+          "trades": 93,
+          "wins": 8,
+          "losses": 85,
+          "win_rate": 8.6,
+          "net_r": -69.0,
+          "avg_r": -0.742
+        }
+      }
+    }
+  }
+}
