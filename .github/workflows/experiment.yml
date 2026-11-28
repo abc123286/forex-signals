@@ -1,0 +1,45 @@
+name: Experiment (one-off tests)
+
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: "Test script to run"
+        type: choice
+        options: ["late_entry_test.py"]
+        default: "late_entry_test.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: forex-signals
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Run test
+        env:
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+          INTERVAL_HOURS: "4"
+        run: python ${{ inputs.script }}
+      - name: Save results
+        run: |
+          git config user.name "forex-bot"
+          git config user.email "forex-bot@users.noreply.github.com"
+          git add docs/data/late_entry_test.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Save experiment results"
+            for attempt in 1 2 3 4; do
+              git pull --rebase -X theirs && git push && break
+              sleep $((attempt * 5))
+            done
+          fi
